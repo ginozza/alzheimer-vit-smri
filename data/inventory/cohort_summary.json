@@ -1,0 +1,61 @@
+{
+  "project_title": "Deteccion Prodromica de la Enfermedad de Alzheimer mediante Vision Transformers aplicados a imagenes de resonancia magnetica estructural",
+  "deliverable": "E1 - Plan de datos y protocolo experimental",
+  "semester": "2026-II",
+  "institutions": {
+    "academic": "Universidad del Magdalena - Facultad de Ingenieria",
+    "primary_repositories": [
+      {
+        "name": "ADNI (Alzheimer's Disease Neuroimaging Initiative)",
+        "url": "https://adni.loni.usc.edu/",
+        "access_agreement": "ADNI Data Use Agreement (DUA) - Institutional Approval",
+        "cohorts_targeted": ["ADNI-1", "ADNI-GO", "ADNI-2", "ADNI-3"],
+        "modality": "T1-weighted sMRI (MPRAGE)",
+        "field_strength": ["1.5T", "3.0T"]
+      },
+      {
+        "name": "OASIS (Open Access Series of Imaging Studies)",
+        "url": "https://sites.wustl.edu/oasisbrains/",
+        "access_agreement": "OASIS Data Use Agreement - Open Access Research",
+        "cohorts_targeted": ["OASIS-1", "OASIS-3"],
+        "modality": "T1-weighted sMRI (MPRAGE)",
+        "field_strength": ["1.5T", "3.0T"]
+      }
+    ]
+  },
+  "cohort_targets": {
+    "minimum_per_class": 1500,
+    "classes": ["CN", "MCI", "AD"],
+    "total_target_sample": 4500
+  },
+  "inclusion_criteria": [
+    "Sujetos con edad >= 55 anos al momento de la adquisicion.",
+    "Diagnostico clinico categorico confirmado en una de las 3 clases: CN (CDR=0, MMSE>=27), MCI (CDR=0.5, MMSE 24-27), AD (CDR>=1.0, MMSE<24).",
+    "Secuencia sMRI T1-weighted volumetrica 3D (MPRAGE o IR-FSPGR) con resolucion isotropa cercana a 1 mm^3.",
+    "Aprobacion en el control de calidad visual y biometrico (sin artefactos de movimiento o sombras severas)."
+  ],
+  "exclusion_criteria": [
+    "Sujetos con edad < 55 anos.",
+    "Diagnostico indeterminado, demencia vascular pura, hidrocefalia, lesiones tumorales cerebrales o secuelas de ictus previo.",
+    "Exploraciones con fallo en skull stripping o error de registro al espacio estereotaxico MNI152.",
+    "Archivos con metadatos DICOM corruptos o campos de proteccion de privacidad vulnerados."
+  ],
+  "experimental_protocol": {
+    "representation_2_5d": {
+      "format": "Canonical Triplet (3 contiguous axial slices)",
+      "anatomical_anchor": "Bilateral Hippocampal Centroid in MNI152 coordinates (z = -12 mm)",
+      "channels": 3,
+      "spatial_dimensions": [224, 224],
+      "vit_compatibility": "ViT-B/16 (16x16 patch size, 196 tokens + [CLS] token, D=768)"
+    },
+    "partition_protocol": {
+      "split_level": "Subject_ID (Strict zero-leakage guarantee)",
+      "proportions": {
+        "development_pool": 0.80,
+        "independent_test_holdout": 0.20
+      },
+      "validation_strategy": "Stratified 5-Fold Cross Validation on Development Pool (80%)",
+      "random_seed": 42
+    }
+  }
+}

@@ -1,0 +1,107 @@
+# Diccionario de Datos Unificado: ADNI y OASIS
+# Proyecto: Detección Prodrómica de la Enfermedad de Alzheimer mediante Vision Transformers (ViT)
+# Entregable: E1 - Plan de datos y protocolo experimental
+
+metadata_schema_version: "1.0.0"
+date_created: "2026-09-05"
+target_classes:
+  CN: "Control Normal / Cognitivamente Saludable (CDR = 0, MMSE >= 27)"
+  MCI: "Deterioro Cognitivo Leve / Fase Prodrómica (CDR = 0.5, MMSE 24-27, deterioro de memoria preservando funcionalidad básica)"
+  AD: "Enfermedad de Alzheimer Confirmada Clínicamente (CDR >= 1.0, MMSE < 24, demencia establecida según criterios NIA-AA)"
+
+variables:
+  Subject_ID:
+    type: "string"
+    description: "Identificador unívoco del paciente en la base de datos (ADNI: 'sub-ADNI...', OASIS: 'OAS3...'). Clave primaria de partición para evitar data leakage."
+    required: true
+    example: "ADNI_002_S_0295"
+
+  Session_ID:
+    type: "string"
+    description: "Identificador de la visita longitudinal (ej. bl, m06, m12, m24, ses-M00)."
+    required: true
+    example: "ses-M00"
+
+  Cohort_Source:
+    type: "string"
+    description: "Repositorio de origen de la adquisición."
+    allowed_values: ["ADNI-1", "ADNI-GO", "ADNI-2", "ADNI-3", "OASIS-1", "OASIS-3"]
+    required: true
+
+  Diagnosis_Class:
+    type: "string"
+    description: "Etiqueta diagnóstica triclase armonizada para clasificación supervisada."
+    allowed_values: ["CN", "MCI", "AD"]
+    required: true
+
+  Age:
+    type: "float"
+    description: "Edad del sujeto al momento de la adquisición sMRI (años)."
+    range: [55.0, 95.0]
+    required: true
+
+  Sex:
+    type: "string"
+    description: "Sexo biológico del sujeto."
+    allowed_values: ["M", "F"]
+    required: true
+
+  MMSE:
+    type: "float"
+    description: "Mini-Mental State Examination score (escala psicométrica global 0-30)."
+    range: [0.0, 30.0]
+    required: true
+
+  CDR:
+    type: "float"
+    description: "Clinical Dementia Rating score global (0: Normal, 0.5: Muy leve/MCI, 1: Leve, 2: Moderado, 3: Severo)."
+    allowed_values: [0.0, 0.5, 1.0, 2.0, 3.0]
+    required: true
+
+  CDR_SB:
+    type: "float"
+    description: "Clinical Dementia Rating Sum of Boxes (escala continua de severidad funcional 0-18)."
+    range: [0.0, 18.0]
+    required: false
+
+  APOE4_Alleles:
+    type: "integer"
+    description: "Número de alelos Apolipoproteína E epsilon 4 (0, 1 o 2). Principal factor de riesgo genético."
+    allowed_values: [0, 1, 2]
+    required: false
+
+  Modality:
+    type: "string"
+    description: "Modalidad de resonancia magnética adquirida."
+    default: "T1w_sMRI"
+    allowed_values: ["T1w_sMRI"]
+
+  Pulse_Sequence:
+    type: "string"
+    description: "Secuencia de pulsos volumétrica 3D."
+    allowed_values: ["MPRAGE", "IR-FSPGR", "T1-weighted 3D"]
+    required: true
+
+  Field_Strength_Tesla:
+    type: "float"
+    description: "Intensidad de campo magnético del resonador en Teslas."
+    allowed_values: [1.5, 3.0]
+    required: true
+
+  Voxel_Resolution_mm:
+    type: "string"
+    description: "Resolución espacial de adquisición isótropa nominal."
+    example: "1.0x1.0x1.0"
+    required: true
+
+  Image_File_Path:
+    type: "string"
+    description: "Ruta relativa o URI al volumen NIfTI preprocesado (espacio MNI152)."
+    required: true
+    example: "data/raw/adni/ADNI_002_S_0295_T1w_MNI.nii.gz"
+
+  Quality_Control_Pass:
+    type: "boolean"
+    description: "Indicador binario de aprobación tras inspección de calidad (sin artefactos de movimiento o envoltura severos)."
+    allowed_values: [true, false]
+    required: true
