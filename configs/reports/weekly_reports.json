@@ -1,0 +1,347 @@
+[
+  {
+    "week": 5,
+    "report": [
+      [
+        "Semana y fechas",
+        "Semana 5 | 31 de agosto a 06 de septiembre de 2026"
+      ],
+      [
+        "Responsable",
+        "Malak Sanchez y Juan Simancas"
+      ],
+      [
+        "Estado general",
+        "Verde."
+      ],
+      [
+        "Trabajo planificado",
+        "EDT 2.0 (2.1 a 2.5): especificación de fuentes, criterios de selección, estructura de datos, partición por sujeto y representación 2.5D. Cierre del Entregable E1: Plan de datos y protocolo experimental."
+      ],
+      [
+        "Trabajo ejecutado",
+        "Especificación de fuentes ADNI y OASIS y de sus condiciones DUA; definición de clases CN, MCI y AD y criterios de inclusión/exclusión; elaboración del diccionario YAML e inventarios; implementación de partición por sujeto y pruebas de no solapamiento entre train, validation y test. Definición del triplete axial canónico en MNI152 y desarrollo del extractor con salida de 3 x 224 x 224. Ejecución de pruebas técnicas de E1."
+      ],
+      [
+        "Evidencias",
+        "Repositorio alzheimer-vit-smri: data/inventory/ (diccionario, inventarios y protocolo), src/data/ (carga, partición y representación), tests/test_subject_leakage.py y tests/test_slice_dimensions.py. Verificador E1: scripts/run_e1_verification.py."
+      ],
+      [
+        "Desviaciones",
+        "Incremento de +2 horas-equipo respecto a lo planificado por validación de casos longitudinales: +8,33 %. Sin impacto registrado en el cronograma."
+      ],
+      [
+        "Riesgos e incidencias",
+        "R2 (fuga de sujetos) mitigado mediante comprobaciones automatizadas y cerrado en el seguimiento de S5. R1 (ambigüedad en fuentes) mitigado mediante un esquema unificado de datos. La separación se comprueba por pares entre train, validation y test."
+      ],
+      [
+        "Decisiones",
+        "Mantener una representación 2.5D basada en tres cortes axiales contiguos y un anclaje canónico previsto en z = -12 mm de MNI152, compatible con ViT-B/16. Consolidar la organización modular y la trazabilidad continua del proyecto."
+      ],
+      [
+        "Cambios",
+        "CAM-001: consolidación del repositorio Git alzheimer-vit-smri y fijación del estándar de entrada 2.5D; decisión documentada en la sección 3."
+      ],
+      [
+        "Próxima semana",
+        "EDT 3.0 (3.1 a 3.5): iniciar control de calidad, normalización, generación de entradas, automatización y pruebas del Entregable E2, cuyo cierre está previsto para S7."
+      ],
+      [
+        "Esfuerzo",
+        "Planificado: 24 horas-equipo. Real: 26 horas-equipo (Malak Sanchez: 14 h; Juan Simancas: 12 h). Desviación: +8,33 %."
+      ]
+    ],
+    "changes": [
+      [
+        "Proyecto",
+        "Detección prodrómica de la enfermedad de Alzheimer mediante Vision Transformers aplicados a imágenes de resonancia magnética estructural"
+      ],
+      [
+        "ID y fecha",
+        "CAM-001 | 05 de septiembre de 2026"
+      ],
+      [
+        "Solicitante",
+        "Malak Sanchez y Juan Simancas"
+      ],
+      [
+        "Elemento afectado",
+        "Organización del repositorio / Entregables técnicos"
+      ],
+      [
+        "Situación actual",
+        "Organización propuesta inicialmente mediante carpetas independientes por entrega."
+      ],
+      [
+        "Cambio solicitado",
+        "Unificar entregables y código en el repositorio Git alzheimer-vit-smri, con estructura modular (data, src, tests), y estandarizar el triplete axial canónico en hipocampo."
+      ],
+      [
+        "Justificación y evidencia",
+        "Facilitar la trazabilidad con Git, reducir duplicación de código y mantener una representación canónica 2.5D uniforme."
+      ],
+      [
+        "Impacto en alcance",
+        "Positivo. Mantiene los entregables comprometidos y mejora la estructura técnica."
+      ],
+      [
+        "Impacto en tiempo",
+        "Ninguno. No altera las 16 semanas del cronograma."
+      ],
+      [
+        "Impacto en calidad",
+        "Favorable. Facilita la ejecución de pruebas unitarias automatizadas."
+      ],
+      [
+        "Impacto en riesgos",
+        "Reduce la probabilidad de inconsistencias de interfaz (R4) y dimensiones (R5)."
+      ],
+      [
+        "Alternativas",
+        "Mantener carpetas aisladas por entrega, alternativa descartada por duplicación de código."
+      ],
+      [
+        "Recomendación",
+        "Aprobar."
+      ],
+      [
+        "Decisión",
+        "Aprobado por el Director Sergio Lubo."
+      ],
+      [
+        "Versiones actualizadas",
+        "Repositorio alzheimer-vit-smri y Línea Base del Proyecto."
+      ]
+    ]
+  },
+  {
+    "week": 6,
+    "report": [
+      [
+        "Semana y fechas",
+        "Semana 6 | 07 de septiembre a 13 de septiembre de 2026"
+      ],
+      [
+        "Responsable",
+        "Malak Sanchez y Juan Simancas"
+      ],
+      [
+        "Estado general",
+        "Verde."
+      ],
+      [
+        "Trabajo planificado",
+        "EDT 3.0 (3.1 a 3.5): implementación inicial de control de calidad, normalización, entradas 2.5D, automatización del flujo y pruebas técnicas para el Entregable E2."
+      ],
+      [
+        "Trabajo ejecutado",
+        "Avance inicial registrado del pipeline: definición de validaciones de integridad y estructura de imágenes, operaciones de normalización y construcción de entradas con tres cortes axiales contiguos. Parametrización inicial de dimensiones y formato de salida; pruebas preliminares con datos sintéticos y muestras pequeñas."
+      ],
+      [
+        "Evidencias",
+        "Repositorio alzheimer-vit-smri, módulos de datos y pruebas de dimensiones y separación por sujeto. Las configuraciones y los registros específicos de las primeras etapas de E2 mencionados en S6 requieren consolidación; no existe una versión separada de S6 verificable en el historial disponible."
+      ],
+      [
+        "Desviaciones",
+        "Sin desviación de esfuerzo: 24 horas-equipo previstas y 24 ejecutadas. No se registra cambio del cronograma. La mayor dedicación se concentró en dimensiones y consistencia de las transformaciones."
+      ],
+      [
+        "Riesgos e incidencias",
+        "R5 (errores de dimensiones en entradas 2.5D) permanece activo y bajo control mediante validaciones estructurales. R1 continúa mitigado mediante separación entre ingestión y procesamiento interno. Pendiente consolidar la evidencia de ejecución de esta etapa."
+      ],
+      [
+        "Decisiones",
+        "Mantener el preprocesamiento desacoplado de la fuente de datos y utilizar parámetros externos para dimensiones, normalización y construcción de entradas 2.5D."
+      ],
+      [
+        "Cambios",
+        "No se registran cambios formales en alcance, fechas, entregables o responsables. Los ajustes corresponden a decisiones internas de implementación."
+      ],
+      [
+        "Próxima semana",
+        "Finalizar EDT 3.0, consolidar pruebas y registros, y preparar el cierre de E2 mediante muestras procesadas y documentación de ejecución."
+      ],
+      [
+        "Esfuerzo",
+        "Planificado: 24 horas-equipo. Real: 24 horas-equipo (Malak Sanchez: 14 h; Juan Simancas: 10 h). Desviación: 0 %."
+      ]
+    ],
+    "changes": [
+      [
+        "Proyecto",
+        "Detección prodrómica de la enfermedad de Alzheimer mediante Vision Transformers aplicados a imágenes de resonancia magnética estructural"
+      ],
+      [
+        "ID y fecha",
+        "No aplica | Semana 6"
+      ],
+      [
+        "Solicitante",
+        "Malak Sanchez y Juan Simancas"
+      ],
+      [
+        "Elemento afectado",
+        "Ninguno."
+      ],
+      [
+        "Situación actual",
+        "Desarrollo inicial del proceso de preprocesamiento conforme al alcance establecido."
+      ],
+      [
+        "Cambio solicitado",
+        "No se solicita cambio formal de alcance, cronograma o entregables."
+      ],
+      [
+        "Justificación y evidencia",
+        "Ajustes internos de parametrización y validaciones para la implementación del pipeline."
+      ],
+      [
+        "Impacto en alcance",
+        "Ninguno."
+      ],
+      [
+        "Impacto en tiempo",
+        "Ninguno identificado."
+      ],
+      [
+        "Impacto en calidad",
+        "Favorable por la incorporación de validaciones estructurales."
+      ],
+      [
+        "Impacto en riesgos",
+        "Reduce errores de dimensiones e inconsistencias en las entradas 2.5D."
+      ],
+      [
+        "Alternativas",
+        "Mantener el diseño inicial sin parametrización adicional."
+      ],
+      [
+        "Recomendación",
+        "Mantener el alcance y consolidar pruebas y registros de ejecución."
+      ],
+      [
+        "Decisión",
+        "No aplica: no se solicita cambio formal."
+      ],
+      [
+        "Versiones actualizadas",
+        "Repositorio técnico y documentación interna de E2."
+      ]
+    ]
+  },
+  {
+    "week": 7,
+    "report": [
+      [
+        "Semana y fechas",
+        "Semana 7 | 14 de septiembre a 20 de septiembre de 2026. Corte de información: 19 de septiembre de 2026."
+      ],
+      [
+        "Responsable",
+        "Malak Sanchez y Juan Simancas. Responsable de E2: Malak Sanchez."
+      ],
+      [
+        "Estado general",
+        "En seguimiento. Implementación técnica verificada con datos sintéticos; aceptación académica de E2 pendiente."
+      ],
+      [
+        "Trabajo planificado",
+        "Finalizar y validar EDT 3.0: control de calidad, normalización, entradas 2.5D, automatización y pruebas. Consolidar scripts, registros y muestra procesada del Entregable E2."
+      ],
+      [
+        "Trabajo ejecutado",
+        "Auditoría del repositorio y formalización del entorno con uv. Implementación de QC NIfTI, validación de geometría y metadatos, normalización por corte con fondo cero y extracción mediante affine de tres cortes contiguos alrededor de z = -12 mm. Generación de tensores float32 de 3 x 224 x 224, registros y hashes. Verificación de 61 pruebas aprobadas y un lote sintético de 8 casos: 4 procesados y 4 rechazos esperados por volumen vacío, archivo ilegible, NaN y duplicado."
+      ],
+      [
+        "Evidencias",
+        "scripts/run_e2_preprocessing.py; scripts/run_e2_demo.py; configs/e2.json; src/data/preprocessing.py y preprocessing_batch.py; tests/test_preprocessing*.py. El demo genera localmente registros, resumen, tensores procesados y vista de entrada/salida. Ejecución y contrato documentados en scripts/README.md. Instalación con uv y dependencias verificadas."
+      ],
+      [
+        "Desviaciones",
+        "La muestra procesada es sintética: todavía no hay imágenes ADNI/OASIS disponibles. Queda pendiente la validación anatómica real. El esfuerzo estimado se ajusta al plan semanal, con desviación estimada del 0 %."
+      ],
+      [
+        "Riesgos e incidencias",
+        "R2: separación por sujeto y rechazo de duplicados verificados en los manifiestos de prueba. R3: entorno bloqueado y compatible. R5: controles de geometría y dimensiones probados. Corregido un fallo del fixture NIfTI al reescribir un archivo mapeado en memoria. La extracción cerebral y el registro anatómico reales siguen pendientes de revisión con datos autorizados."
+      ],
+      [
+        "Decisiones",
+        "Mantener el contrato de NIfTI previamente preparados en MNI152 y sin entrenamiento. Usar estadísticas por corte de cada sujeto, sin compartir parámetros entre train, validation y test. Conservar todas las visitas de un sujeto en una sola partición y no sobrescribir entradas ni corridas."
+      ],
+      [
+        "Cambios",
+        "Migración a pyproject.toml y uv.lock; eliminación de requirements.txt redundante; scripts agrupados en scripts/. Ajustes internos de reproducibilidad y organización, sin modificar los entregables comprometidos."
+      ],
+      [
+        "Próxima semana",
+        "Iniciar E3: componentes, interfaces y decisiones de arquitectura. Presentar E2 para revisión académica; completar el registro de horas y programar validación anatómica cuando existan muestras autorizadas."
+      ],
+      [
+        "Esfuerzo",
+        "Planificado: 24 horas-equipo. Estimado: 24 horas-equipo (Malak Sanchez: 12 h; Juan Simancas: 12 h). Desviación estimada: 0 %. Horas reales pendientes de confirmación."
+      ]
+    ],
+    "changes": [
+      [
+        "Proyecto",
+        "Detección prodrómica de la enfermedad de Alzheimer mediante Vision Transformers aplicados a imágenes de resonancia magnética estructural"
+      ],
+      [
+        "ID y fecha",
+        "No aplica | Semana 7, corte al 19 de septiembre de 2026"
+      ],
+      [
+        "Solicitante",
+        "Malak Sanchez y Juan Simancas"
+      ],
+      [
+        "Elemento afectado",
+        "Entorno Python, organización de scripts y módulos de preprocesamiento."
+      ],
+      [
+        "Situación actual",
+        "E2 implementado y verificado técnicamente mediante datos sintéticos. Revisión académica pendiente."
+      ],
+      [
+        "Cambio solicitado",
+        "No se solicita modificación formal de alcance, fechas, entregables o responsables."
+      ],
+      [
+        "Justificación y evidencia",
+        "Los ajustes internos fijan dependencias con uv, ordenan los ejecutables y permiten reproducir QC, transformaciones, registros y muestras de E2."
+      ],
+      [
+        "Impacto en alcance",
+        "Se mantiene el desarrollo de código y las pruebas técnicas, sin entrenamiento ni resultados diagnósticos."
+      ],
+      [
+        "Impacto en tiempo",
+        "Sin modificación solicitada del cronograma. Esfuerzo semanal estimado: 24 horas-equipo."
+      ],
+      [
+        "Impacto en calidad",
+        "61 pruebas aprobadas; salidas uniformes y parámetros de procesamiento registrados."
+      ],
+      [
+        "Impacto en riesgos",
+        "Controles contra solapamiento de sujetos, geometría inválida y duplicados. Validación con imágenes reales pendiente."
+      ],
+      [
+        "Alternativas",
+        "Conservar el flujo previo de instalación y ejecutables en la raíz; se adoptó uv y scripts/ para mejorar reproducibilidad y organización."
+      ],
+      [
+        "Recomendación",
+        "Mantener el alcance y presentar las evidencias de E2 para revisión."
+      ],
+      [
+        "Decisión",
+        "Ajustes técnicos realizados. Aceptación académica de E2 pendiente."
+      ],
+      [
+        "Versiones actualizadas",
+        "pyproject.toml, uv.lock, scripts/, src/data/, tests/, configuración y documentación E2."
+      ]
+    ]
+  }
+]

@@ -1,100 +1,50 @@
-# Alzheimer ViT sMRI: Detección Prodrómica de la Enfermedad de Alzheimer mediante Vision Transformers
+# Alzheimer ViT sMRI
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![License: Academic Research](https://img.shields.io/badge/License-Academic_Research-green.svg)](#)
-[![Seminario III](https://img.shields.io/badge/Universidad_del_Magdalena-Seminario_III_2026--II-darkblue.svg)](#)
+Proyecto académico de clasificación futura de imágenes sMRI en CN, MCI y AD mediante Vision Transformers y entradas 2.5D.
 
-Repositorio oficial del proyecto de investigación y desarrollo tecnológico para la futura clasificación triclase (**Control Normal - CN**, **Deterioro Cognitivo Leve - MCI** y **Enfermedad de Alzheimer - AD**) a partir de imágenes de Resonancia Magnética Estructural (sMRI), utilizando arquitecturas **Vision Transformer (ViT-B/16)** con entradas 2.5D e interpretabilidad clínica vía **Attention Rollout**.
+**Autores:** Malak Sanchez y Juan Simancas. Universidad del Magdalena, Ingeniería de Sistemas, Seminario III, 2026-II.
 
-* **Autores:** Malak Sanchez, Juan Simancas
-* **Director:** Sergio Lubo
-* **Institución:** Universidad del Magdalena — Facultad de Ingeniería — Programa de Ingeniería de Sistemas
-* **Periodo Académico:** Seminario III — 2026-II
+## Estado del proyecto
 
----
+- **E1:** inventarios, criterios, particiones por sujeto y representación 2.5D. Las pruebas verifican separación sobre los manifiestos suministrados; el loader no aplica todo el esquema clínico.
+- **E2:** control de calidad NIfTI, normalización por corte, generación de tensores float32 de 3×224×224 y registros reproducibles. Validado con muestras sintéticas.
+- **Reportes:** versiones finales S5, S6 y S7 disponibles en [docs/reports](docs/reports/README.md). S7 tiene corte al 19 de septiembre de 2026; sus horas son estimadas.
 
-## Estructura del Repositorio
+## Instalación y ejecución
 
-```
-alzheimer-vit-smri/
-├── .gitignore                                 # Exclusiones de Git (entornos, datos pesados, pesos)
-├── README.md                                  # Documentación principal del repositorio
-├── requirements.txt                           # Dependencias científicas
-├── pyproject.toml                             # Configuración estándar de empaquetado y pytest
-├── run_e1_verification.py                     # Script ejecutable de auditoría y verificación integral de E1
-│
-├── data/
-│   └── inventory/
-│       ├── adni_oasis_data_dictionary.yaml    # Diccionario unificado de variables y esquema de metadatos
-│       ├── adni_metadata_inventory.csv        # Manifiesto de inventario de la cohorte ADNI
-│       ├── oasis_metadata_inventory.csv       # Manifiesto de inventario de la cohorte OASIS
-│       └── cohort_summary.json                # Resumen estructurado de cohortes, fuentes y protocolos
-│
-├── src/
-│   ├── __init__.py
-│   └── data/
-│       ├── __init__.py
-│       ├── inventory_loader.py                # Carga, validación de esquemas y filtros de inclusión/exclusión
-│       ├── subject_split.py                   # Partición estratificada por sujeto (80/20 Holdout y 5-Fold CV)
-│       └── slice_representation.py            # Extractor y modelado de entradas 2.5D (triplete canónico MNI152)
-│
-└── tests/
-    ├── __init__.py
-    ├── test_inventory.py                      # Pruebas de carga de inventario y filtros de exclusión
-    ├── test_subject_leakage.py                # Verificación estricta de CERO fuga de sujetos (Criterio E1)
-    └── test_slice_dimensions.py               # Verificación de dimensiones de tensor 2.5D [3, 224, 224]
-```
+Desde la raíz del repositorio, con [uv](https://docs.astral.sh/uv/getting-started/installation/):
 
----
-
-## Entregable E1: Plan de Datos y Protocolo Experimental
-
-El **Entregable 1 (E1)** responde al paquete **EDT 2.0 (Especificación de datos)** de la Línea Base:
-- **Contenido:** Inventario, criterios, partición por sujeto, variables y representación 2.5D.
-- **Evidencia:** Documento formal de la Línea Base, inventario (`data/inventory/`) y pruebas técnicas de separación por sujeto (`src/data/subject_split.py`, `tests/test_subject_leakage.py`).
-- **Criterio de Aceptación:** *Los permisos y fuentes están registrados; las clases y exclusiones están definidas; ningún sujeto aparece en más de una partición.*
-
-### Aspectos Clave Metodológicos:
-1. **Fuentes:** ADNI (ADNI-1, ADNI-GO, ADNI-2, ADNI-3) y OASIS (OASIS-1, OASIS-3) con secuencias T1w MPRAGE.
-2. **Clases Diagnósticas:** Triclase (CN, MCI, AD) parametrizadas por criterios clínicos estandarizados (CDR y MMSE).
-3. **Representación 2.5D:** Triplete canónico axial de 3 cortes contiguos centrado en el hipocampo ($z = -12\text{ mm}$ en espacio MNI152), mapeados a canales RGB ($3 \times 224 \times 224$). Esta configuración ofrece la mayor uniformidad experimental y una reducción del $85\%$ en costo computacional frente a modelos 3D.
-4. **Partición por Sujeto:** 80% Desarrollo (preparado para 5-fold cross validation estratificado) y 20% Test Hold-out reservado, con garantía matemática de cero fuga de información ($S_{\text{train}} \cap S_{\text{val}} \cap S_{\text{test}} = \emptyset$).
-
----
-
-## Instalación y Verificación Rápida
-
-### 1. Clonar el repositorio y configurar el entorno virtual:
 ```bash
-cd alzheimer-vit-smri
-python -m venv .venv
-
-# En Windows:
-.venv\Scripts\activate
-
-# En Linux / macOS:
-source .venv/bin/activate
-
-# Instalar dependencias científicas:
-pip install -r requirements.txt
+uv sync --locked
+uv run --locked python scripts/run_e1_verification.py
+uv run --locked pytest
+uv run --locked python scripts/run_e2_demo.py --output-dir data/processed/mi_demo_e2
 ```
 
-### 2. Ejecutar la verificación automatizada del Entregable 1:
+Para generar los tres reportes desde su contenido estructurado:
+
 ```bash
-python run_e1_verification.py
+uv run --locked --group reports python scripts/build_weekly_reports.py
 ```
 
-### 3. Ejecutar la suite de pruebas unitarias con Pytest:
-```bash
-pytest tests/ -v
+El grupo opcional `reports` instala ReportLab. Esta orden actualiza los PDF finales en `docs/reports/`; los originales históricos se conservan en `archive/`.
+
+## Organización
+
+```text
+configs/    Configuración del preprocesamiento y contenido de reportes
+data/       Inventarios y datos locales de ejecución
+docs/       Línea base y reportes semanales
+scripts/    Puntos de entrada para verificación, procesamiento y reportes
+src/data/   Implementación de inventario, particiones y preprocesamiento
+tests/      Pruebas de E1, E2 y prevención de fuga de datos
 ```
 
----
+## Documentación
 
-## Matriz de Cumplimiento de Criterios de Aceptación
+- [Índice documental](docs/README.md)
+- [Línea base](docs/base/Linea_Base_Proyecto_Alzheimer_ViT.pdf)
+- [Reportes semanales S5–S7](docs/reports/README.md)
+- [Comandos y contrato de preprocesamiento](scripts/README.md)
 
-| Criterio E1 | Archivo / Módulo de Verificación | Estado |
-| :--- | :--- | :---: |
-| Permisos y fuentes registrados | Línea Base (Secc. 2 y 3), `cohort_summary.json` | CUMPLIDO |
-| Clases y exclusiones definidas | `data/inventory/adni_oasis_data_dictionary.yaml`, `src/data/inventory_loader.py` | CUMPLIDO |
-| Ningún sujeto en más de una partición | `src/data/subject_split.py`, `tests/test_subject_leakage.py`, `run_e1_verification.py` | CUMPLIDO |
+La metodología conserva el triplete axial centrado en z = −12 mm en MNI152, la normalización independiente por corte y las particiones por sujeto. No se aprenden estadísticas de normalización entre particiones. Los inventarios originales son referencias de metadatos, no acreditación de acceso ni manifiestos listos para E2.

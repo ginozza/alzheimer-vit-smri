@@ -3,14 +3,14 @@ All-in-one verification runner for Deliverable E1: Plan de Datos y Protocolo Exp
 Executes data inventory audit, subject-level partitioning, and zero-leakage mathematical checks.
 
 Usage:
-    python run_e1_verification.py
+    uv run python scripts/run_e1_verification.py
 """
 
 import sys
 from pathlib import Path
 
 # Add project root to sys.path
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from src.data.inventory_loader import DatasetInventoryLoader
 from src.data.subject_split import SubjectSplitter
