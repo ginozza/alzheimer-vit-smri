@@ -12,7 +12,7 @@
       ],
       [
         "Estado general",
-        "Verde."
+        "Amarillo. E1 cerrado técnicamente y esfuerzo +8,33 %; R7 sigue alto. Fecha formal de H1 por conciliar. Confirmar fecha de aceptación y mantener el control de R7 antes de continuar E2."
       ],
       [
         "Trabajo planificado",
@@ -32,7 +32,7 @@
       ],
       [
         "Riesgos e incidencias",
-        "R2 (fuga de sujetos) mitigado mediante comprobaciones automatizadas y cerrado en el seguimiento de S5. R1 (ambigüedad en fuentes) mitigado mediante un esquema unificado de datos. La separación se comprueba por pares entre train, validation y test."
+        "R2 (fuga de sujetos) mitigado mediante comprobaciones automatizadas y cerrado en el seguimiento de S5. R1 (ambigüedad en fuentes) mitigado mediante un esquema unificado de datos. La separación se comprueba por pares entre train, validation y test. R7 permanece alto (exposición 15), sin cierre ni reevaluación documentados."
       ],
       [
         "Decisiones",
@@ -112,6 +112,73 @@
         "Versiones actualizadas",
         "Repositorio alzheimer-vit-smri y Línea Base del Proyecto."
       ]
+    ],
+    "indicators": [
+      [
+        "I1",
+        "Actividades cumplidas",
+        "100 % (5/5 componentes EDT 2.1-2.5 documentados).",
+        "Fuentes, criterios, estructura, partición y licencias descritos en E1. Supera la meta de 85 %; no acredita acceso a imágenes."
+      ],
+      [
+        "I2",
+        "Entregables aceptados",
+        "0/7 acreditados al corte del 06/09. E1 cerrado técnicamente.",
+        "La constancia de aceptación está fechada 07/09; se incorpora al acumulado de S6."
+      ],
+      [
+        "I3",
+        "Hitos en fecha",
+        "Sin porcentaje concluyente para H1.",
+        "El cronograma marca H1 completado en S5, pero la constancia es del 07/09. Conciliar la fecha antes de evaluar la meta de 80 %."
+      ],
+      [
+        "I4",
+        "Desviación de esfuerzo",
+        "+8,33 %: (26 - 24) / 24 x 100.",
+        "26 h reales frente a 24 h previstas. Dentro del rango de -15 % a +20 %; el exceso fue por casos longitudinales."
+      ],
+      [
+        "I5",
+        "Riesgos altos abiertos",
+        "1 riesgo alto remanente: R7, exposición 15.",
+        "R2 se registra cerrado en S5. R7 no tiene cierre ni nueva valoración; mantener la advertencia sobre interpretación clínica."
+      ],
+      [
+        "I6",
+        "Incidencias resueltas",
+        "Sin porcentaje: no hay registro consolidado de incidencias.",
+        "El cierre del riesgo R2 no equivale a una incidencia resuelta. Registrar incidencias y cierres para evaluar la meta de 80 %."
+      ],
+      [
+        "I7",
+        "Reproducibilidad",
+        "Pruebas E1 ejecutadas; razón de corridas no calculable.",
+        "Se documentan separación por sujeto y dimensiones 2.5D. Falta consolidar el conteo de corridas y verificaciones ejecutadas durante S5."
+      ],
+      [
+        "I8",
+        "Rendimiento",
+        "No aplica en S5.",
+        "E1 define datos y representación. No hay entrenamiento ni AUC, F1, sensibilidad, especificidad o accuracy."
+      ],
+      [
+        "I9",
+        "Portabilidad",
+        "No aplica en S5; prevista para S13.",
+        "No existe aún un modelo exportado para medir tamaño, latencia o degradación."
+      ],
+      [
+        "I10",
+        "Cobertura documental",
+        "Inventarios, diccionario, código y pruebas disponibles.",
+        "Documentación de E1 identificada. Falta una lista total de artefactos obligatorios para calcular cobertura porcentual."
+      ]
+    ],
+    "status": [
+      "Amarillo",
+      "E1 cerrado técnicamente y esfuerzo +8,33 %; R7 sigue alto. Fecha formal de H1 por conciliar.",
+      "Confirmar fecha de aceptación y mantener el control de R7 antes de continuar E2."
     ]
   },
   {
@@ -127,7 +194,7 @@
       ],
       [
         "Estado general",
-        "Verde."
+        "Amarillo. E1 aceptado, E2 inicial y esfuerzo 0 %. R7 sigue alto; falta evidencia específica de S6. Consolidar registros del pipeline y preparar la revisión de E2 en S7."
       ],
       [
         "Trabajo planificado",
@@ -147,7 +214,7 @@
       ],
       [
         "Riesgos e incidencias",
-        "R5 (errores de dimensiones en entradas 2.5D) permanece activo y bajo control mediante validaciones estructurales. R1 continúa mitigado mediante separación entre ingestión y procesamiento interno. Pendiente consolidar la evidencia de ejecución de esta etapa."
+        "R5 (errores de dimensiones en entradas 2.5D) permanece activo y bajo control mediante validaciones estructurales. R1 continúa mitigado mediante separación entre ingestión y procesamiento interno. Pendiente consolidar la evidencia de ejecución de esta etapa. R7 permanece alto (exposición 15), sin cierre ni reevaluación documentados."
       ],
       [
         "Decisiones",
@@ -227,6 +294,73 @@
         "Versiones actualizadas",
         "Repositorio técnico y documentación interna de E2."
       ]
+    ],
+    "indicators": [
+      [
+        "I1",
+        "Actividades cumplidas",
+        "100 % declarado en el reporte original; sin desglose verificable.",
+        "Avance inicial en QC, normalización y entradas 2.5D. Consolidar actividades terminadas/planificadas antes de confirmar el porcentaje."
+      ],
+      [
+        "I2",
+        "Entregables aceptados",
+        "14,29 % acumulado: 1/7 entregables aceptados.",
+        "E1 consta aprobado el 07/09. E2 sigue en desarrollo; su aceptación corresponde a H2 en S7."
+      ],
+      [
+        "I3",
+        "Hitos en fecha",
+        "H1 aceptado; sin nuevo hito de aceptación en S6.",
+        "La discrepancia de fecha de H1 sigue sin resolver. No confirmar el 100 % declarado en S6 hasta aclarar su cumplimiento en fecha."
+      ],
+      [
+        "I4",
+        "Desviación de esfuerzo",
+        "0 %: (24 - 24) / 24 x 100.",
+        "24 h reales y 24 h previstas: Malak 14 h, Juan 10 h. Cumple el rango; completa el valor pendiente de la tabla original."
+      ],
+      [
+        "I5",
+        "Riesgos altos abiertos",
+        "1 riesgo alto reportado; R7 permanece con exposición 15.",
+        "No consta cierre o reevaluación de R7. R5 sigue activo con exposición inicial 12, nivel medio; no sumarlo como alto."
+      ],
+      [
+        "I6",
+        "Incidencias resueltas",
+        "No aplica: sin incidencias registradas en S6.",
+        "El original registra N/A. No convertir ausencia de incidencias en 100 %; registrar cualquier caso nuevo."
+      ],
+      [
+        "I7",
+        "Reproducibilidad",
+        "En verificación; sin razón de corridas comprobable.",
+        "Se mencionan pruebas preliminares, pero no hay una versión ni registros separados de S6. Consolidarlos para el cierre E2."
+      ],
+      [
+        "I8",
+        "Rendimiento",
+        "No aplica en S6.",
+        "El trabajo corresponde al preprocesamiento inicial; aún no hay modelo entrenado ni métricas diagnósticas."
+      ],
+      [
+        "I9",
+        "Portabilidad",
+        "No aplica en S6; prevista para S13.",
+        "La parametrización del pipeline no demuestra portabilidad del modelo. Mantener la medición para su hito."
+      ],
+      [
+        "I10",
+        "Cobertura documental",
+        "En desarrollo; porcentaje no calculable.",
+        "E1 documentado; configuraciones y registros iniciales de E2 por consolidar. Falta un inventario completo para evaluar la meta final."
+      ]
+    ],
+    "status": [
+      "Amarillo",
+      "E1 aceptado, E2 inicial y esfuerzo 0 %. R7 sigue alto; falta evidencia específica de S6.",
+      "Consolidar registros del pipeline y preparar la revisión de E2 en S7."
     ]
   },
   {
@@ -242,7 +376,7 @@
       ],
       [
         "Estado general",
-        "En seguimiento. Implementación técnica verificada con datos sintéticos; aceptación académica de E2 pendiente."
+        "Amarillo. E2 verificado con datos sintéticos; H2 pendiente al 19/09. R7 sigue alto y las horas son estimadas. Presentar E2 a revisión, confirmar horas y actualizar H2 al cierre del 20/09."
       ],
       [
         "Trabajo planificado",
@@ -262,7 +396,7 @@
       ],
       [
         "Riesgos e incidencias",
-        "R2: separación por sujeto y rechazo de duplicados verificados en los manifiestos de prueba. R3: entorno bloqueado y compatible. R5: controles de geometría y dimensiones probados. Corregido un fallo del fixture NIfTI al reescribir un archivo mapeado en memoria. La extracción cerebral y el registro anatómico reales siguen pendientes de revisión con datos autorizados."
+        "R2: separación por sujeto y rechazo de duplicados verificados en los manifiestos de prueba. R3: entorno bloqueado y compatible. R5: controles de geometría y dimensiones probados. Corregido un fallo del fixture NIfTI al reescribir un archivo mapeado en memoria. La extracción cerebral y el registro anatómico reales siguen pendientes de revisión con datos autorizados. R7 permanece alto (exposición 15), sin cierre ni reevaluación documentados."
       ],
       [
         "Decisiones",
@@ -342,6 +476,73 @@
         "Versiones actualizadas",
         "pyproject.toml, uv.lock, scripts/, src/data/, tests/, configuración y documentación E2."
       ]
+    ],
+    "indicators": [
+      [
+        "I1",
+        "Actividades cumplidas",
+        "100 % técnico: 5/5 componentes EDT 3.1-3.5 implementados.",
+        "QC, normalización, entradas, automatización y pruebas verificados con datos sintéticos. No equivale a aceptación académica de E2."
+      ],
+      [
+        "I2",
+        "Entregables aceptados",
+        "14,29 % acumulado: 1/7 aceptados. E2 pendiente.",
+        "E1 mantiene su aceptación. Presentar scripts, registros y muestra a revisión de H2; no contabilizar E2 antes de la decisión."
+      ],
+      [
+        "I3",
+        "Hitos en fecha",
+        "H2 pendiente al corte del 19/09; semana termina el 20/09.",
+        "Aún no declarar H2 fallido ni cumplido. Actualizar al cierre; la fecha de H1 sigue pendiente de conciliación."
+      ],
+      [
+        "I4",
+        "Desviación de esfuerzo",
+        "0 % estimado: (24 - 24) / 24 x 100.",
+        "Plan 24 h; estimación 24 h, 12 por integrante. Dentro del rango estimado; I4 real pendiente de confirmar horas."
+      ],
+      [
+        "I5",
+        "Riesgos altos abiertos",
+        "1 riesgo alto remanente: R7, exposición 15.",
+        "Sin reevaluación formal. R2, R3 y R5 tienen controles técnicos probados; mantener R7 visible y no atribuir validez clínica al demo."
+      ],
+      [
+        "I6",
+        "Incidencias resueltas",
+        "1/1 incidencia descrita resuelta: fallo del fixture NIfTI.",
+        "100 % del caso documentado: copia en RAM antes de reescribir. No equivale a cobertura global de incidencias sin un registro completo."
+      ],
+      [
+        "I7",
+        "Reproducibilidad",
+        "3/3 verificaciones técnicas conformes (100 %).",
+        "Suite: 61/61 pruebas; demo: 4 aceptados y 4 rechazos previstos; CLI: código 1 ante esos rechazos. Alcance sintético, no clínico."
+      ],
+      [
+        "I8",
+        "Rendimiento",
+        "No aplica en S7.",
+        "E2 genera entradas; no hay entrenamiento ni evaluación diagnóstica. Los rechazos de QC no son métricas de clasificación."
+      ],
+      [
+        "I9",
+        "Portabilidad",
+        "No aplica en S7; prevista para S13.",
+        "El entorno uv es reproducible, pero no mide tamaño, latencia ni degradación de un modelo exportado."
+      ],
+      [
+        "I10",
+        "Cobertura documental",
+        "Guía de ejecución, configuración y generadores disponibles.",
+        "Registros y muestra se generan localmente. Consolidar el paquete de revisión E2 y la lista de artefactos para calcular cobertura global."
+      ]
+    ],
+    "status": [
+      "Amarillo",
+      "E2 verificado con datos sintéticos; H2 pendiente al 19/09. R7 sigue alto y las horas son estimadas.",
+      "Presentar E2 a revisión, confirmar horas y actualizar H2 al cierre del 20/09."
     ]
   }
 ]

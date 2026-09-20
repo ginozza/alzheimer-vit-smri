@@ -8,7 +8,7 @@ Proyecto académico de clasificación futura de imágenes sMRI en CN, MCI y AD m
 
 - **E1:** inventarios, criterios, particiones por sujeto y representación 2.5D. Las pruebas verifican separación sobre los manifiestos suministrados; el loader no aplica todo el esquema clínico.
 - **E2:** control de calidad NIfTI, normalización por corte, generación de tensores float32 de 3×224×224 y registros reproducibles. Validado con muestras sintéticas.
-- **Reportes:** versiones finales S5, S6 y S7 disponibles en [docs/reports](docs/reports/README.md). S7 tiene corte al 19 de septiembre de 2026; sus horas son estimadas.
+- **Reportes:** versiones finales S5, S6 y S7 disponibles en [docs/reports](docs/reports/README.md).
 
 ## Instalación y ejecución
 
@@ -27,7 +27,7 @@ Para generar los tres reportes desde su contenido estructurado:
 uv run --locked --group reports python scripts/build_weekly_reports.py
 ```
 
-El grupo opcional `reports` instala ReportLab. Esta orden actualiza los PDF finales en `docs/reports/`; los originales históricos se conservan en `archive/`.
+El grupo opcional `reports` instala ReportLab. Esta orden actualiza los PDF finales en `docs/reports/`;
 
 ## Organización
 

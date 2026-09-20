@@ -58,30 +58,16 @@ def page_frame(canvas, document):
     canvas.restoreState()
 
 
-def indicators(week):
-    rows = [
-        ("I1", "Actividades cumplidas", "Terminadas / planificadas x 100", "Semanal", ">= 85 %"),
-        ("I2", "Entregables aceptados", "Aceptados / 7 x 100", "Por hito", "Según cronograma"),
-        ("I3", "Hitos en fecha", "En fecha / vencidos x 100", "Semanal", ">= 80 %"),
-        ("I4", "Desviación de esfuerzo", "(Real - plan) / plan x 100", "Semanal", "-15 % a +20 %"),
-        ("I5", "Riesgos altos abiertos", "Conteo con exposición >= 15", "Semanal", "Tendencia descendente"),
-        ("I6", "Incidencias resueltas", "Cerradas / registradas x 100", "Semanal", ">= 80 % al cierre"),
-        ("I7", "Reproducibilidad", "Corridas exitosas / verificaciones", "Por versión", "100 % final"),
-        ("I8", "Rendimiento", "AUC, F1, sensibilidad, especificidad y accuracy", "Por modelo", "Superar referencia"),
-        ("I9", "Portabilidad", "Tamaño, latencia y degradación", "S13", "Resultado documentado"),
-        ("I10", "Cobertura documental", "Artefactos documentados / obligatorios", "Quincenal", "100 % final"),
-    ]
-    states = [
-        ("Verde", "Desviación <= 10 % y sin bloqueo crítico.", "Continuar."),
-        ("Amarillo", "Desviación de 11 % a 20 % o riesgo alto.", "Plan de recuperación."),
-        ("Rojo", "Desviación > 20 % o hito fallido.", "Analizar impacto y tramitar cambio."),
-    ]
+def indicators(report):
+    week = report["week"]
     return [
         paragraph(f"Reporte Semanal Semana {week}", "title"),
         paragraph("1. Indicadores de seguimiento", "heading"),
-        table(("ID", "Indicador", "Cálculo", "Frecuencia", "Meta"), rows, [27, 112, 158, 68, WIDTH - 365]),
+        table(("ID", "Indicador", f"Resultado S{week}", "Evidencia y seguimiento"),
+              report["indicators"], [25, 91, 166, WIDTH - 282], compact=True),
         paragraph("1.1 Estado general", "subheading"),
-        table(("Estado", "Condición", "Acción"), states, [82, 252, WIDTH - 334]),
+        table(("Estado", "Situación de la semana", "Acción"),
+              [report["status"]], [59, 215, WIDTH - 274], compact=True),
     ]
 
 
@@ -95,7 +81,7 @@ def build_report(report):
         author="Malak Sanchez y Juan Simancas",
         subject=f"Seguimiento académico S{week}",
     )
-    story = indicators(week) + [PageBreak()]
+    story = indicators(report) + [PageBreak()]
     story += [paragraph("2. Reporte semanal", "heading"),
               table(("Campo", "Registro"), report["report"], [117, WIDTH - 117])]
     story += [PageBreak(), paragraph("3. Control de cambios", "heading"),
