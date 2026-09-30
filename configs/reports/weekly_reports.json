@@ -544,5 +544,187 @@
       "Entregable E2 finalizado y validado con datasets reales de Kaggle y datos sintéticos. H2 completado con 66 pruebas aprobadas.",
       "Proceder con la Semana 8: Entregable E3 (Arquitectura del sistema ViT-B/16)."
     ]
+  },
+  {
+    "week": 8,
+    "indicators": [
+      [
+        "I1",
+        "Actividades cumplidas",
+        "100 % (5/5 componentes EDT 4.1-4.5 implementados y validados).",
+        "Requisitos, modulos ViT-B/16, conteo de 85.8M parametros, contratos de interfaz E2-E3 y diagramas tecnicos validados."
+      ],
+      [
+        "I2",
+        "Entregables aceptados",
+        "42,86 % acumulado: 3/7 entregables (E1, E2 y E3) completados y validados.",
+        "E1 y E2 cerrados; E3 con especificacion tecnica, suite de 31 pruebas unitarias y runner de verificacion para H3."
+      ],
+      [
+        "I3",
+        "Hitos en fecha",
+        "100 % de hitos previstos al corte (H1, H2 y H3 en fecha segun cronograma).",
+        "H1 formalizado, H2 cerrado con datasets reales y H3 cumplido al finalizar la arquitectura ViT-B/16 en S8."
+      ],
+      [
+        "I4",
+        "Desviación de esfuerzo",
+        "0 %: (24 - 24) / 24 x 100.",
+        "24 h reales y 24 h previstas: Juan 12 h, Malak 12 h. Cumplimiento exacto del esfuerzo planificado."
+      ],
+      [
+        "I5",
+        "Riesgos altos abiertos",
+        "0 riesgos altos abiertos. R4, R5 y R7 mitigados tecnicamente.",
+        "R3 asegurado con PyTorch en uv.lock; R4 mitigado por modularidad en src/model/; R5 y R7 validados con pruebas y hooks."
+      ],
+      [
+        "I6",
+        "Incidencias resueltas",
+        "100 % (1/1 incidencia resuelta: sincronizacion de PyTorch en uv para Windows).",
+        "Configurada la resolucion automatica de torch 2.14 en uv.lock manteniendo reproducibilidad total del entorno."
+      ],
+      [
+        "I7",
+        "Reproducibilidad",
+        "100 % de reproducibilidad (97/97 pruebas unitarias aprobadas en entorno uv).",
+        "Suite completa: 66 pruebas de E1-E2 mas 31 pruebas arquitectonicas de E3 aprobadas sin fallos."
+      ],
+      [
+        "I8",
+        "Rendimiento",
+        "Latencia de inferencia CPU de ~207 ms/imagen para batch de 4.",
+        "Verificado el paso forward/backward completo sin desbordamiento de memoria ni degradacion numerica."
+      ],
+      [
+        "I9",
+        "Portabilidad",
+        "No aplica en S8; prevista para S13.",
+        "El modelo se basa en PyTorch estandar exportable a ONNX o TorchScript en fases avanzadas de integracion."
+      ],
+      [
+        "I10",
+        "Cobertura documental",
+        "100 % de cobertura documental para E1, E2 y E3.",
+        "Especificacion tecnica de arquitectura, diagramas Mermaid, configuracion JSON y runner de verificacion disponibles."
+      ]
+    ],
+    "status": [
+      "Verde",
+      "Entregable E3 finalizado y auditado formalmente. Hito H3 cumplido con 97 pruebas aprobadas y runner de verificacion exitoso.",
+      "Proceder con la Semana 9: Implementacion de funciones de perdida y componentes de entrenamiento futuro (EDT 5.0 / E4)."
+    ],
+    "report": [
+      [
+        "Semana y fechas",
+        "Semana 8 | 21 de septiembre a 27 de septiembre de 2026. Cierre del Entregable E3."
+      ],
+      [
+        "Responsable",
+        "Juan Simancas y Malak Sanchez. Responsable de E3: Juan Simancas."
+      ],
+      [
+        "Estado general",
+        "Verde. Entregable E3 finalizado y auditado al 100 %. Arquitectura ViT-B/16 completamente implementada en PyTorch, con desacoplamiento de hiperparametros, captura de atencion para E5 y 97 pruebas aprobadas."
+      ],
+      [
+        "Trabajo planificado",
+        "EDT 4.0 (4.1 a 4.5): Definicion de requisitos, componentes modulares, implementacion de ViT-B/16 triclase, contratos de interfaz E2-E3 y E3-E5, y diagramas de arquitectura. Cierre del Entregable E3."
+      ],
+      [
+        "Trabajo ejecutado",
+        "Implementacion del paquete src/model/ con PatchEmbedding, MultiHeadSelfAttention, TransformerBlock (Pre-Norm), ClassificationHead y VisionTransformer. Desacoplamiento de hiperparametros en configs/e3_architecture.json. Verificacion exacta de 85,800,963 parametros entrenables. Implementacion de hooks para extraccion de mapas de atencion (12 tensores de 12 cabezas) para interoperabilidad directa con Attention Rollout (E5). Validacion del contrato de tensores E2 (3, 224, 224) float32 hacia logits triclase. Desarrollo del script runner de verificacion scripts/run_e3_verification.py y elaboracion del documento tecnico docs/architecture/E3_Especificacion_Arquitectura_ViT.md. Aprobacion de 31 pruebas unitarias nuevas (97 totales)."
+      ],
+      [
+        "Evidencias",
+        "Modulos src/model/ (config.py, layers.py, vit.py), script de auditoria scripts/run_e3_verification.py, suite tests/test_vit_architecture.py (31 pruebas aprobadas), configuracion configs/e3_architecture.json, documento docs/architecture/E3_Especificacion_Arquitectura_ViT.md y reporte generado."
+      ],
+      [
+        "Desviaciones",
+        "Ninguna desviacion de alcance ni de cronograma. Esfuerzo ejecutado exactamente segun lo planificado (desviacion de esfuerzo 0 %). Hito H3 completado en fecha."
+      ],
+      [
+        "Riesgos e incidencias",
+        "R3 (dependencias incompatibles) mitigado fijando torch>=2.0.0 en pyproject.toml y sincronizando con uv.lock. R4 (complejidad arquitectonica) mitigado mediante descomposicion modular en capas atomicas testeables. R5 (errores de dimension 2.5D) resuelto con verificaciones exhaustivas en tensor de parches (197x768). R7 (interpretabilidad) mitigado desacoplando la captura de pesos de atencion sin afectar la propagacion hacia adelante."
+      ],
+      [
+        "Decisiones",
+        "Mantener arquitectura canonica ViT-B/16 (L=12, H=12, D=768, P=16) con formulacion Pre-Norm por estabilidad demostrada en Transformers profundos; salida triclase formalizada para clasificacion prodromica (CN=0, MCI=1, AD=2); adaptacion 2.5D ratificada por 85 % de ahorro computacional frente a 3D denso."
+      ],
+      [
+        "Cambios",
+        "CAM-003: Incorporacion de la dependencia formal PyTorch (torch>=2.0.0) en el entorno uv para soporte de computo tensorial, grafos de diferenciacion automatica y capas Transformer del modelo ViT-B/16."
+      ],
+      [
+        "Próxima semana",
+        "Iniciar EDT 5.0 / Entregable E4 (Semana 9): Definicion de optimizadores, funciones de perdida con ponderacion por clase para mitigar desbalance diagnostico y preparacion de modulos de carga de datos para entrenamiento futuro."
+      ],
+      [
+        "Esfuerzo",
+        "Planificado: 24 horas-equipo | Real: 24 horas-equipo (Juan Simancas: 12 h, Malak Sanchez: 12 h). Desviacion: 0 %."
+      ]
+    ],
+    "changes": [
+      [
+        "Proyecto",
+        "Deteccion prodromica de la enfermedad de Alzheimer mediante Vision Transformers aplicados a imagenes de resonancia magnetica estructural"
+      ],
+      [
+        "ID y fecha",
+        "CAM-003 | 24 de septiembre de 2026"
+      ],
+      [
+        "Solicitante",
+        "Juan Simancas y Malak Sanchez"
+      ],
+      [
+        "Elemento afectado",
+        "Dependencias de ejecucion y desarrollo (pyproject.toml, uv.lock)"
+      ],
+      [
+        "Situación actual",
+        "Entorno uv configurado con dependencias de procesamiento de datos y neuroimagen basica (NiBabel, NumPy, Pandas, Scikit-Learn, Pillow)."
+      ],
+      [
+        "Cambio solicitado",
+        "Incorporacion formal de PyTorch (torch>=2.0.0) como dependencia principal del proyecto para dar soporte estructural a la arquitectura Vision Transformer (ViT-B/16)."
+      ],
+      [
+        "Justificación y evidencia",
+        "Requerido para la implementacion nativa de las capas de auto-atencion multi-cabeza, bloques Transformer, embeddings y flujo de gradientes del Entregable E3. Validado con 31 pruebas unitarias aprobadas."
+      ],
+      [
+        "Impacto en alcance",
+        "Positivo. Materializa la arquitectura del modelo comprometida en la Linea Base sin alterar los objetivos academicos."
+      ],
+      [
+        "Impacto en tiempo",
+        "Ninguno. Implementado y verificado dentro de la Semana 8 segun cronograma oficial."
+      ],
+      [
+        "Impacto en calidad",
+        "Favorable. Aporta infraestructura computacional robusta, diferenciacion automatica probada y optimizacion vectorial."
+      ],
+      [
+        "Impacto en riesgos",
+        "Mitiga R3 (dependencias incompatibles) y R4 (complejidad arquitectonica) utilizando un framework estandarizado y bloqueado en uv.lock."
+      ],
+      [
+        "Alternativas",
+        "Implementacion manual en NumPy puro (descartado por ineficiencia en diferenciacion automatica y falta de soporte GPU futuro)."
+      ],
+      [
+        "Recomendación",
+        "Aprobar"
+      ],
+      [
+        "Decisión",
+        "Aprobado por el Director Sergio Lubo"
+      ],
+      [
+        "Versiones actualizadas",
+        "pyproject.toml, uv.lock, configs/e3_architecture.json y suite de pruebas."
+      ]
+    ]
   }
 ]
