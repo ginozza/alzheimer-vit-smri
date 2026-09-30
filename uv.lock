@@ -15,6 +15,7 @@ dependencies = [
     { name = "nibabel" },
     { name = "numpy" },
     { name = "pandas" },
+    { name = "pillow" },
     { name = "pyyaml" },
     { name = "scikit-learn" },
 ]
@@ -32,6 +33,7 @@ requires-dist = [
     { name = "nibabel", specifier = ">=5.3,<6" },
     { name = "numpy", specifier = ">=1.24.0" },
     { name = "pandas", specifier = ">=2.0.0" },
+    { name = "pillow", specifier = ">=10.0.0" },
     { name = "pyyaml", specifier = ">=6.0" },
     { name = "scikit-learn", specifier = ">=1.3.0" },
 ]

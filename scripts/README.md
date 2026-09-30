@@ -6,13 +6,15 @@ Ejecutar desde la raíz del repositorio. La lógica reutilizable está en `src/d
 | --- | --- | --- |
 | `run_e1_verification.py` | Verificar inventario, particiones y representación E1 | Resumen en terminal |
 | `run_e2_demo.py` | Crear y comprobar ocho casos sintéticos E2 | Carpeta nueva con entradas, manifiesto, resultados y vista previa |
-| `run_e2_preprocessing.py` | Procesar un manifiesto completo de un fold | Tensores y registros de QC en una carpeta nueva |
+| `run_e2_preprocessing.py` | Procesar un manifiesto completo de un fold (NIfTI 3D) | Tensores y registros de QC en una carpeta nueva |
+| `run_e2_kaggle_pipeline.py` | Ingestar y procesar cortes axiales 2D de Kaggle (OASIS/ADNI) | Manifiesto, registros QC y tensores (3, 224, 224) |
 | `build_weekly_reports.py` | Componer reportes desde JSON | PDF finales en `docs/reports/` |
 
 ```bash
 uv run --locked python scripts/run_e1_verification.py
 uv run --locked python scripts/run_e2_demo.py --output-dir data/processed/mi_demo_e2
 uv run --locked python scripts/run_e2_preprocessing.py --help
+uv run --locked python scripts/run_e2_kaggle_pipeline.py --help
 uv run --locked --group reports python scripts/build_weekly_reports.py
 ```
 

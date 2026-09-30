@@ -99,9 +99,10 @@ def test_volume_qc_rejections(tmp_path, image_data, defect, reason):
     elif defect == "unknown":
         image.set_qform(None, code=0)
         image.set_sform(None, code=0)
-    nib.save(image, path)
+    test_path = tmp_path / "modified_sample.nii"
+    nib.save(image, test_path)
     with pytest.raises(QCError) as error:
-        load_volume(path, PreprocessingConfig())
+        load_volume(test_path, PreprocessingConfig())
     assert error.value.reason == reason
 
 

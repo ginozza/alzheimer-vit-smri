@@ -44,6 +44,7 @@ venv/
 *.IMA
 data/raw/
 data/processed/
+data/samples/
 !data/inventory/
 
 # Model checkpoints and weights

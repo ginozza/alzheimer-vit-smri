@@ -92,7 +92,7 @@ def build_report(report):
 
 def main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    reports = json.loads((ROOT / "configs/reports/weekly_reports.json").read_text())
+    reports = json.loads((ROOT / "configs/reports/weekly_reports.json").read_text(encoding="utf-8"))
     for report in reports:
         print(build_report(report))
 
