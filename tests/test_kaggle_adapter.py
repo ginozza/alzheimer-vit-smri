@@ -24,16 +24,19 @@ def test_normalize_class_name():
     assert normalize_class_name("non_demented") == "CN"
     assert normalize_class_name("cn") == "CN"
 
-    # Very Mild & Mild -> MCI
+    # Very Mild & Mild -> MCI (both 'Demented' and 'Dementia' variants)
     assert normalize_class_name("Very Mild Demented") == "MCI"
     assert normalize_class_name("VeryMildDemented") == "MCI"
+    assert normalize_class_name("Very mild Dementia") == "MCI"
     assert normalize_class_name("Mild Demented") == "MCI"
     assert normalize_class_name("MildDemented") == "MCI"
+    assert normalize_class_name("Mild Dementia") == "MCI"
     assert normalize_class_name("mci") == "MCI"
 
-    # Moderate -> AD
+    # Moderate -> AD (both 'Demented' and 'Dementia' variants)
     assert normalize_class_name("Moderate Demented") == "AD"
     assert normalize_class_name("ModerateDemented") == "AD"
+    assert normalize_class_name("Moderate Dementia") == "AD"
     assert normalize_class_name("moderate_demented") == "AD"
     assert normalize_class_name("ad") == "AD"
 

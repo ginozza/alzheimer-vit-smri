@@ -34,14 +34,23 @@ KAGGLE_CLASS_MAPPING: Dict[str, str] = {
     "verymilddemented": "MCI",
     "very mild demented": "MCI",
     "very_mild_demented": "MCI",
+    "verymilddementia": "MCI",
+    "very mild dementia": "MCI",
+    "very_mild_dementia": "MCI",
     "milddemented": "MCI",
     "mild demented": "MCI",
     "mild_demented": "MCI",
+    "milddementia": "MCI",
+    "mild dementia": "MCI",
+    "mild_dementia": "MCI",
     "mci": "MCI",
     # Moderate Demented -> Alzheimer's Disease (AD)
     "moderatedemented": "AD",
     "moderate demented": "AD",
     "moderate_demented": "AD",
+    "moderatedementia": "AD",
+    "moderate dementia": "AD",
+    "moderate_dementia": "AD",
     "ad": "AD",
 }
 
