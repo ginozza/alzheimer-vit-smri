@@ -551,38 +551,38 @@
       [
         "I1",
         "Actividades cumplidas",
-        "100 % (5/5 componentes EDT 4.1-4.5 implementados y validados).",
-        "Requisitos, modulos ViT-B/16, conteo de 85.8M parametros, contratos de interfaz E2-E3 y diagramas tecnicos validados."
+        "100 % (5/5 componentes EDT 4.1-4.5 completados tras reajustar E2).",
+        "Preprocesamiento reajustado a las imagenes reales del dataset y arquitectura ViT-B/16 validada con 85.8M parametros y contratos E2-E3."
       ],
       [
         "I2",
         "Entregables aceptados",
-        "42,86 % acumulado: 3/7 entregables (E1, E2 y E3) completados y validados.",
-        "E1 y E2 cerrados; E3 con especificacion tecnica, suite de 31 pruebas unitarias y runner de verificacion para H3."
+        "42,86 % acumulado: 3/7 entregables (E1, E2 y E3) completados.",
+        "E1 aceptado, E2 reajustado con imagenes reales de Kaggle y E3 con soporte tecnico y pruebas completas para H3."
       ],
       [
         "I3",
         "Hitos en fecha",
-        "100 % de hitos previstos al corte (H1, H2 y H3 en fecha segun cronograma).",
-        "H1 formalizado, H2 cerrado con datasets reales y H3 cumplido al finalizar la arquitectura ViT-B/16 en S8."
+        "100 % de hitos completados al corte (H1, H2 y H3 cerrados tras absorber el atraso de S8).",
+        "H3 alcanzado al cierre de S8 tras completar la arquitectura ViT-B/16 una vez estabilizado el reajuste del preprocesamiento con imagenes reales."
       ],
       [
         "I4",
         "Desviación de esfuerzo",
-        "0 %: (24 - 24) / 24 x 100.",
-        "24 h reales y 24 h previstas: Juan 12 h, Malak 12 h. Cumplimiento exacto del esfuerzo planificado."
+        "+16,67 %: (28 - 24) / 24 x 100.",
+        "28 h reales frente a 24 h previstas: Juan 14 h, Malak 14 h. Sobreesfuerzo y retraso generado por el reajuste del preprocesamiento en base a las imagenes reales del dataset."
       ],
       [
         "I5",
         "Riesgos altos abiertos",
-        "0 riesgos altos abiertos. R4, R5 y R7 mitigados tecnicamente.",
-        "R3 asegurado con PyTorch en uv.lock; R4 mitigado por modularidad en src/model/; R5 y R7 validados con pruebas y hooks."
+        "0 riesgos altos abiertos. R6 (datos reales) mitigado tras reajuste de preprocesamiento.",
+        "R3 asegurado en uv.lock; R4 mitigado por modularidad; R6 controlado al adaptar el pipeline a los formatos reales de OASIS y ADNI."
       ],
       [
         "I6",
         "Incidencias resueltas",
-        "100 % (1/1 incidencia resuelta: sincronizacion de PyTorch en uv para Windows).",
-        "Configurada la resolucion automatica de torch 2.14 en uv.lock manteniendo reproducibilidad total del entorno."
+        "100 % (2/2 incidencias resueltas: reajuste del preprocesamiento para datos reales e integracion de PyTorch).",
+        "Resueltos los desajustes de taxonomia y formato en imagenes reales de Kaggle y configurada la resolucion de torch en uv.lock."
       ],
       [
         "I7",
@@ -610,14 +610,14 @@
       ]
     ],
     "status": [
-      "Verde",
-      "Entregable E3 finalizado y auditado formalmente. Hito H3 cumplido con 97 pruebas aprobadas y runner de verificacion exitoso.",
-      "Proceder con la Semana 9: Implementacion de funciones de perdida y componentes de entrenamiento futuro (EDT 5.0 / E4)."
+      "Amarillo",
+      "Atraso temporal y sobreesfuerzo de +16,67 % en S8 ocasionado por la necesidad imperativa de reajustar el preprocesamiento (E2) en base a las caracteristicas de las imagenes reales del dataset descargado de Kaggle. A pesar del retraso, la arquitectura ViT-B/16 (E3) quedo completada y validada con 97 pruebas unitarias.",
+      "Con el preprocesamiento ya adaptado y estabilizado sobre las imagenes reales, proceder en la Semana 9 con el modulo de entrenamiento y funciones de perdida (EDT 5.0 / E4)."
     ],
     "report": [
       [
         "Semana y fechas",
-        "Semana 8 | 21 de septiembre a 27 de septiembre de 2026. Cierre del Entregable E3."
+        "Semana 8 | 21 de septiembre a 27 de septiembre de 2026. Cierre del Entregable E3 y reajuste de datos reales."
       ],
       [
         "Responsable",
@@ -625,7 +625,7 @@
       ],
       [
         "Estado general",
-        "Verde. Entregable E3 finalizado y auditado al 100 %. Arquitectura ViT-B/16 completamente implementada en PyTorch, con desacoplamiento de hiperparametros, captura de atencion para E5 y 97 pruebas aprobadas."
+        "Amarillo. Entregable E3 completado con atraso y sobreesfuerzo (+16,67 %) al tener que reajustar el preprocesamiento (E2) en base a las imagenes reales del dataset de Kaggle (OASIS y ADNI). Tras el reajuste, la arquitectura ViT-B/16 quedo implementada en PyTorch con 97 pruebas aprobadas."
       ],
       [
         "Trabajo planificado",
@@ -633,35 +633,35 @@
       ],
       [
         "Trabajo ejecutado",
-        "Implementacion del paquete src/model/ con PatchEmbedding, MultiHeadSelfAttention, TransformerBlock (Pre-Norm), ClassificationHead y VisionTransformer. Desacoplamiento de hiperparametros en configs/e3_architecture.json. Verificacion exacta de 85,800,963 parametros entrenables. Implementacion de hooks para extraccion de mapas de atencion (12 tensores de 12 cabezas) para interoperabilidad directa con Attention Rollout (E5). Validacion del contrato de tensores E2 (3, 224, 224) float32 hacia logits triclase. Desarrollo del script runner de verificacion scripts/run_e3_verification.py y elaboracion del documento tecnico docs/architecture/E3_Especificacion_Arquitectura_ViT.md. Aprobacion de 31 pruebas unitarias nuevas (97 totales)."
+        "Reajuste del preprocesamiento E2 frente a las imagenes reales del dataset: soporte para variantes en OASIS ('Very mild Dementia', 'Mild Dementia', 'Moderate Dementia'), clipping p1/p99 y z-score en cortes 2D, particionado sin fuga en 99.237 imagenes y script validate_real_datasets.py. Paralelamente, implementacion de ViT-B/16 en PyTorch (src/model/), conteo de 85.8M parametros, runner run_e3_verification.py, documento tecnico E3 y 31 pruebas unitarias nuevas (97 totales)."
       ],
       [
         "Evidencias",
-        "Modulos src/model/ (config.py, layers.py, vit.py), script de auditoria scripts/run_e3_verification.py, suite tests/test_vit_architecture.py (31 pruebas aprobadas), configuracion configs/e3_architecture.json, documento docs/architecture/E3_Especificacion_Arquitectura_ViT.md y reporte generado."
+        "Repositorio: src/model/, src/data/kaggle_adapter.py reajustado, scripts/validate_real_datasets.py, scripts/run_e3_verification.py, suite tests/ (97 pruebas aprobadas), configs/e3_architecture.json, docs/architecture/E3_Especificacion_Arquitectura_ViT.md y reporte S8."
       ],
       [
         "Desviaciones",
-        "Ninguna desviacion de alcance ni de cronograma. Esfuerzo ejecutado exactamente segun lo planificado (desviacion de esfuerzo 0 %). Hito H3 completado en fecha."
+        "Atraso e incremento de esfuerzo de +4 h (+16,67 %): Se presento un retraso en la planificacion al ser mandatorio reajustar el pipeline de preprocesamiento (E2) en base a las imagenes del dataset real (nomenclaturas imprevistas en OASIS y calibracion de normalizacion), requiriendo tiempo adicional no contemplado originalmente para S8."
       ],
       [
         "Riesgos e incidencias",
-        "R3 (dependencias incompatibles) mitigado fijando torch>=2.0.0 en pyproject.toml y sincronizando con uv.lock. R4 (complejidad arquitectonica) mitigado mediante descomposicion modular en capas atomicas testeables. R5 (errores de dimension 2.5D) resuelto con verificaciones exhaustivas en tensor de parches (197x768). R7 (interpretabilidad) mitigado desacoplando la captura de pesos de atencion sin afectar la propagacion hacia adelante."
+        "R6 (datos reales) mitigado tras reajustar preprocesamiento con tensores reales (3, 224, 224) float32. R3 (PyTorch) asegurado en uv.lock. R4 (complejidad) y R5 (dimensiones) controlados con modularidad y 97 pruebas unitarias aprobadas."
       ],
       [
         "Decisiones",
-        "Mantener arquitectura canonica ViT-B/16 (L=12, H=12, D=768, P=16) con formulacion Pre-Norm por estabilidad demostrada en Transformers profundos; salida triclase formalizada para clasificacion prodromica (CN=0, MCI=1, AD=2); adaptacion 2.5D ratificada por 85 % de ahorro computacional frente a 3D denso."
+        "Priorizar la estabilizacion del preprocesamiento sobre datos reales antes del modelado. Ratificar la arquitectura canonica ViT-B/16 con Pre-Norm, adaptacion 2.5D tricanal (85 % de ahorro computacional) y salida triclase para deteccion prodromica (CN=0, MCI=1, AD=2)."
       ],
       [
         "Cambios",
-        "CAM-003: Incorporacion de la dependencia formal PyTorch (torch>=2.0.0) en el entorno uv para soporte de computo tensorial, grafos de diferenciacion automatica y capas Transformer del modelo ViT-B/16."
+        "CAM-003: Incorporacion formal de PyTorch (torch>=2.0.0) en el entorno uv para soporte de computo tensorial, grafos de diferenciacion automatica y capas Transformer del modelo ViT-B/16."
       ],
       [
         "Próxima semana",
-        "Iniciar EDT 5.0 / Entregable E4 (Semana 9): Definicion de optimizadores, funciones de perdida con ponderacion por clase para mitigar desbalance diagnostico y preparacion de modulos de carga de datos para entrenamiento futuro."
+        "Iniciar EDT 5.0 / Entregable E4 (Semana 9): Definicion de optimizadores (AdamW), funciones de perdida ponderadas para compensar el desbalance de clases de los datasets reales y preparacion del pipeline de entrenamiento futuro."
       ],
       [
         "Esfuerzo",
-        "Planificado: 24 horas-equipo | Real: 24 horas-equipo (Juan Simancas: 12 h, Malak Sanchez: 12 h). Desviacion: 0 %."
+        "Planificado: 24 horas-equipo | Real: 28 horas-equipo (Juan Simancas: 14 h, Malak Sanchez: 14 h). Desviacion: +16,67 % (+4 h debido al retraso ocasionado por reajustar el preprocesamiento en base a las imagenes del dataset)."
       ]
     ],
     "changes": [
