@@ -5,8 +5,10 @@
 | S5 | 31 de agosto–6 de septiembre de 2026 | [Reporte S5](Reporte_semanal_S5_final.pdf) |
 | S6 | 7–13 de septiembre de 2026 | [Reporte S6](Reporte_semanal_S6_final.pdf) |
 | S7 | 14–20 de septiembre de 2026; corte al día 19 | [Reporte S7](Reporte_semanal_S7_final.pdf) |
+| S8 | 21–27 de septiembre de 2026 | [Reporte S8](Reporte_semanal_S8_final.pdf) |
+| S9 | 28 de septiembre–4 de octubre de 2026 | [Reporte S9](Reporte_semanal_S9_final.pdf) |
 
-Los reportes mantienen la organización de indicadores, reporte semanal y control de cambios del formato de referencia S5. S7 registra 24 horas estimadas, distribuidas en 12 por integrante; las horas reales están pendientes de confirmación. La evidencia E2 es sintética.
+Los reportes mantienen la organización de indicadores, reporte semanal y control de cambios del formato de referencia S5. S9 registra el plan de 24 horas-equipo y deja las horas reales pendientes de confirmación para no atribuir valores sin evidencia.
 
 ## Seguimiento semanal
 
@@ -14,7 +16,7 @@ Cada PDF presenta I1–I10 con resultado de la semana, evidencia y acción de se
 
 El conteo técnico de I1 usa los cinco componentes EDT de E1 o E2 identificados en cada fila; no equivale a aceptación formal. I2 usa la fecha de aceptación acreditada: E1 tiene constancia del 07/09. I3 deja explícita la discrepancia entre esa fecha y el hito H1 asignado a S5. Los valores declarados sin desglose, las estimaciones y los indicadores sin denominador se identifican como tales.
 
-El semáforo se evalúa con la condición de riesgo alto de la línea base: R7 mantiene exposición 15 mientras no exista cierre o nueva valoración. Por ello se actualiza a amarillo, con acciones específicas por semana. Los originales históricos conservan su estado y contenido anteriores.
+El semáforo se evalúa con las condiciones de la línea base. S5 y S6 conservan R7 como riesgo alto; S7 registra su reevaluación, S8 queda amarillo por la desviación de esfuerzo y S9 mantiene amarillo hasta confirmar las horas reales y los pesos calculados desde la partición de entrenamiento. Los originales históricos conservan su estado y contenido anteriores.
 
 ## Generación
 
@@ -24,7 +26,13 @@ El contenido está en [weekly_reports.json](../../configs/reports/weekly_reports
 uv run --locked --group reports python scripts/build_weekly_reports.py
 ```
 
-La orden reemplaza los tres PDF finales. Después de modificar contenido o formato, revisar las páginas renderizadas, los saltos y la legibilidad de las tablas antes de entregar.
+La orden reemplaza todos los PDF finales. Para generar solo una semana y preservar los demás archivos:
+
+```bash
+uv run --locked --group reports python scripts/build_weekly_reports.py --week 9
+```
+
+Después de modificar contenido o formato, revisar las páginas renderizadas, los saltos y la legibilidad de las tablas antes de entregar.
 
 ## Archivo histórico
 
