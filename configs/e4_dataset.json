@@ -1,0 +1,12 @@
+{
+  "batch_size": 16,
+  "shuffle_train": true,
+  "shuffle_val": false,
+  "num_workers": 0,
+  "pin_memory": false,
+  "drop_last": false,
+  "target_shape": [3, 224, 224],
+  "dtype": "float32",
+  "num_classes": 3,
+  "class_names": ["CN", "MCI", "AD"]
+}

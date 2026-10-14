@@ -1,0 +1,8 @@
+{
+  "batch_size": 16,
+  "device": "cpu",
+  "num_classes": 3,
+  "class_names": ["CN", "MCI", "AD"],
+  "return_attention": false,
+  "confidence_threshold": 0.3333
+}

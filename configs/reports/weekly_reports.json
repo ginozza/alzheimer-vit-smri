@@ -908,5 +908,187 @@
         "src/model/layers.py, src/training/, configs/e4_training.json, pruebas, verificador S9 y documentación técnica."
       ]
     ]
+  },
+  {
+    "week": 10,
+    "indicators": [
+      [
+        "I1",
+        "Actividades cumplidas",
+        "100 % (5/5 componentes EDT 5.1-5.5 completados e integrados).",
+        "Carga de datos, DataLoader seguro, integracion ViT-B/16, entrenamiento futuro, evaluacion multiclase e inferencia verificados."
+      ],
+      [
+        "I2",
+        "Entregables aceptados",
+        "42,86 % acumulado: 3/7 entregables (E1, E2 y E3 cerrados; E4 en avance tecnico).",
+        "E1, E2 y E3 completados; E4 mantiene avance tecnico planificado con aceptacion formal prevista en Semana 11 (H4)."
+      ],
+      [
+        "I3",
+        "Hitos en fecha",
+        "100 % de hitos vencidos completados: H1, H2 y H3.",
+        "S10 aporta la evidencia de codigo integrado requerida; el Hito H4 (Entregable E4 aceptado) corresponde a la Semana 11."
+      ],
+      [
+        "I4",
+        "Desviación de esfuerzo",
+        "0 %: (24 - 24) / 24 x 100.",
+        "24 h reales frente a 24 h previstas: Malak 12 h, Juan 12 h. Cumplimiento exacto del esfuerzo programado."
+      ],
+      [
+        "I5",
+        "Riesgos altos abiertos",
+        "0 riesgos con exposicion vigente igual o superior a 15.",
+        "R4 y R5 controlados con modularidad y contratos tensoriales estrictos. R6 en nivel medio al usar datos sinteticos controlados."
+      ],
+      [
+        "I6",
+        "Incidencias resueltas",
+        "No aplica: no se registraron incidencias formales en S10.",
+        "Se incorporaron validaciones preventivas de rango y dimensiones espaciales sin constituir fallos formales."
+      ],
+      [
+        "I7",
+        "Reproducibilidad",
+        "100 %: 140/140 pruebas unitarias aprobadas en entorno uv.",
+        "Suite completa: 113 pruebas de E1-S9 mas 27 pruebas de S10 aprobadas. Verificador S10 reproducible al 100 %."
+      ],
+      [
+        "I8",
+        "Rendimiento",
+        "No aplica en S10.",
+        "No existe modelo entrenado ni se calculan metricas clinicas definitivas sobre pacientes reales."
+      ],
+      [
+        "I9",
+        "Portabilidad",
+        "No aplica en S10; prevista para S13.",
+        "La ejecucion modular en PyTorch acredita interoperabilidad interna, no portabilidad hacia dispositivos finales."
+      ],
+      [
+        "I10",
+        "Cobertura documental",
+        "100 % de los artefactos tecnicos previstos para S10 documentados.",
+        "Especificacion tecnica S10, configuraciones e4_dataset y e4_inference, runner de verificacion y pruebas disponibles."
+      ]
+    ],
+    "status": [
+      "Verde",
+      "Actividad S10 completada: codigo integrado de los principales componentes (datos, entrenamiento, evaluacion e inferencia) con 140 pruebas aprobadas. E4 avanza conforme al cronograma hacia su cierre en S11.",
+      "Proceder con la Semana 11: Integracion final, pruebas de interoperabilidad entre modulos y cierre formal del Entregable E4 (Hito H4)."
+    ],
+    "report": [
+      [
+        "Semana y fechas",
+        "Semana 10 | 05 de octubre a 11 de octubre de 2026. Codigo integrado de componentes E4."
+      ],
+      [
+        "Responsable",
+        "Malak Sanchez y Juan Simancas. Responsables de E4: Ambos."
+      ],
+      [
+        "Estado general",
+        "Verde. Codigo integrado de los principales componentes del sistema (EDT 5.0) implementado y auditado al 100 %: Dataset, DataLoader, ViT-B/16, FutureTrainer, Evaluacion multiclase y Pipeline de inferencia con 140 pruebas aprobadas."
+      ],
+      [
+        "Trabajo planificado",
+        "EDT 5.0 (5.1 a 5.5): Implementacion del modulo de datos, configuracion, entrenamiento futuro, evaluacion e inferencia. Obtener el codigo integrado de los principales componentes del sistema."
+      ],
+      [
+        "Trabajo ejecutado",
+        "Implementacion de MRI25DDataset y SyntheticMRIDataset (src/data/dataset.py), mri_collate_fn y create_mri_dataloader (src/data/dataloader.py); verificacion de integracion de lotes hacia ViT-B/16; desarrollo de FutureTrainer y TrainingHistory con soporte de checkpoints (src/training/trainer.py); modulo de evaluacion con matriz de confusion 3x3 y metricas macro en EvaluationMetrics (src/training/evaluation.py); pipeline de inferencia unitaria y por lotes con extraccion de atencion (src/inference/predictor.py); configuracion en configs/e4_dataset.json y configs/e4_inference.json; runner scripts/run_s10_verification.py; especificacion tecnica docs/implementation/E4_S10_Modulo_Datos_Entrenamiento_Evaluacion_Inferencia.md y 27 pruebas unitarias nuevas (140 totales)."
+      ],
+      [
+        "Evidencias",
+        "Repositorio: src/data/dataset.py, src/data/dataloader.py, src/training/trainer.py, src/training/evaluation.py, src/inference/, scripts/run_s10_verification.py, suite tests/ (140 pruebas aprobadas), configs/e4_dataset.json, configs/e4_inference.json, documento tecnico S10 y reporte semanal."
+      ],
+      [
+        "Desviaciones",
+        "Ninguna desviacion de alcance ni de cronograma. Esfuerzo ejecutado exactamente segun lo planificado: 24 horas-equipo (desviacion de esfuerzo 0 %)."
+      ],
+      [
+        "Riesgos e incidencias",
+        "R4 (complejidad arquitectonica) mitigado mediante descomposicion modular desacoplada entre datos, entrenamiento, evaluacion e inferencia. R5 (dimensiones) asegurado con validacion estricta en el cargador. R6 (datos reales) controlado mediante tensores sinteticos reproducibles."
+      ],
+      [
+        "Decisiones",
+        "Estandarizar el contrato de entrada en tensores tricanal (B, 3, 224, 224) float32 a traves de todo el pipeline. Desacoplar la inferencia en un paquete independiente (src/inference) para facilitar la posterior integracion con el prototipo de demostracion (E6)."
+      ],
+      [
+        "Cambios",
+        "No se registraron solicitudes de cambio formal en S10. El avance corresponde al desarrollo interno del paquete EDT 5.0."
+      ],
+      [
+        "Próxima semana",
+        "Semana 11: Integracion final de componentes, pruebas unitarias integrales, pruebas de interoperabilidad entre modulos y cierre formal del Entregable E4 (Hito H4)."
+      ],
+      [
+        "Esfuerzo",
+        "Planificado: 24 horas-equipo | Real: 24 horas-equipo (Malak Sanchez: 12 h, Juan Simancas: 12 h). Desviacion: 0 %."
+      ]
+    ],
+    "changes": [
+      [
+        "Proyecto",
+        "Deteccion prodromica de la enfermedad de Alzheimer mediante Vision Transformers aplicados a imagenes de resonancia magnetica estructural"
+      ],
+      [
+        "ID y fecha",
+        "No aplica | Semana 10"
+      ],
+      [
+        "Solicitante",
+        "Malak Sanchez y Juan Simancas"
+      ],
+      [
+        "Elemento afectado",
+        "Ninguno."
+      ],
+      [
+        "Situación actual",
+        "Actividad S10 completada: codigo integrado de los principales componentes (EDT 5.0) en desarrollo conforme al cronograma oficial."
+      ],
+      [
+        "Cambio solicitado",
+        "No se solicita modificacion de alcance, cronograma, entregables, criterios de aceptacion o responsables."
+      ],
+      [
+        "Justificación y evidencia",
+        "La integracion de modulos de datos, entrenamiento futuro, evaluacion e inferencia corresponde a la implementacion tecnica programada para S10 y preserva las restricciones metodologicas del proyecto."
+      ],
+      [
+        "Impacto en alcance",
+        "Ninguno."
+      ],
+      [
+        "Impacto en tiempo",
+        "Ninguno identificado; el Entregable E4 conserva su aceptacion formal prevista para la Semana 11 (Hito H4)."
+      ],
+      [
+        "Impacto en calidad",
+        "Favorable por integracion temprana de cargadores, metricas diagnósticas estandarizadas y pipeline de inferencia modular."
+      ],
+      [
+        "Impacto en riesgos",
+        "Reduce R4 (complejidad) y R5 (dimensiones); mantiene explicitamente controlado R6 mediante datos sinteticos reproducibles."
+      ],
+      [
+        "Alternativas",
+        "Posponer la integracion de inferencia y evaluacion a la Semana 11, lo que habria sobrecargado el cierre de H4."
+      ],
+      [
+        "Recomendación",
+        "Mantener la linea base y continuar con las pruebas de interoperabilidad de E4 en la Semana 11."
+      ],
+      [
+        "Decisión",
+        "No aplica: no se tramita cambio formal."
+      ],
+      [
+        "Versiones actualizadas",
+        "src/data/, src/training/, src/inference/, configs/e4_dataset.json, configs/e4_inference.json, pruebas y runner S10."
+      ]
+    ]
   }
 ]
