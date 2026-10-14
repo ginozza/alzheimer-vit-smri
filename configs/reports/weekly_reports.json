@@ -726,5 +726,187 @@
         "pyproject.toml, uv.lock, configs/e3_architecture.json y suite de pruebas."
       ]
     ]
+  },
+  {
+    "week": 9,
+    "indicators": [
+      [
+        "I1",
+        "Actividades cumplidas",
+        "100 % (3/3 actividades S9 verificadas).",
+        "ViT-B/16 triclase implementada, salida de logits (B, 3) definida y dimensiones validadas. Se inició E4 con pérdida ponderada, AdamW y paso sintético."
+      ],
+      [
+        "I2",
+        "Entregables aceptados",
+        "42,86 % acumulado: 3/7 entregables aceptados.",
+        "E1, E2 y E3 permanecen completados. E4 está en ejecución y solo puede aceptarse en H4, Semana 11."
+      ],
+      [
+        "I3",
+        "Hitos en fecha",
+        "100 % de hitos vencidos completados: H1, H2 y H3.",
+        "S9 exige evidencia estructural, no un nuevo hito de aceptación. La arquitectura fue adelantada en S8 y revalidada en S9."
+      ],
+      [
+        "I4",
+        "Desviación de esfuerzo",
+        "Pendiente de cálculo.",
+        "Plan: 24 horas-equipo. No se dispone de horas reales confirmadas por integrante; no se inventa una desviación."
+      ],
+      [
+        "I5",
+        "Riesgos altos abiertos",
+        "0 riesgos con exposición vigente igual o superior a 15.",
+        "R4 y R5 están controlados con modularidad y pruebas. R6 continúa activo en nivel medio porque no se entrena con datos reales."
+      ],
+      [
+        "I6",
+        "Incidencias resueltas",
+        "No aplica: no se registraron incidencias formales en S9.",
+        "Se agregaron validaciones preventivas para rango, canales, dimensiones y tipo de tensor; no corresponden al cierre de una incidencia registrada."
+      ],
+      [
+        "I7",
+        "Reproducibilidad",
+        "100 %: 113/113 pruebas unitarias aprobadas.",
+        "El verificador S9 confirma 85.800.963 parámetros, logits (1, 3) y un paso forward/backward sintético reproducible."
+      ],
+      [
+        "I8",
+        "Rendimiento",
+        "No aplica en S9.",
+        "No existe modelo entrenado ni se calculan AUC, F1, sensibilidad, especificidad o accuracy sobre datos reales."
+      ],
+      [
+        "I9",
+        "Portabilidad",
+        "No aplica en S9; prevista para S13.",
+        "La ejecución en PyTorch y uv acredita reproducibilidad técnica, no el indicador de portabilidad del modelo."
+      ],
+      [
+        "I10",
+        "Cobertura documental",
+        "100 % de los artefactos técnicos previstos para S9 documentados.",
+        "Configuración, módulos, pruebas, verificador y especificación S9 disponibles. La cobertura final del proyecto sigue abierta."
+      ]
+    ],
+    "status": [
+      "Amarillo",
+      "Actividad técnica S9 completa y 113 pruebas aprobadas. E4 continúa abierto; faltan confirmar las horas reales y calcular pesos con la partición de entrenamiento real.",
+      "Confirmar esfuerzo, obtener conteos solo de train y continuar S10 sin declarar E4 aceptado antes de H4."
+    ],
+    "report": [
+      [
+        "Semana y fechas",
+        "Semana 9 | 28 de septiembre a 04 de octubre de 2026. Implementación ViT-B/16 y avance controlado del Entregable E4."
+      ],
+      [
+        "Responsable",
+        "Malak Sanchez y Juan Simancas. Actividad S9 y E4: ambos."
+      ],
+      [
+        "Estado general",
+        "Amarillo. La evidencia técnica de S9 está completa con 113 pruebas aprobadas; E4 permanece en desarrollo y están pendientes las horas reales y los pesos derivados del train real."
+      ],
+      [
+        "Trabajo planificado",
+        "Cronograma S9: implementar ViT-B/16 triclase, definir la salida y validar dimensiones. Seguimiento S8: iniciar EDT 5.0 / E4 con AdamW, pérdida ponderada y preparación del entrenamiento futuro."
+      ],
+      [
+        "Trabajo ejecutado",
+        "Revalidación de ViT-B/16 con 85.800.963 parámetros y salida de logits (B, 3) para CN, MCI y AD. Validación explícita del contrato de entrada. Implementación de TrainingConfig, pesos balanceados calculados solo desde train, entropía cruzada ponderada, AdamW con grupos de decaimiento, clipping de gradiente y paso forward/backward sintético."
+      ],
+      [
+        "Evidencias",
+        "src/model/layers.py; src/training/; configs/e4_training.json; tests/test_vit_architecture.py y tests/test_training.py; scripts/run_s9_verification.py; docs/implementation/E4_S9_Implementacion_ViT_y_Entrenamiento_Futuro.md; 113/113 pruebas aprobadas."
+      ],
+      [
+        "Desviaciones",
+        "La arquitectura prevista para S9 se adelantó durante el cierre de E3 en S8. S9 se dedicó a endurecer el contrato y adelantar componentes de E4 sin cambiar fechas ni alcance. La desviación de esfuerzo no puede calcularse hasta confirmar horas reales."
+      ],
+      [
+        "Riesgos e incidencias",
+        "R4 y R5 controlados mediante módulos separados y validaciones dimensionales. R6 permanece activo: el flujo de entrenamiento solo se verificó con tensores sintéticos. La ausencia del manifiesto real de train impide fijar pesos definitivos sin riesgo de fuga. Sin incidencias formales nuevas."
+      ],
+      [
+        "Decisiones",
+        "Mantener logits como salida contractual del modelo y aplicar softmax únicamente para consumo de probabilidades. Calcular pesos de clase solo con train. Excluir sesgos, normalizaciones, token CLS y embeddings posicionales del weight decay de AdamW."
+      ],
+      [
+        "Cambios",
+        "No se solicita cambio formal. La implementación es un ajuste interno trazable de E4 y respeta alcance, entregables, responsables y fechas de la línea base."
+      ],
+      [
+        "Próxima semana",
+        "S10: integrar módulos de datos y configuración con entrenamiento futuro, evaluación e inferencia; definir contratos de lote y resultados; ampliar pruebas sin entrenar el modelo."
+      ],
+      [
+        "Esfuerzo",
+        "Planificado: 24 horas-equipo. Real: pendiente de confirmación por Malak Sanchez y Juan Simancas. Desviación: no calculable con la evidencia disponible."
+      ]
+    ],
+    "changes": [
+      [
+        "Proyecto",
+        "Detección prodrómica de la enfermedad de Alzheimer mediante Vision Transformers aplicados a imágenes de resonancia magnética estructural"
+      ],
+      [
+        "ID y fecha",
+        "No aplica | Semana 9"
+      ],
+      [
+        "Solicitante",
+        "Malak Sanchez y Juan Simancas"
+      ],
+      [
+        "Elemento afectado",
+        "Ninguno."
+      ],
+      [
+        "Situación actual",
+        "Actividad S9 completada y Entregable E4 en desarrollo conforme al cronograma."
+      ],
+      [
+        "Cambio solicitado",
+        "No se solicita modificación de alcance, cronograma, entregables, criterios de aceptación o responsables."
+      ],
+      [
+        "Justificación y evidencia",
+        "Los módulos de entrenamiento futuro y las validaciones de entrada son implementación interna de EDT 5.0 y mantienen las exclusiones del proyecto."
+      ],
+      [
+        "Impacto en alcance",
+        "Ninguno."
+      ],
+      [
+        "Impacto en tiempo",
+        "Ninguno identificado; E4 conserva aceptación prevista para S11."
+      ],
+      [
+        "Impacto en calidad",
+        "Favorable por validación temprana de pérdida, optimizador, gradientes y errores de entrada."
+      ],
+      [
+        "Impacto en riesgos",
+        "Reduce R4 y R5; mantiene explícito R6 hasta disponer de entrenamiento futuro validable."
+      ],
+      [
+        "Alternativas",
+        "Posponer toda la preparación de entrenamiento a S10, con mayor carga de integración antes de H4."
+      ],
+      [
+        "Recomendación",
+        "Mantener la línea base y continuar la integración incremental de E4."
+      ],
+      [
+        "Decisión",
+        "No aplica: no se tramita cambio formal."
+      ],
+      [
+        "Versiones actualizadas",
+        "src/model/layers.py, src/training/, configs/e4_training.json, pruebas, verificador S9 y documentación técnica."
+      ]
+    ]
   }
 ]

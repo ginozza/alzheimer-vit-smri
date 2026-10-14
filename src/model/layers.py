@@ -33,6 +33,7 @@ class PatchEmbedding(nn.Module):
         super().__init__()
         self.image_size = image_size
         self.patch_size = patch_size
+        self.in_channels = in_channels
         self.num_patches = (image_size // patch_size) ** 2
         self.seq_length = self.num_patches + 1
 
@@ -64,7 +65,19 @@ class PatchEmbedding(nn.Module):
         Returns:
             Token embeddings of shape (B, num_patches + 1, embed_dim).
         """
-        B = x.shape[0]
+        if x.ndim != 4:
+            raise ValueError(f"Expected a 4D input tensor (B, C, H, W), got shape {tuple(x.shape)}")
+
+        expected_shape = (self.in_channels, self.image_size, self.image_size)
+        if tuple(x.shape[1:]) != expected_shape:
+            raise ValueError(
+                f"Expected input shape (B, {expected_shape[0]}, {expected_shape[1]}, "
+                f"{expected_shape[2]}), got {tuple(x.shape)}"
+            )
+        if not torch.is_floating_point(x):
+            raise TypeError(f"Expected a floating-point input tensor, got dtype {x.dtype}")
+
+        batch_size = x.shape[0]
 
         # (B, C, H, W) -> (B, embed_dim, H/P, W/P) -> (B, embed_dim, num_patches)
         patches = self.projection(x)
@@ -72,7 +85,7 @@ class PatchEmbedding(nn.Module):
         patches = patches.transpose(1, 2)  # (B, num_patches, embed_dim)
 
         # Prepend [CLS] token
-        cls_tokens = self.cls_token.expand(B, -1, -1)  # (B, 1, embed_dim)
+        cls_tokens = self.cls_token.expand(batch_size, -1, -1)  # (B, 1, embed_dim)
         embeddings = torch.cat([cls_tokens, patches], dim=1)  # (B, N+1, D)
 
         # Add positional embeddings

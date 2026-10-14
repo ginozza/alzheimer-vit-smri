@@ -111,6 +111,24 @@ class TestPatchEmbedding:
         # CLS token at index 0 should exist
         assert out[:, 0, :].shape == (1, 768)
 
+    @pytest.mark.parametrize(
+        "invalid_input",
+        [
+            torch.randn(3, 224, 224),
+            torch.randn(1, 1, 224, 224),
+            torch.randn(1, 3, 192, 224),
+        ],
+    )
+    def test_rejects_invalid_input_shape(self, invalid_input):
+        pe = PatchEmbedding(image_size=224, patch_size=16, in_channels=3, embed_dim=768)
+        with pytest.raises(ValueError, match="Expected"):
+            pe(invalid_input)
+
+    def test_rejects_integer_input(self):
+        pe = PatchEmbedding(image_size=224, patch_size=16, in_channels=3, embed_dim=768)
+        with pytest.raises(TypeError, match="floating-point"):
+            pe(torch.ones(1, 3, 224, 224, dtype=torch.int32))
+
 
 class TestMultiHeadSelfAttention:
 

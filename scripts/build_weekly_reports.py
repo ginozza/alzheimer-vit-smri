@@ -1,5 +1,6 @@
-"""Build S5-S7: uv run --locked --group reports python scripts/build_weekly_reports.py."""
+"""Build weekly reports from the structured JSON source."""
 
+import argparse
 import json
 
 from pathlib import Path
@@ -90,9 +91,24 @@ def build_report(report):
     return output
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--week",
+        type=int,
+        help="Build only the requested week and preserve the existing PDFs for other weeks.",
+    )
+    return parser.parse_args()
+
+
 def main():
+    args = parse_args()
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     reports = json.loads((ROOT / "configs/reports/weekly_reports.json").read_text(encoding="utf-8"))
+    if args.week is not None:
+        reports = [report for report in reports if report["week"] == args.week]
+        if not reports:
+            raise SystemExit(f"No report data found for week {args.week}")
     for report in reports:
         print(build_report(report))
 

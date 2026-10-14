@@ -8,6 +8,8 @@ Ejecutar desde la raíz del repositorio. La lógica reutilizable está en `src/d
 | `run_e2_demo.py` | Crear y comprobar ocho casos sintéticos E2 | Carpeta nueva con entradas, manifiesto, resultados y vista previa |
 | `run_e2_preprocessing.py` | Procesar un manifiesto completo de un fold (NIfTI 3D) | Tensores y registros de QC en una carpeta nueva |
 | `run_e2_kaggle_pipeline.py` | Ingestar y procesar cortes axiales 2D de Kaggle (OASIS/ADNI) | Manifiesto, registros QC y tensores (3, 224, 224) |
+| `run_e3_verification.py` | Auditar arquitectura ViT-B/16 y contratos E2-E3-E5 | Resumen técnico en terminal |
+| `run_s9_verification.py` | Verificar salida triclase y componentes de entrenamiento futuro | Resumen técnico en terminal |
 | `build_weekly_reports.py` | Componer reportes desde JSON | PDF finales en `docs/reports/` |
 
 ```bash
@@ -15,7 +17,10 @@ uv run --locked python scripts/run_e1_verification.py
 uv run --locked python scripts/run_e2_demo.py --output-dir data/processed/mi_demo_e2
 uv run --locked python scripts/run_e2_preprocessing.py --help
 uv run --locked python scripts/run_e2_kaggle_pipeline.py --help
+uv run --locked python scripts/run_e3_verification.py
+uv run --locked python scripts/run_s9_verification.py
 uv run --locked --group reports python scripts/build_weekly_reports.py
+uv run --locked --group reports python scripts/build_weekly_reports.py --week 9
 ```
 
 El demo retorna 0 cuando se cumplen los cuatro casos aceptados y cuatro rechazos previstos. El CLI de preprocesamiento retorna 0 sin rechazos, 1 con rechazos y 2 ante errores globales. Consultar el contrato de entrada siguiente antes de preparar un manifiesto.
