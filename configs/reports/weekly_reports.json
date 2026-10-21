@@ -1272,5 +1272,187 @@
         "Repositorio completo, tests/test_interoperability.py, scripts/run_e4_verification.py, docs/deliverables/E4_Codigo_Fuente_del_Sistema.md y reporte S11."
       ]
     ]
+  },
+  {
+    "week": 12,
+    "indicators": [
+      [
+        "I1",
+        "Actividades cumplidas",
+        "100 % (4/4 actividades de interpretabilidad EDT 6.0 completadas).",
+        "Formulacion de Attention Rollout, integracion con ViT-B/16, visualizacion pseudo-Jet y descargo clinico ejecutados."
+      ],
+      [
+        "I2",
+        "Entregables aceptados",
+        "71,43 % acumulado: 5/7 entregables (E1, E2, E3, E4 y E5) aceptados formalmente.",
+        "E1, E2, E3, E4 y E5 cerrados y aceptados formalmente de acuerdo con los criterios de aceptacion fijados en la Linea Base."
+      ],
+      [
+        "I3",
+        "Hitos en fecha",
+        "100 % de hitos previstos al corte cumplidos en fecha (H1, H2, H3, H4 y H5).",
+        "Hito H5 alcanzado en fecha al formalizar la aceptacion del Entregable E5 (Modulo de interpretabilidad) en la Semana 12."
+      ],
+      [
+        "I4",
+        "Desviación de esfuerzo",
+        "0 %: (24 - 24) / 24 x 100.",
+        "24 h reales frente a 24 h previstas: Juan 12 h, Malak 12 h. Cumplimiento exacto del esfuerzo programado."
+      ],
+      [
+        "I5",
+        "Riesgos altos abiertos",
+        "0 riesgos altos abiertos con exposicion vigente igual o superior a 15.",
+        "R7 (falsa atribucion clinica) mitigado activamente mediante descargo clinico en RolloutResult y documentacion tecnica."
+      ],
+      [
+        "I6",
+        "Incidencias resueltas",
+        "100 % (todas las incidencias historicas resueltas; 0 abiertas en S12).",
+        "Normalizacion e interpolacion bilineal de mapas de calor integradas en src/interpretability/ sin dependencias pesadas."
+      ],
+      [
+        "I7",
+        "Reproducibilidad",
+        "100 %: 157/157 pruebas unitarias e integracion aprobadas.",
+        "Suite completa: 144 pruebas previas mas 13 pruebas de interpretabilidad en test_attention_rollout.py aprobadas en uv."
+      ],
+      [
+        "I8",
+        "Rendimiento",
+        "No aplica en S12.",
+        "Se preserva la restriccion de la linea base de no entrenar el modelo ni calcular metricas clinicas definitivas."
+      ],
+      [
+        "I9",
+        "Portabilidad",
+        "No aplica en S12; prevista para S13.",
+        "La portabilidad modular sera evaluada en la semana 13 mediante el empaquetamiento y exportacion del sistema."
+      ],
+      [
+        "I10",
+        "Cobertura documental",
+        "100 % de cobertura documental para E1, E2, E3, E4 y E5.",
+        "Documento de aceptacion E5, runner de auditoria run_e5_verification, configuracion e5_interpretabilidad y pruebas consolidadas."
+      ]
+    ],
+    "status": [
+      "Verde",
+      "Hito H5 cumplido: Entregable E5 (Modulo de interpretabilidad - Attention Rollout) aceptado formalmente. 157 pruebas aprobadas.",
+      "Proceder con la Semana 13: Preparacion de pruebas de portabilidad y cierre documental del proyecto."
+    ],
+    "report": [
+      [
+        "Semana y fechas",
+        "Semana 12 | 19 de octubre a 25 de octubre de 2026. Cierre y aceptacion formal de E5."
+      ],
+      [
+        "Responsable",
+        "Juan Simancas y Malak Sanchez. Responsable de E5: Juan Simancas."
+      ],
+      [
+        "Estado general",
+        "Verde. Entregable E5 finalizado y aceptado formalmente segun la Linea Base. Modulo de Attention Rollout implementado con reduccion de cabezas, conexion residual, interpolacion bilineal a 224x224, colormap pseudo-Jet y descargo clinico obligatorio."
+      ],
+      [
+        "Trabajo planificado",
+        "EDT 6.0 (6.1 a 6.4): Implementacion del modulo de Attention Rollout y documentacion de su funcionamiento. Cierre del Entregable E5 (Hito H5)."
+      ],
+      [
+        "Trabajo ejecutado",
+        "Implementacion del algoritmo Attention Rollout (Abnar & Zuidema 2020) en src/interpretability/rollout.py; configuracion desacoplada en configs/e5_interpretabilidad.json; pipeline de visualizacion y alpha-blending en visualization.py; documentacion del requerimiento de pesos entrenados y descargo clinico (R7); creacion de runner scripts/run_e5_verification.py; documento tecnico docs/deliverables/E5_Modulo_Interpretabilidad_Attention_Rollout.md; y aprobacion de 13 nuevas pruebas unitarias (157 totales)."
+      ],
+      [
+        "Evidencias",
+        "Repositorio alzheimer-vit-smri: paquete src/interpretability/, configs/e5_interpretabilidad.json, tests/test_attention_rollout.py, scripts/run_e5_verification.py, documento tecnico E5, 157 pruebas aprobadas y reporte semanal S12."
+      ],
+      [
+        "Desviaciones",
+        "Ninguna desviacion de alcance ni de cronograma. Esfuerzo ejecutado exactamente segun lo planificado: 24 horas-equipo (desviacion 0 %). Hito H5 cumplido en fecha."
+      ],
+      [
+        "Riesgos e incidencias",
+        "R7 (falsa atribucion de relevancia clinica a mapas de atencion no validados) mitigado al incorporar CLINICAL_DISCLAIMER en RolloutResult, documentando formalmente la necesidad de pesos entrenados y la ausencia de validez diagnostica clinica."
+      ],
+      [
+        "Decisiones",
+        "Declarar formalmente aceptado el Entregable E5 (Hito H5). Adoptar el colormap pseudo-Jet nativo con Pillow para evitar dependencias graficas pesadas. Habilitar la transicion a la Semana 13 para portabilidad y cierre documental."
+      ],
+      [
+        "Cambios",
+        "No se registraron solicitudes de cambio formal en S12. El avance corresponde al cierre programado del paquete EDT 6.0 y Entregable E5."
+      ],
+      [
+        "Próxima semana",
+        "Semana 13: Preparacion de pruebas de portabilidad y exportacion del sistema. Responsable: Malak Sanchez y Juan Simancas."
+      ],
+      [
+        "Esfuerzo",
+        "Planificado: 24 horas-equipo | Real: 24 horas-equipo (Juan Simancas: 12 h, Malak Sanchez: 12 h). Desviacion: 0 %."
+      ]
+    ],
+    "changes": [
+      [
+        "Proyecto",
+        "Deteccion prodromica de la enfermedad de Alzheimer mediante Vision Transformers aplicados a imagenes de resonancia magnetica estructural"
+      ],
+      [
+        "ID y fecha",
+        "No aplica | Semana 12"
+      ],
+      [
+        "Solicitante",
+        "Juan Simancas y Malak Sanchez"
+      ],
+      [
+        "Elemento afectado",
+        "Ninguno."
+      ],
+      [
+        "Situación actual",
+        "Entregable E5 completado y aceptado formalmente. Hito H5 alcanzado en fecha segun el cronograma oficial de la Linea Base."
+      ],
+      [
+        "Cambio solicitado",
+        "No se solicita modificacion de alcance, cronograma, entregables, criterios de aceptacion o responsabilidades."
+      ],
+      [
+        "Justificación y evidencia",
+        "La culminacion del Entregable E5 satisface el criterio de aceptacion oficial con 13 pruebas unitarias especificas, 157 pruebas globales aprobadas y auditoria superada."
+      ],
+      [
+        "Impacto en alcance",
+        "Ninguno. Se cumplen integramente los compromisos de E5 fijados en la Linea Base."
+      ],
+      [
+        "Impacto en tiempo",
+        "Ninguno. Cumplimiento en fecha de la Semana 12."
+      ],
+      [
+        "Impacto en calidad",
+        "Favorable por la incorporacion de interpretabilidad post-hoc desacoplada y trazabilidad matematica comprobada."
+      ],
+      [
+        "Impacto en riesgos",
+        "Mitiga de forma concluyente el Riesgo R7 mediante descargo clinico a nivel de arquitectura y documentacion."
+      ],
+      [
+        "Alternativas",
+        "No aplica."
+      ],
+      [
+        "Recomendación",
+        "Aprobar el cierre de E5 e iniciar la fase de portabilidad y cierre en la Semana 13."
+      ],
+      [
+        "Decisión",
+        "Aprobado formalmente el Entregable E5 (Hito H5) por el equipo de proyecto."
+      ],
+      [
+        "Versiones actualizadas",
+        "src/interpretability/, configs/e5_interpretabilidad.json, tests/test_attention_rollout.py, scripts/run_e5_verification.py, docs/deliverables/E5_Modulo_Interpretabilidad_Attention_Rollout.md y reporte S12."
+      ]
+    ]
   }
 ]

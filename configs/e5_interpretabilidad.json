@@ -1,0 +1,10 @@
+{
+  "head_reduction": "mean",
+  "discard_ratio": 0.0,
+  "add_residual": true,
+  "residual_weight": 0.5,
+  "image_size": 224,
+  "patch_size": 16,
+  "cls_token_idx": 0,
+  "interpolate_mode": "bilinear"
+}
