@@ -1090,5 +1090,187 @@
         "src/data/, src/training/, src/inference/, configs/e4_dataset.json, configs/e4_inference.json, pruebas y runner S10."
       ]
     ]
+  },
+  {
+    "week": 11,
+    "indicators": [
+      [
+        "I1",
+        "Actividades cumplidas",
+        "100 % (4/4 actividades de integracion e interoperabilidad completadas).",
+        "Instalacion del paquete, importacion modular, pruebas de interoperabilidad y auditoria de aceptacion E4 ejecutadas."
+      ],
+      [
+        "I2",
+        "Entregables aceptados",
+        "57,14 % acumulado: 4/7 entregables (E1, E2, E3 y E4) aceptados formalmente.",
+        "E1, E2, E3 y E4 cerrados y aceptados formalmente de acuerdo con los criterios de aceptacion fijados en la Linea Base."
+      ],
+      [
+        "I3",
+        "Hitos en fecha",
+        "100 % de hitos previstos al corte cumplidos en fecha (H1, H2, H3 y H4).",
+        "Hito H4 alcanzado en fecha al formalizar la aceptacion del Entregable E4 (Codigo fuente del sistema) en la Semana 11."
+      ],
+      [
+        "I4",
+        "Desviación de esfuerzo",
+        "0 %: (24 - 24) / 24 x 100.",
+        "24 h reales frente a 24 h previstas: Malak 12 h, Juan 12 h. Cumplimiento exacto del esfuerzo programado."
+      ],
+      [
+        "I5",
+        "Riesgos altos abiertos",
+        "0 riesgos altos abiertos con exposicion vigente igual o superior a 15.",
+        "R3, R4 y R5 controlados mediante modularidad e interoperabilidad. R6 activo en nivel medio sin impacto en H4."
+      ],
+      [
+        "I6",
+        "Incidencias resueltas",
+        "100 % (todas las incidencias historicas resueltas; 0 abiertas en S11).",
+        "Corregidos los requerimientos de columnas y agregaciones en particionado para pruebas de interoperabilidad."
+      ],
+      [
+        "I7",
+        "Reproducibilidad",
+        "100 %: 144/144 pruebas unitarias e interoperabilidad aprobadas.",
+        "Suite completa: 140 pruebas previas mas 4 pruebas de interoperabilidad end-to-end aprobadas en entorno uv."
+      ],
+      [
+        "I8",
+        "Rendimiento",
+        "No aplica en S11.",
+        "Se preserva la restriccion de la linea base de no entrenar el modelo ni calcular metricas clinicas definitivas."
+      ],
+      [
+        "I9",
+        "Portabilidad",
+        "No aplica en S11; prevista para S13.",
+        "La instalacion editable del paquete acredita portabilidad de libreria interna, no exportacion a dispositivos finales."
+      ],
+      [
+        "I10",
+        "Cobertura documental",
+        "100 % de cobertura documental para E1, E2, E3 y E4.",
+        "Documento de aceptacion E4, runner de auditoria run_e4_verification, configuraciones y pruebas consolidadas."
+      ]
+    ],
+    "status": [
+      "Verde",
+      "Hito H4 cumplido: Entregable E4 (Codigo fuente del sistema) aceptado formalmente. Repositorio instalable con 144 pruebas aprobadas.",
+      "Proceder con la Semana 12: Implementacion del modulo de Attention Rollout y cierre del Entregable E5 (Hito H5)."
+    ],
+    "report": [
+      [
+        "Semana y fechas",
+        "Semana 11 | 12 de octubre a 18 de octubre de 2026. Cierre y aceptacion formal de E4."
+      ],
+      [
+        "Responsable",
+        "Malak Sanchez y Juan Simancas. Responsables de E4: Ambos."
+      ],
+      [
+        "Estado general",
+        "Verde. Entregable E4 finalizado y formalmente aceptado segun los criterios de la Linea Base. Codigo instalable como alzheimer-vit-smri==0.1.0, modulos importables, ViT-B/16 instanciado con 85.8M parametros, 144 pruebas aprobadas y runner de verificacion superado."
+      ],
+      [
+        "Trabajo planificado",
+        "S11: Integracion, pruebas unitarias y pruebas de interoperabilidad entre modulos. Hito o evidencia: H4: E4 aceptado."
+      ],
+      [
+        "Trabajo ejecutado",
+        "Integracion final de los modulos src/data, src/model, src/training y src/inference; verificacion de instalabilidad del paquete en entorno uv; implementacion de suite de interoperabilidad tests/test_interoperability.py; desarrollo del runner de auditoria scripts/run_e4_verification.py; consolidacion del documento formal docs/deliverables/E4_Codigo_Fuente_del_Sistema.md; y aprobacion de 144 pruebas unitarias al 100 %."
+      ],
+      [
+        "Evidencias",
+        "Repositorio alzheimer-vit-smri: paquete instalable, suite de 144 pruebas aprobadas, scripts/run_e4_verification.py, tests/test_interoperability.py, 5 archivos de configuracion JSON, documento tecnico E4 y reporte semanal S11."
+      ],
+      [
+        "Desviaciones",
+        "Ninguna desviacion de alcance ni de cronograma. Esfuerzo ejecutado exactamente segun lo planificado: 24 horas-equipo (desviacion 0 %). Hito H4 cumplido en fecha."
+      ],
+      [
+        "Riesgos e incidencias",
+        "R3 (dependencias incompatibles) mitigado fijando versiones en uv.lock. R4 (complejidad) y R5 (dimensiones) controlados con suite de interoperabilidad. R6 (datos reales) controlado al mantener el andamiaje con tensores sinteticos sin pretender diagnostico clinico prematuro."
+      ],
+      [
+        "Decisiones",
+        "Declarar formalmente aceptado el Entregable E4 (Hito H4) al cumplir al 100 % el criterio de aceptacion oficial. Habilitar el inicio del Entregable E5 (Modulo de interpretabilidad - Attention Rollout) en la Semana 12."
+      ],
+      [
+        "Cambios",
+        "No se registraron solicitudes de cambio formal en S11. El avance corresponde al cierre programado del paquete EDT 5.0 y Entregable E4."
+      ],
+      [
+        "Próxima semana",
+        "Semana 12: Implementacion del modulo de Attention Rollout y documentacion de su funcionamiento. Cierre del Entregable E5 (Hito H5). Responsable: Juan Simancas."
+      ],
+      [
+        "Esfuerzo",
+        "Planificado: 24 horas-equipo | Real: 24 horas-equipo (Malak Sanchez: 12 h, Juan Simancas: 12 h). Desviacion: 0 %."
+      ]
+    ],
+    "changes": [
+      [
+        "Proyecto",
+        "Deteccion prodromica de la enfermedad de Alzheimer mediante Vision Transformers aplicados a imagenes de resonancia magnetica estructural"
+      ],
+      [
+        "ID y fecha",
+        "No aplica | Semana 11"
+      ],
+      [
+        "Solicitante",
+        "Malak Sanchez y Juan Simancas"
+      ],
+      [
+        "Elemento afectado",
+        "Ninguno."
+      ],
+      [
+        "Situación actual",
+        "Entregable E4 completado y aceptado formalmente. Hito H4 alcanzado en fecha segun el cronograma oficial de la Linea Base."
+      ],
+      [
+        "Cambio solicitado",
+        "No se solicita modificacion de alcance, cronograma, entregables, criterios de aceptacion o responsables."
+      ],
+      [
+        "Justificación y evidencia",
+        "La culminacion del Entregable E4 satisface todos los criterios de aceptacion contractuales con 144 pruebas unitarias aprobadas y auditoria superada."
+      ],
+      [
+        "Impacto en alcance",
+        "Ninguno. Se cumplen integramente los compromisos de E4 fijados en la Linea Base."
+      ],
+      [
+        "Impacto en tiempo",
+        "Ninguno. Cumplimiento en fecha de la Semana 11."
+      ],
+      [
+        "Impacto en calidad",
+        "Favorable por la integracion de pruebas de interoperabilidad y runner formal de verificacion."
+      ],
+      [
+        "Impacto en riesgos",
+        "Reduce R3, R4 y R5; preserva R6 en nivel medio bajo control metodologico."
+      ],
+      [
+        "Alternativas",
+        "No aplica."
+      ],
+      [
+        "Recomendación",
+        "Aprobar el cierre de E4 e iniciar el Entregable E5 en la Semana 12."
+      ],
+      [
+        "Decisión",
+        "Aprobado formalmente el Entregable E4 (Hito H4) por el equipo de proyecto."
+      ],
+      [
+        "Versiones actualizadas",
+        "Repositorio completo, tests/test_interoperability.py, scripts/run_e4_verification.py, docs/deliverables/E4_Codigo_Fuente_del_Sistema.md y reporte S11."
+      ]
+    ]
   }
 ]
