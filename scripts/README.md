@@ -10,6 +10,11 @@ Ejecutar desde la raíz del repositorio. La lógica reutilizable está en `src/d
 | `run_e2_kaggle_pipeline.py` | Ingestar y procesar cortes axiales 2D de Kaggle (OASIS/ADNI) | Manifiesto, registros QC y tensores (3, 224, 224) |
 | `run_e3_verification.py` | Auditar arquitectura ViT-B/16 y contratos E2-E3-E5 | Resumen técnico en terminal |
 | `run_s9_verification.py` | Verificar salida triclase y componentes de entrenamiento futuro | Resumen técnico en terminal |
+| `run_s10_verification.py` | Verificar integración de datos, entrenamiento, evaluación e inferencia | Resumen técnico en terminal |
+| `run_e4_verification.py` | Auditar criterios de aceptación del Entregable E4 (H4) | Resumen técnico en terminal |
+| `run_e5_verification.py` | Auditar criterios de aceptación de Attention Rollout E5 (H5) | Resumen técnico en terminal |
+| `run_s13_verification.py` | Verificar flujo integrado completo y benchmark de portabilidad I9 (S13) | Resumen técnico en terminal |
+| `run_e6_verification.py` | Auditar criterios de aceptación del Prototipo de Integración E6 (H6) | Resumen técnico en terminal |
 | `build_weekly_reports.py` | Componer reportes desde JSON | PDF finales en `docs/reports/` |
 
 ```bash

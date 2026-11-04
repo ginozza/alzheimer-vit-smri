@@ -7,6 +7,11 @@
 | S7 | 14–20 de septiembre de 2026; corte al día 19 | [Reporte S7](Reporte_semanal_S7_final.pdf) |
 | S8 | 21–27 de septiembre de 2026 | [Reporte S8](Reporte_semanal_S8_final.pdf) |
 | S9 | 28 de septiembre–4 de octubre de 2026 | [Reporte S9](Reporte_semanal_S9_final.pdf) |
+| S10 | 5–11 de octubre de 2026 | [Reporte S10](Reporte_semanal_S10_final.pdf) |
+| S11 | 12–18 de octubre de 2026 | [Reporte S11](Reporte_semanal_S11_final.pdf) |
+| S12 | 19–25 de octubre de 2026 | [Reporte S12](Reporte_semanal_S12_final.pdf) |
+| S13 | 26 de octubre–1 de noviembre de 2026 | [Reporte S13 PDF](Reporte_semanal_S13_final.pdf) / [Informe Técnico S13 MD](week_13_report.md) |
+| S14 | 2–8 de noviembre de 2026 | [Reporte S14 PDF](Reporte_semanal_S14_final.pdf) / [Informe Técnico S14 MD](week_14_report.md) |
 
 Los reportes mantienen la organización de indicadores, reporte semanal y control de cambios del formato de referencia S5. S9 registra el plan de 24 horas-equipo y deja las horas reales pendientes de confirmación para no atribuir valores sin evidencia.
 
