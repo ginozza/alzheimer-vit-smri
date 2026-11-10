@@ -1818,5 +1818,187 @@
         "src/integration/interface.py, tests/test_e6_interface_and_error_handling.py, scripts/run_e6_verification.py, docs/deliverables/E6_Prototipo_Integracion_y_Manual_de_Uso.md y reporte S14."
       ]
     ]
+  },
+  {
+    "week": 15,
+    "indicators": [
+      [
+        "I1",
+        "Actividades cumplidas",
+        "100 % (4/4 actividades de Semana 15 del paquete EDT 8.0 completadas).",
+        "Depuracion final del repositorio (8.2), consolidacion e informe final (8.1), retrospectiva (8.4) y presentacion (8.3) completadas."
+      ],
+      [
+        "I2",
+        "Entregables aceptados",
+        "85,71 % cerrados en hitos H1-H6 (6/7) + E7 en version candidata final validada (100 % tecnico).",
+        "E1-E6 aceptados formalmente; E7 dispone de informe final, repositorio depurado, presentacion y demostracion repetible lista para H7 (S16)."
+      ],
+      [
+        "I3",
+        "Hitos en fecha",
+        "100 % de hitos vencidos cumplidos en fecha (H1, H2, H3, H4, H5 y H6).",
+        "Semana 15 entrega la Evidencia Oficial 'Version candidata final' (0.1.0-rc1) previa a la sustentacion final en Semana 16 (H7)."
+      ],
+      [
+        "I4",
+        "Desviación de esfuerzo",
+        "0 %: (24 - 24) / 24 x 100.",
+        "24 h reales frente a 24 h previstas: Malak 12 h, Juan 12 h. Cumplimiento exacto del esfuerzo programado."
+      ],
+      [
+        "I5",
+        "Riesgos altos abiertos",
+        "0 riesgos altos abiertos con exposicion vigente igual o superior a 15.",
+        "R8 (seguridad/credenciales) mitigado y auditado con 0 hallazgos en 118 archivos; R6 y R7 controlados en todos los entregables."
+      ],
+      [
+        "I6",
+        "Incidencias resueltas",
+        "100 % (todas las incidencias resueltas; 0 abiertas al cierre de S15).",
+        "Sin incidencias abiertas; suite de pruebas y verificadores E1-E7 se ejecutan sin errores ni advertencias."
+      ],
+      [
+        "I7",
+        "Reproducibilidad",
+        "100 %: 193/193 pruebas automatizadas aprobadas y demostracion repetible (delta = 0,0).",
+        "Suite completa: 183 pruebas hasta S14 mas 10 pruebas de auditoria de cierre en S15 aprobadas al 100 %."
+      ],
+      [
+        "I8",
+        "Rendimiento",
+        "No aplica por diseno (alcance no clinico de la Linea Base).",
+        "El informe final y la presentacion mantienen explicita la restriccion de no entrenar modelos clinicos definitivos."
+      ],
+      [
+        "I9",
+        "Portabilidad",
+        "Consolidado en Informe Final E7 (0,00 % degradacion, 327,30 MB, 585,54 ms TorchScript CPU).",
+        "Indicador I9 documentado y trazado integramente en el Informe Final del proyecto."
+      ],
+      [
+        "I10",
+        "Cobertura documental",
+        "100,0 %: 23/23 artefactos obligatorios verificados (>= 90 % meta de Linea Base).",
+        "8 archivos de configuracion JSON, 7 documentos de entregables E1-E7 y 8 scripts de verificacion formal auditados."
+      ]
+    ],
+    "status": [
+      "Verde",
+      "Actividad S15 completada: Version candidata final (0.1.0-rc1) generada con repositorio depurado (0 credenciales, 0 datos restringidos), cobertura documental I10 del 100 %, informe final E7, presentacion y 193 pruebas aprobadas.",
+      "Proceder a la Semana 16 (Hito H7): Sustentacion academica final y cierre administrativo del proyecto."
+    ],
+    "report": [
+      [
+        "Semana y fechas",
+        "Semana 15 | 09 de noviembre a 15 de noviembre de 2026. Version candidata final (Paquete EDT 8.0)."
+      ],
+      [
+        "Responsable",
+        "Malak Sanchez y Juan Simancas. Responsables de S15 y E7: Ambos."
+      ],
+      [
+        "Estado general",
+        "Verde. Se completo la depuracion final del repositorio, la consolidacion de resultados de E1 a E7, la elaboracion del Informe Final y Retrospectiva, y la preparacion de la Presentacion y Guia de Sustentacion. La version candidata final (0.1.0-rc1) supera 193 pruebas automatizadas."
+      ],
+      [
+        "Trabajo planificado",
+        "EDT 8.0 (8.1 Informe, 8.2 Depuracion, 8.3 Presentacion, 8.4 Retrospectiva): Depuracion final del repositorio, consolidacion de resultados, elaboracion del informe y preparacion de la presentacion. Evidencia: Version candidata final."
+      ],
+      [
+        "Trabajo ejecutado",
+        "Implementacion del paquete de auditoria de cierre src/closure/ (config.py, audit.py) y configs/e7_closure.json; ejecucion de auditoria de higiene y seguridad sobre 118 archivos (0 credenciales, 0 archivos clinicos restringidos); verificacion de cobertura documental I10 (23/23 artefactos = 100 %); validacion de repetibilidad determinista de la demostracion (discrepancia 0,0); redaccion del Informe Final (docs/deliverables/E7_Informe_Final_y_Cierre_del_Proyecto.md) y Presentacion (docs/deliverables/E7_Presentacion_y_Sustentacion.md); y creacion de scripts/run_s15_verification.py y tests/test_s15_closure_and_e7.py (10 pruebas nuevas, 193 totales)."
+      ],
+      [
+        "Evidencias",
+        "Repositorio alzheimer-vit-smri: src/closure/, configs/e7_closure.json, docs/deliverables/E7_Informe_Final_y_Cierre_del_Proyecto.md, docs/deliverables/E7_Presentacion_y_Sustentacion.md, scripts/run_s15_verification.py, tests/test_s15_closure_and_e7.py y reporte semanal S15."
+      ],
+      [
+        "Desviaciones",
+        "Ninguna desviacion de alcance ni de cronograma. Esfuerzo ejecutado exactamente segun lo planificado: 24 horas-equipo (desviacion 0 %)."
+      ],
+      [
+        "Riesgos e incidencias",
+        "R8 (exposicion de credenciales o datos restringidos) verificado automaticamente con 0 violaciones. Sin incidencias tecnicas abiertas."
+      ],
+      [
+        "Decisiones",
+        "Congelar la version candidata final 0.1.0-rc1 tras verificar el 100 % de los criterios de aceptacion de E7 (trazabilidad OE1-OE4 y E1-E7, 0 credenciales/datos restringidos y demostracion repetible con delta = 0,0)."
+      ],
+      [
+        "Cambios",
+        "No se registraron solicitudes de cambio formal en S15. El avance corresponde al paquete EDT 8.0 planificado en la Linea Base."
+      ],
+      [
+        "Próxima semana",
+        "Semana 16: Sustentacion final, entrega definitiva de artefactos y cierre del proyecto (Hito H7: E7 aceptado)."
+      ],
+      [
+        "Esfuerzo",
+        "Planificado: 24 horas-equipo | Real: 24 horas-equipo (Malak Sanchez: 12 h, Juan Simancas: 12 h). Desviacion: 0 %."
+      ]
+    ],
+    "changes": [
+      [
+        "Proyecto",
+        "Deteccion prodromica de la enfermedad de Alzheimer mediante Vision Transformers aplicados a imagenes de resonancia magnetica estructural"
+      ],
+      [
+        "ID y fecha",
+        "No aplica | Semana 15"
+      ],
+      [
+        "Solicitante",
+        "Malak Sanchez y Juan Simancas"
+      ],
+      [
+        "Elemento afectado",
+        "Ninguno."
+      ],
+      [
+        "Situación actual",
+        "Version candidata final (0.1.0-rc1) completada y validada en la Semana 15 conforme al cronograma oficial de la Linea Base."
+      ],
+      [
+        "Cambio solicitado",
+        "No se solicita modificacion de alcance, cronograma, entregables, criterios de aceptacion o responsabilidades."
+      ],
+      [
+        "Justificación y evidencia",
+        "La auditoria automatizada de cierre verifica 0 credenciales, 0 datos restringidos, 100 % de cobertura documental I10 (23/23 artefactos), demostracion repetible (delta = 0,0) y 193 pruebas aprobadas."
+      ],
+      [
+        "Impacto en alcance",
+        "Ninguno. Se cumplen todos los requisitos de E7 y del paquete EDT 8.0."
+      ],
+      [
+        "Impacto en tiempo",
+        "Ninguno. El proyecto queda listo en fecha para la sustentacion final en la Semana 16 (Hito H7)."
+      ],
+      [
+        "Impacto en calidad",
+        "Altamente favorable por la verificacion automatizada de higiene, trazabilidad e invarianza numerica."
+      ],
+      [
+        "Impacto en riesgos",
+        "Mitiga R8 (seguridad/privacidad) y consolida las salvaguardas eticas y tecnicas de R1 a R10."
+      ],
+      [
+        "Alternativas",
+        "No aplica."
+      ],
+      [
+        "Recomendación",
+        "Presentar la version candidata final 0.1.0-rc1 en la sustentacion academica de la Semana 16 para formalizar H7."
+      ],
+      [
+        "Decisión",
+        "No aplica: no se tramita cambio formal."
+      ],
+      [
+        "Versiones actualizadas",
+        "src/closure/, configs/e7_closure.json, scripts/run_s15_verification.py, tests/test_s15_closure_and_e7.py, docs/deliverables/E7_Informe_Final_y_Cierre_del_Proyecto.md, docs/deliverables/E7_Presentacion_y_Sustentacion.md y reporte S15."
+      ]
+    ]
   }
 ]
