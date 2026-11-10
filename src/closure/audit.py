@@ -148,7 +148,7 @@ def audit_repository_hygiene(
             restricted_violations.append(f"{rel_str} (restricted NIfTI volume in repository tree)")
 
         # Scan text files for hardcoded credentials
-        if cfg.verify_no_credentials and suffix in {".py", ".json", ".yaml", ".yml", ".toml", ".md", ".sh", ".env"}:
+        if cfg.verify_no_credentials and (suffix in {".py", ".json", ".yaml", ".yml", ".toml", ".md", ".sh", ".env", ".txt"} or item.name == ".env"):
             if item.name == ".env":
                 credential_violations.append(f"{rel_str} (unignored .env file)")
                 continue
