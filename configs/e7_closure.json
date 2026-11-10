@@ -1,0 +1,38 @@
+{
+  "release_Candidate_version": "0.1.0-rc1",
+  "project_period": "2026-II",
+  "verify_no_credentials": true,
+  "verify_no_restricted_data": true,
+  "verify_repeatable_demo": true,
+  "demo_seed": 42,
+  "forbidden_extensions": [".dcm", ".ima", ".pem", ".key", ".p12", ".pfx"],
+  "required_configs": [
+    "configs/e2.json",
+    "configs/e3_architecture.json",
+    "configs/e4_dataset.json",
+    "configs/e4_inference.json",
+    "configs/e4_training.json",
+    "configs/e5_interpretabilidad.json",
+    "configs/e6_integration.json",
+    "configs/e7_closure.json"
+  ],
+  "required_deliverable_docs": [
+    "docs/base/Linea_Base_Proyecto_Alzheimer_ViT.pdf",
+    "docs/architecture/E3_Especificacion_Arquitectura_ViT.md",
+    "docs/deliverables/E4_Codigo_Fuente_del_Sistema.md",
+    "docs/deliverables/E5_Modulo_Interpretabilidad_Attention_Rollout.md",
+    "docs/deliverables/E6_Prototipo_Integracion_y_Manual_de_Uso.md",
+    "docs/deliverables/E7_Informe_Final_y_Cierre_del_Proyecto.md",
+    "docs/deliverables/E7_Presentacion_y_Sustentacion.md"
+  ],
+  "required_verification_scripts": [
+    "scripts/run_e1_verification.py",
+    "scripts/run_e2_demo.py",
+    "scripts/run_e3_verification.py",
+    "scripts/run_e4_verification.py",
+    "scripts/run_e5_verification.py",
+    "scripts/run_s13_verification.py",
+    "scripts/run_e6_verification.py",
+    "scripts/run_s15_verification.py"
+  ]
+}
