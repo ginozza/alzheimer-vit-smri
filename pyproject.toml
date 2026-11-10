@@ -27,6 +27,7 @@ dev = [
     "pytest>=7.4.0"
 ]
 reports = [
+    "matplotlib>=3.11.2",
     "reportlab>=5,<6",
 ]
 
