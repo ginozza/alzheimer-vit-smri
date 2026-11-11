@@ -1636,5 +1636,187 @@
         "src/integration/, configs/e6_integration.json, tests/test_s13_integration_and_portability.py, scripts/run_s13_verification.py, docs/implementation/E6_S13_Flujo_Integrado_y_Portabilidad.md y reporte S13."
       ]
     ]
+  },
+  {
+    "week": 14,
+    "indicators": [
+      [
+        "I1",
+        "Actividades cumplidas",
+        "100 % (5/5 componentes EDT 7.1-7.5 completados y validados).",
+        "Flujo integrado, interfaz tecnica, datos sinteticos, control de errores, manual de uso y demostracion E6 verificados."
+      ],
+      [
+        "I2",
+        "Entregables aceptados",
+        "85,71 % acumulado: 6/7 entregables (E1, E2, E3, E4, E5 y E6) aceptados formalmente.",
+        "E1-E6 cerrados y aceptados formalmente segun los criterios de la Linea Base; solo resta E7 (Semana 16)."
+      ],
+      [
+        "I3",
+        "Hitos en fecha",
+        "100 % de hitos previstos al corte cumplidos en fecha (H1, H2, H3, H4, H5 y H6).",
+        "Hito H6 alcanzado en fecha al formalizar la aceptacion del Entregable E6 (Prototipo de integracion) en la Semana 14."
+      ],
+      [
+        "I4",
+        "Desviación de esfuerzo",
+        "0 %: (24 - 24) / 24 x 100.",
+        "24 h reales frente a 24 h previstas: Malak 12 h, Juan 12 h. Cumplimiento exacto del esfuerzo programado."
+      ],
+      [
+        "I5",
+        "Riesgos altos abiertos",
+        "0 riesgos altos abiertos con exposicion vigente igual o superior a 15.",
+        "R6, R7 y R10 mitigados mediante avisos obligatorios en la interfaz, control de errores y cierre oportuno de H6."
+      ],
+      [
+        "I6",
+        "Incidencias resueltas",
+        "100 % (todas las incidencias resueltas; 0 abiertas al cierre de S14).",
+        "Estandarizadas las dimensiones (3, 224, 224) en fixtures de prueba de interfaz para cumplir el contrato estricto de InferencePipeline."
+      ],
+      [
+        "I7",
+        "Reproducibilidad",
+        "100 %: 183/183 pruebas unitarias e integracion aprobadas.",
+        "Suite completa: 167 pruebas hasta S13 mas 16 pruebas de interfaz y control de errores en S14 aprobadas al 100 %."
+      ],
+      [
+        "I8",
+        "Rendimiento",
+        "No aplica en S14.",
+        "Se preserva la restriccion de la linea base: la interfaz indica explicitamente que no contiene un modelo entrenado."
+      ],
+      [
+        "I9",
+        "Portabilidad",
+        "Documentado en S13 y revalidado en S14 (0,00 % degradacion, 327,30 MB).",
+        "La interfaz tecnica incorpora execute_portability_check() para revalidar I9 de forma automatizada."
+      ],
+      [
+        "I10",
+        "Cobertura documental",
+        "100 % de cobertura documental para E1, E2, E3, E4, E5 y E6.",
+        "Manual de uso e instalacion, documento de aceptacion E6, runner run_e6_verification.py y READMEs actualizados."
+      ]
+    ],
+    "status": [
+      "Verde",
+      "Hito H6 cumplido: Entregable E6 (Prototipo de integracion) aceptado formalmente con manual de uso, control de errores y 183 pruebas aprobadas.",
+      "Proceder con la Semana 15: Depuracion final del repositorio, consolidacion de resultados, informe final y preparacion de la presentacion (E7)."
+    ],
+    "report": [
+      [
+        "Semana y fechas",
+        "Semana 14 | 02 de noviembre a 08 de noviembre de 2026. Cierre y aceptacion formal de E6."
+      ],
+      [
+        "Responsable",
+        "Malak Sanchez y Juan Simancas. Responsables de E6: Ambos."
+      ],
+      [
+        "Estado general",
+        "Verde. Entregable E6 finalizado y formalmente aceptado segun la Linea Base. Interfaz tecnica conectada al flujo simulado, control estructurado de errores en 11 escenarios, aviso explicito de modelo no entrenado y manual de uso completados con 183 pruebas aprobadas."
+      ],
+      [
+        "Trabajo planificado",
+        "EDT 7.0 (7.2, 7.4 y 7.5): Pruebas, correccion de errores y elaboracion del manual de uso. Hito o evidencia: H6: E6 aceptado."
+      ],
+      [
+        "Trabajo ejecutado",
+        "Implementacion de TechnicalIntegrationInterface y CLI run_cli (src/integration/interface.py); control estructurado de errores (IntegrationInputError) para entradas invalidas, corruptas o no finitas; inclusion de UNTRAINED_MODEL_NOTICE y CLINICAL_DISCLAIMER; desarrollo del runner de auditoria scripts/run_e6_verification.py; elaboracion del Manual de Uso y documento de aceptacion docs/deliverables/E6_Prototipo_Integracion_y_Manual_de_Uso.md; y aprobacion de 16 pruebas nuevas (183 totales)."
+      ],
+      [
+        "Evidencias",
+        "Repositorio alzheimer-vit-smri: src/integration/interface.py, tests/test_e6_interface_and_error_handling.py, scripts/run_e6_verification.py, docs/deliverables/E6_Prototipo_Integracion_y_Manual_de_Uso.md, 183 pruebas aprobadas y reporte semanal S14."
+      ],
+      [
+        "Desviaciones",
+        "Ninguna desviacion de alcance ni de cronograma. Esfuerzo ejecutado exactamente segun lo planificado: 24 horas-equipo (desviacion 0 %). Hito H6 cumplido en fecha."
+      ],
+      [
+        "Riesgos e incidencias",
+        "R6 y R7 mitigados en la interfaz mediante banderas is_trained_model=False, generates_clinical_diagnosis=False y avisos impresos y exportados en JSON. R10 cerrado con la aceptacion en fecha de E6."
+      ],
+      [
+        "Decisiones",
+        "Declarar formalmente aceptado el Entregable E6 (Hito H6) tras verificar el 100 % de los criterios de la Linea Base. Habilitar la fase de cierre del proyecto (EDT 8.0 / Entregable E7) para las Semanas 15 y 16."
+      ],
+      [
+        "Cambios",
+        "No se registraron solicitudes de cambio formal en S14. El avance corresponde al cierre programado del paquete EDT 7.0 y Entregable E6."
+      ],
+      [
+        "Próxima semana",
+        "Semana 15: Depuracion final del repositorio, consolidacion de resultados, elaboracion del informe final y preparacion de la presentacion (Entregable E7)."
+      ],
+      [
+        "Esfuerzo",
+        "Planificado: 24 horas-equipo | Real: 24 horas-equipo (Malak Sanchez: 12 h, Juan Simancas: 12 h). Desviacion: 0 %."
+      ]
+    ],
+    "changes": [
+      [
+        "Proyecto",
+        "Deteccion prodromica de la enfermedad de Alzheimer mediante Vision Transformers aplicados a imagenes de resonancia magnetica estructural"
+      ],
+      [
+        "ID y fecha",
+        "No aplica | Semana 14"
+      ],
+      [
+        "Solicitante",
+        "Malak Sanchez y Juan Simancas"
+      ],
+      [
+        "Elemento afectado",
+        "Ninguno."
+      ],
+      [
+        "Situación actual",
+        "Entregable E6 completado y aceptado formalmente. Hito H6 alcanzado en fecha segun el cronograma oficial de la Linea Base."
+      ],
+      [
+        "Cambio solicitado",
+        "No se solicita modificacion de alcance, cronograma, entregables, criterios de aceptacion o responsabilidades."
+      ],
+      [
+        "Justificación y evidencia",
+        "La culminacion del Entregable E6 satisface todos los criterios de aceptacion con 26 pruebas de integracion/interfaz en S13-S14 (183 globales aprobadas), manual de uso y auditoria formal superada."
+      ],
+      [
+        "Impacto en alcance",
+        "Ninguno. Se cumplen integramente los compromisos de E6 fijados en la Linea Base."
+      ],
+      [
+        "Impacto en tiempo",
+        "Ninguno. Cumplimiento en fecha de la Semana 14."
+      ],
+      [
+        "Impacto en calidad",
+        "Favorable por la incorporacion de manejo determinista de errores, CLI reproducible y manual tecnico integral."
+      ],
+      [
+        "Impacto en riesgos",
+        "Cierra R10 (integracion) y refuerza las salvaguardas contra R6 y R7 en la interfaz de usuario."
+      ],
+      [
+        "Alternativas",
+        "No aplica."
+      ],
+      [
+        "Recomendación",
+        "Aprobar el cierre de E6 e iniciar el paquete EDT 8.0 (Cierre del proyecto) en la Semana 15."
+      ],
+      [
+        "Decisión",
+        "Aprobado formalmente el Entregable E6 (Hito H6) por el equipo de proyecto."
+      ],
+      [
+        "Versiones actualizadas",
+        "src/integration/interface.py, tests/test_e6_interface_and_error_handling.py, scripts/run_e6_verification.py, docs/deliverables/E6_Prototipo_Integracion_y_Manual_de_Uso.md y reporte S14."
+      ]
+    ]
   }
 ]

@@ -11,8 +11,9 @@ Proyecto académico de clasificación futura de imágenes sMRI en CN, MCI y AD m
 - **E3 (S9):** Arquitectura ViT-B/16 triclase (85.8M parámetros) implementada y validada. Aceptado (Hito H3).
 - **E4 (S11):** Componentes de datos, entrenamiento, evaluación e inferencia integrada. Aceptado (Hito H4).
 - **E5 (S12):** Módulo de interpretabilidad post-hoc mediante Attention Rollout. Aceptado (Hito H5).
-- **Semana 13 (E6 en curso):** Integración del flujo extremo a extremo (E1/E2 -> E3 -> E4 -> E5) con datos sintéticos y evaluación del Indicador I9 de portabilidad TorchScript.
-- **Reportes:** Versiones finales S5–S13 disponibles en [docs/reports](docs/reports/README.md).
+- **E6 (S14):** Prototipo de integración extremo a extremo, interfaz técnica CLI/programática con control estructurado de errores y manual de uso. Aceptado (Hito H6).
+- **Avance acumulado:** 85,71 % en entregables (6 de 7 entregables aceptados formalmente).
+- **Reportes:** Versiones finales S5–S14 disponibles en [docs/reports](docs/reports/README.md).
 
 ## Instalación y ejecución
 
