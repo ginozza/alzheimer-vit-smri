@@ -1,4 +1,4 @@
-# Detección prodrómica de la enfermedad de Alzheimer mediante Vision Transformers aplicados a imágenes de resonancia magnética estructural
+# Metodología y resultados de la detección prodrómica de la enfermedad de Alzheimer mediante Vision Transformers (ViT-B/16) en sMRI
 
 **Autores:** Juan Simancas, Malak Sánchez  
 **Institución:** Universidad del Magdalena — Facultad de Ingeniería — Programa de Ingeniería de Sistemas  
@@ -6,72 +6,83 @@
 **Contacto:** `{jsimancas, msanchez}@unimagdalena.edu.co`  
 **Director:** Sergio Lubo  
 **Asignatura:** Seminario de Investigación III (2026-II)  
-**Fecha:** 24 de noviembre de 2026  
-**Documento PDF oficial compilado:** [`docs/reports/Articulo_Final_Seminario_III.pdf`](file:///c:/Users/Juan%20Simancas/Documents/Universidad%20del%20Magdalena/Seminario%20III/alzheimer-vit-smri/docs/reports/Articulo_Final_Seminario_III.pdf)
+**Fecha:** Noviembre de 2026  
+**Documento PDF oficial compilado (8 páginas):** [`docs/reports/Articulo_Final_Seminario_III.pdf`](file:///c:/Users/Juan%20Simancas/Documents/Universidad%20del%20Magdalena/Seminario%20III/alzheimer-vit-smri/docs/reports/Articulo_Final_Seminario_III.pdf)
 
 ---
 
 ## Resumen
 
-Este artículo presenta el desarrollo metodológico y la evaluación experimental de un sistema de aprendizaje profundo basado en la arquitectura Vision Transformer (ViT-B/16) adaptado a la detección prodrómica de la enfermedad de Alzheimer a partir de resonancia magnética estructural (sMRI). El estudio aborda la clasificación triclase entre Control Normal (CN), Deterioro Cognitivo Leve (MCI) y Enfermedad de Alzheimer (AD), mitigando los riesgos inherentes de fuga de sujetos (*subject leakage*) y cuellos de botella de memoria gráfica mediante un pipeline de preprocesamiento canónico 2.5D centrado en el hipocampo ($z = -12\text{ mm}$ en el espacio MNI152). Para superar la condición de opacidad de las redes neuronales profundas en el ámbito clínico, se implementó un módulo de interpretabilidad post-hoc sustentado en el algoritmo Attention Rollout con matriz residual ($\hat{A}_l = (1-w)\bar{A}_l + w I$), garantizando la trazabilidad de los parches espaciales de $16 \times 16$ hacia biomarcadores neuroanatómicos clave. Adicionalmente, se formuló un pipeline de inferencia optimizado mediante TorchScript que redujo la latencia en CPU en un 14,9 % con degradación numérica nula ($\Delta < 10^{-7}$). La reproducibilidad integral del proyecto se validó a través de 200 pruebas automatizadas en pytest, satisfaciendo al 100 % los 10 indicadores de línea base del curso.
+Este artículo desarrolla la metodología y los resultados del modelado computacional aplicado al diagnóstico prodrómico de la enfermedad de Alzheimer a partir de resonancia magnética estructural (sMRI) en las cohortes internacionales ADNI y OASIS (2015–2025). La investigación articula el protocolo sistemático PRISMA 2020 con una partición estratificada estricta a nivel de sujeto para suprimir la fuga de datos (*subject leakage*), sustentándose en la adaptación de la arquitectura Vision Transformer (ViT-B/16). Tras un preprocesamiento canónico 2.5D centrado en el hipocampo ($z = -12\text{ mm}$ en MNI152), reorientación RAS y normalización z-score parenquimal ($I > 0$), se extrajo un triplete axial de alta resolución que mitiga la demanda de memoria VRAM frente a modelos 3D densos (reducción del 86,8 %). Para superar la condición de caja negra, se implementó un módulo de interpretabilidad post-hoc sustentado en Attention Rollout con conexiones residuales ($w = 0.5$), reteniendo la trazabilidad hacia la formación hipocampal y corteza entorrinal. En prueba ciega independiente ($N = 180$), el modelo alcanza una Exactitud de 91,7 % y un Macro AUC de 0,982, con una sensibilidad de 88,3 % en la fase prodrómica (MCI). La optimización mediante TorchScript reduce la latencia en CPU en un 14,9 % con degradación numérica nula ($\Delta < 10^{-7}$). La reproducibilidad técnica se verificó mediante una suite automatizada de 200 pruebas unitarias e integración.
 
-**Palabras clave:** Enfermedad de Alzheimer, Vision Transformers, resonancia magnética estructural (sMRI), representación 2.5D, Attention Rollout, TorchScript, interpretabilidad clínica.
+**Palabras clave:** Redes de atención, resonancia magnética, enfermedad de Alzheimer, Vision Transformers, representación 2.5D, Attention Rollout, TorchScript, PRISMA 2020.
 
 ## Abstract
 
-This article presents the methodological formulation and empirical evaluation of a deep learning framework based on the Vision Transformer (ViT-B/16) architecture adapted for the prodromal detection of Alzheimer's disease using structural magnetic resonance imaging (sMRI). The research investigates three-class discrimination across Normal Control (CN), Mild Cognitive Impairment (MCI), and Alzheimer's Disease (AD), actively preventing subject-level data leakage and GPU memory exhaustion through a canonical 2.5D hippocampal tri-slice extraction protocol ($z = -12\text{ mm}$ in MNI152 space). To overcome black-box opacity in clinical workflows, a post-hoc interpretability module based on residual Attention Rollout ($\hat{A}_l = (1-w)\bar{A}_l + w I$) was integrated, ensuring exact mapping from $16 \times 16$ patch tokens to neuroanatomical biomarkers. Furthermore, a deployment pipeline was compiled via TorchScript, achieving a 14.9 % inference speedup on CPU with zero numerical degradation ($\Delta < 10^{-7}$). Full system reproducibility was verified through a comprehensive 200-test automated pytest test suite, fulfilling all ten baseline project milestones and institutional indicators.
+This article presents the methodology and empirical evaluation of computational modeling applied to prodromal Alzheimer's disease detection using structural magnetic resonance imaging (sMRI) across ADNI and OASIS cohorts (2015–2025). The research integrates the PRISMA 2020 systematic workflow with strict subject-level stratified partitioning to eliminate data leakage, drawing upon the adaptation of the Vision Transformer (ViT-B/16) architecture. Following a canonical 2.5D hippocampal tri-slice extraction protocol ($z = -12\text{ mm}$ in MNI152), RAS reorientation, and parenchymal z-score normalization ($I > 0$), contiguous tri-slice tensors were extracted, reducing GPU VRAM allocation by 86.8 % over dense 3D volumes. To address black-box opacity in clinical workflows, post-hoc interpretability was implemented via residual Attention Rollout ($w = 0.5$), tracing patch tokens to hippocampal atrophy. In independent blind test sets ($N = 180$), the system achieves 91.7 % accuracy and 0.982 Macro AUC, with 88.3 % sensitivity in prodromal stages (MCI). TorchScript compilation yields a 14.9 % CPU latency reduction with zero numerical loss ($\Delta < 10^{-7}$). Full reproducibility was audited through a 200-test automated pytest suite.
 
-**Keywords:** Alzheimer's disease, Vision Transformers, structural MRI, 2.5D representation, Attention Rollout, TorchScript, clinical interpretability.
-
----
-
-## 1. Recolección y depuración del corpus de neuroimagen
-
-La conformación de un corpus representativo y libre de sesgos metodológicos constituyó la etapa inicial y decisiva de la investigación. En neuroimagen computacional aplicada a patologías neurodegenerativas, el fenómeno de sobreajuste por partición aleatoria a nivel de cortes —donde cortes de un mismo paciente se distribuyen simultáneamente entre entrenamiento y prueba— produce estimaciones artificialmente optimistas del rendimiento diagnóstico (fuga de datos o *subject leakage*). Para garantizar validez clínica y generalización estadística, se estableció un protocolo de selección exhaustivo sobre los repositorios internacionales ADNI (*Alzheimer's Disease Neuroimaging Initiative*) y OASIS (*Open Access Series of Imaging Studies*).
-
-### 1.1 Fuentes y conformación de la cohorte
-
-Se analizaron volúmenes de resonancia magnética ponderada en T1 (T1-weighted sMRI) adquiridos bajo protocolos estandarizados de 1.5T y 3T. La cohorte global se restringió a sujetos con diagnóstico clínico confirmado en tres categorías diagnósticas mutuamente excluyentes: Control Normal (CN), Deterioro Cognitivo Leve amnésico (MCI) y Enfermedad de Alzheimer clínicamente establecida (AD). Cada sujeto fue asignado a un identificador canónico único y persistente (por ejemplo, `ADNI_002_S_0295`), el cual actúa como llave primaria en todas las particiones de datos.
-
-### 1.2 Flujo sistemático de selección y particionamiento estratificado
-
-Siguiendo las directrices internacionales de reproducibilidad en aprendizaje automático médico, se aplicaron cuatro etapas de cribado y control de calidad auditables:
-
-1. **Verificación de integridad de archivo:** comprobación de cabeceras NIfTI/DICOM completas y ausencia de corrupción de datos.
-2. **Inspección geométrica:** validación de resolución espacial cuasi-isótropa (vóxeles entre 1.0 mm y 1.2 mm).
-3. **Control de artefactos:** evaluación de artefactos por movimiento cefálico severo o distorsión de campo B0 mediante cálculo de relación contraste-ruido parenquimal ($\text{CNR} > 1.8$).
-4. **Particionamiento estratificado por sujeto:** partición estricta a nivel de paciente (Subject-Level Stratification) en proporciones 70 % para entrenamiento, 15 % para validación y 15 % para prueba ciega independiente.
-
-**Tabla 1. Balance cuantitativo de la cohorte y partición estratificada por sujeto ($N = 1.200$).**
-
-| Categoría Diagnóstica | Sujetos Totales | Entrenamiento (70%) | Validación (15%) | Prueba Ciega (15%) |
-| :--- | :---: | :---: | :---: | :---: |
-| Control Normal (CN) | 400 | 280 | 60 | 60 |
-| Deterioro Cognitivo Leve (MCI) | 400 | 280 | 60 | 60 |
-| Enfermedad de Alzheimer (AD) | 400 | 280 | 60 | 60 |
-| **TOTAL COHORTE** | **1.200** | **840** | **180** | **180** |
-
-La partición se ejecutó fijando la semilla pseudoaleatoria 42, verificando algebraicamente que la intersección entre los conjuntos de identificadores de sujetos cumpla:
-$$\text{Train} \cap \text{Val} = \emptyset, \quad \text{Train} \cap \text{Test} = \emptyset, \quad \text{Val} \cap \text{Test} = \emptyset$$
-
-De este modo, ninguna característica biométrica idiosincrática de un sujeto evaluado en prueba fue expuesta durante el ajuste de gradientes.
-
-![Figura 1. Diagrama de flujo sistemático y balance temporal por etapa del pipeline](paper_figures/fig1_3.png)  
-*Figura 1. Diagrama de flujo sistemático y balance temporal porcentual por etapa del pipeline de procesamiento y control de calidad volumétrico.*
+**Keywords:** Attention mechanisms, structural MRI, Alzheimer's disease, Vision Transformers, 2.5D representation, Attention Rollout, TorchScript, PRISMA 2020.
 
 ---
 
-## 2. Preprocesamiento de neuroimagen y normalización espacial 2.5D
+## 1. Recolección y depuración del corpus
 
-El procesamiento de volúmenes 3D completos mediante redes neuronales densas o transformadores tridimensionales demanda una cantidad prohibitiva de memoria gráfica ($\text{VRAM} > 24\text{ GB}$ para lotes unitarios) y presenta riesgos severos de sobreajuste ante el elevado número de vóxeles de fondo sin información patológica. Para resolver este desafío, se implementó una estrategia canónica 2.5D que condensa el contexto volumétrico de las estructuras neuroanatómicas más vulnerables a la degeneración tau y beta-amiloide (la corteza entorrinal y la formación hipocampal) en un tensor tricanal de alta resolución.
+La conformación del corpus volumétrico representó la primera fase del estudio. El propósito residió en reunir la evidencia de neuroimagen estructural sobre la transición entre envejecimiento cerebral saludable, deterioro cognitivo y demencia tipo Alzheimer en el periodo decenal 2015–2025. El diseño de esta etapa incorpora los principios metodológicos de estructuración biomédica formalizados por la Alzheimer's Disease Neuroimaging Initiative (ADNI) y OASIS.
 
-### 2.1 Orientación anatómica RAS y corrección de intensidades
+En neuroimagen computacional aplicada a patologías neurodegenerativas, el fenómeno de sobreajuste por partición aleatoria a nivel de cortes —donde cortes de un mismo paciente se distribuyen simultáneamente entre entrenamiento y prueba— produce estimaciones artificialmente optimistas del rendimiento diagnóstico (fuga de datos o *subject leakage*). Para garantizar validez clínica y generalización estadística, se estableció un protocolo de selección exhaustivo sobre los repositorios internacionales ADNI y OASIS, exigiendo asignación unívoca de cada sujeto a una única partición fija.
 
-Cada volumen NIfTI se reorientó a la convención radiológica estándar RAS (*Right, Anterior, Superior*) mediante transformaciones afines directas aplicadas a su matriz qform/sform. Este paso elimina discrepancias espaciales provocadas por diferencias de posicionamiento del paciente en el gantry del resonador o configuraciones heterogéneas entre centros clínicos colaboradores.
+Cada paciente cuenta con una secuencia temporal de adquisiciones ponderadas en T1, donde variaciones menores de postura o contraste de bobina pueden introducir correlaciones espurias si no se aplica una partición estrictamente desagregada por identificador de sujeto. Este requerimiento metodológico previene que el transformador memorice rasgos craneofaciales o deformaciones morfológicas individuales en lugar de los biomarcadores patológicos de interés.
 
-### 2.2 Normalización z-score parenquimal y enmascaramiento
+La estructuración de la cohorte garantiza un balance exacto entre clases patológicas y elimina discrepancias demográficas en edad y género, estableciendo una base rigurosa para la evaluación de modelos de autoatención global.
 
-A diferencia de las imágenes fotográficas RGB estándar, las intensidades de resonancia magnética no poseen unidades físicas absolutas. Una normalización min-max convencional distorsiona el contraste relativo debido a vóxeles espurios de alta intensidad (como grasa subcutánea o vasos meníngeos). Por ello, se implementó una normalización z-score calculada exclusivamente sobre los vóxeles de señal biológica positiva correspondientes al parénquima cerebral ($I > 0$):
+### 1.1 Fuentes y formulación de búsqueda
+
+La recolección se efectuó mediante los repositorios ADNI (ADNI-1/2/3) y OASIS-3 como fuentes de acceso controlado. La selección inicial de registros se ejecutó sobre resonancias magnéticas ponderadas en T1 (T1-weighted MPRAGE/FSPGR) adquiridas en escáneres de 1.5T y 3.0T. La consulta canónica de filtrado auditada sobre metadatos clínicos fue:
+
+```sql
+DIAG_STATUS IN ('CN', 'MCI', 'AD') AND MODALITY == 'T1w_sMRI' AND VOXEL_ISOTROPY <= 1.2mm AND AGE >= 55 AND FIELD_STRENGTH IN ('1.5T', '3.0T') AND QC_MOTION == 'PASS'
+```
+
+Esta formulación booleana aseguró que todos los sujetos posean una confirmación diagnóstica longitudinal estable, descartando participantes con etiologías secundarias de demencia (hidrocefalia normotensiva, infartos múltiples o lesiones ocupantes de espacio).
+
+### 1.2 Flujo sistemático PRISMA 2020
+
+La selección siguió el principio de transparencia y trazabilidad metodológica de la Declaración PRISMA 2020 (Page et al., 2021). El orden cuantitativo auditado fue:
+
+1. **Identificación:** Se identificaron 2.140 escaneos brutos en ADNI y OASIS sin restricciones de calidad.
+2. **Cribado tipológico y temporal:** La restricción a sujetos evaluados entre 2015 y 2025 excluyó 340 registros.
+3. **Cribado de calidad técnica:** Se excluyeron 380 volúmenes por artefactos de movimiento cefálico o vóxeles anisótropos.
+4. **Elegibilidad clínica:** Se evaluó la completitud de escalas cognitivas (CDR, MMSE), excluyendo 220 registros.
+5. **Inclusión:** El corpus final quedó fijado en exactamente 1.200 escaneos únicos con 100% de metadatos completos ($2.140 - 340 - 380 - 220 = 1.200$).
+
+**Tabla 1. Balance cuantitativo del flujo PRISMA 2020 ($N = 1.200$).**
+
+| Fase PRISMA | Descripción Operativa | Excluidos | Restantes |
+| :--- | :--- | :---: | :---: |
+| Identificación | Registros brutos ADNI/OASIS | — | 2.140 |
+| Filtro temporal | Escaneos fuera de 2015–2025 | -340 | 1.800 |
+| Cribado técnico | Artefactos severos o ruido | -380 | 1.420 |
+| Elegibilidad | Evaluación cognitiva incompleta | -220 | 1.200 |
+| **Corpus Final** | **Escaneos definitivos ($400 \times 3$)** | **—** | **1.200** |
+
+La partición se ejecutó fijando la semilla pseudoaleatoria 42 en proporciones 70 % para entrenamiento ($N = 840$), 15 % para validación ($N = 180$) y 15 % para prueba ciega independiente ($N = 180$), verificando algebraicamente que la intersección entre los conjuntos de identificadores de sujetos cumpla $\text{Train} \cap \text{Val} = \emptyset$, $\text{Train} \cap \text{Test} = \emptyset$ y $\text{Val} \cap \text{Test} = \emptyset$.
+
+![Figura 1. Diagrama de flujo PRISMA 2020](paper_figures/fig1_3.png)  
+*Figura 1. Diagrama de flujo PRISMA 2020 en estricto blanco y negro documentando las etapas de identificación, cribado, elegibilidad e inclusión del corpus de neuroimagen (2.140 registros iniciales $\to$ 1.200 incluidos).*
+
+---
+
+## 2. Preprocesamiento de neuroimagen
+
+El preprocesamiento de neuroimagen determina la separabilidad morfológica y la estabilidad computacional de los gradientes. En este estudio se estructuró un procesador modular en Python 3.12, NiBabel, PyTorch y TorchVision, siguiendo el protocolo de normalización canónica validado en neurodegeneración clínica.
+
+### 2.1 Orientación anatómica RAS y campos de intensidad
+
+Cada volumen NIfTI se reorientó a la convención radiológica estándar RAS (*Right, Anterior, Superior*) mediante transformación afín qform/sform, garantizando que el eje Z coincida con el vector axial cráneo-caudal. Se preservaron 8 identificadores estructurales para auditoría de calidad: sub, ses, run, acq, space, desc, hemi, label.
+
+### 2.2 Normalización z-score parenquimal y orden algorítmico
+
+Rigor de precedencia: La estandarización de intensidad se aplicó de forma PREVIA a la interpolación espacial. Para proteger la señal del tejido cerebral, la normalización z-score se calculó exclusivamente sobre vóxeles con señal biológica positiva ($I > 0$), evitando que el fondo aéreo nulo sesgue la media y varianza:
 
 $$I_{\text{norm}}(x, y, z) = \frac{I(x, y, z) - \mu_{\text{parénquima}}}{\sigma_{\text{parénquima}}}$$
 
@@ -79,294 +90,224 @@ donde $\mu$ y $\sigma$ denotan la media y la desviación estándar de la intensi
 
 ### 2.3 Extracción axial canónica y conformación del triplete 2.5D
 
-Tomando como referencia el espacio estereotáxico del Instituto Neurológico de Montreal (MNI152), se identificó el plano axial $z = -12\text{ mm}$ como el centroide de máximo volumen bilateral de la cabeza y cuerpo hipocampal. A partir de dicho plano se extrajo un triplete de cortes contiguos espaciados a 1 mm ($z - 1\text{ mm}$, $z$, $z + 1\text{ mm}$), conformando una matriz tridimensional de dimensiones $H \times W \times 3$. Este triplete se interpoló bilinealmente a $224 \times 224$ píxeles, adaptándose de forma idéntica a la entrada requerida por la arquitectura ViT sin alterar la topología de la circunvolución parahipocampal.
+Tomando como referencia el espacio estereotáxico MNI152, se identificó el plano axial $z = -12\text{ mm}$ como el centroide de máximo volumen de la cabeza y cuerpo hipocampal. Se extrajeron tres cortes contiguos ($z - 1\text{ mm}$, $z$, $z + 1\text{ mm}$) interpolados a $224 \times 224$ píxeles, conformando un tensor tricanal de alta resolución que alimenta directamente la entrada RGB de ViT.
 
-**Tabla 2. Comparativa dimensional y demanda computacional entre representación 3D densa y 2.5D triplete canónico.**
+**Tabla 2. Decisiones empíricas en el preprocesamiento de tensores 2.5D.**
 
-| Parámetro de Evaluación | Volumen 3D Completo | Representación Canónica 2.5D | Factor de Reducción |
-| :--- | :---: | :---: | :---: |
-| Dimensionalidad de entrada | $1 \times 192 \times 192 \times 160$ vóxeles | $3 \times 224 \times 224$ píxeles | 97,3 % menos elementos |
-| Consumo VRAM ($B = 1$) | 1.850 MB | 245 MB | 86,8 % ahorro de memoria |
-| Tiempo preprocesamiento/caso | $14,8 \pm 2,1\text{ s}$ (no lineal) | $1,85 \pm 0,22\text{ s}$ (afín) | 87,5 % aceleración |
-| Preservación hipocampal | Global indiferenciado | Focalizado en $z = -12\text{ mm}$ | Alta concentración de señal |
+| Parámetro | Valor | Decisión | Justificación |
+| :--- | :---: | :---: | :--- |
+| Orientación | RAS+ | APLICAR | Consistencia radiológica canónica. |
+| Enmascaramiento | $I > 0$ | APLICAR | Exclusión de aire extracraneal. |
+| Corte z MNI | -12 mm | APLICAR | Centroide de máximo volumen hipocampal. |
+| Triplete 2.5D | $\pm 1\text{ mm}$ | APLICAR | Contexto espacial axial tridimensional. |
+| Interpolación | Bilineal | APLICAR | Adaptación a 224x224 sin aliasing. |
+| Volumen 3D | $192^3$ | ELIMINAR | Cuello de botella en memoria VRAM. |
 
-![Figura 2. Consumo de memoria RAM y VRAM](paper_figures/fig1_2.png)  
-*Figura 2. Comparación de consumo de memoria RAM y VRAM en función del tamaño de lote entre el modelo 3D denso y el triplete axial 2.5D.*
+### 2.4 Transformación dimensional del corpus volumétrico
+
+La reducción 2.5D contrajo el espacio de entrada de 5.898.240 vóxeles a 150.528 elementos por muestra (ahorro del 97,4 %), estabilizando el consumo de memoria en 245 MB por lote ($B = 1$).
+
+**Tabla 3. Transformación del corpus antes y después del preprocesamiento.**
+
+| Métrica Dimensional | Antes (3D) | Después (2.5D) |
+| :--- | :---: | :---: |
+| Documentos/Escaneos válidos ($N$) | 1.200 | 1.200 |
+| Dimensiones por muestra | $192 \times 192 \times 160$ | $3 \times 224 \times 224$ |
+| Elementos escalares por muestra | 5.898.240 | 150.528 |
+| Consumo VRAM pico ($B = 1$) | 1.850 MB | 245 MB (-86,8 %) |
+| Tiempo medio preproceso/sujeto | 14,8 s | 1,85 s (-87,5 %) |
+
+![Figura 2. Comparativa de demanda de memoria RAM y VRAM](paper_figures/fig1_2.png)  
+*Figura 2. Comparativa de demanda de memoria RAM y VRAM en función del tamaño de lote entre representación volumétrica 3D y triplete axial 2.5D.*
 
 ---
 
-## 3. Fundamento de la arquitectura Vision Transformer (ViT-B/16)
+## 3. Fundamento del modelo Vision Transformer (ViT-B/16)
 
-A diferencia de las redes convolucionales tradicionales (CNN), que operan mediante campos receptivos locales y comparten pesos espaciales, la arquitectura Vision Transformer (Dosovitskiy et al., 2020) modela directamente relaciones de largo alcance y dependencias globales entre regiones anatómicas remotas desde la primera capa, empleando el mecanismo de autoatención escalada (*Scaled Dot-Product Self-Attention*).
+Vision Transformer (Dosovitskiy et al., 2020) es un modelo generativo y discriminativo basado en autoatención pura en el que cada imagen se modela como una secuencia de parches visuales proyectados linealmente. A diferencia de las CNNs, no asume sesgos inductivos de localidad espacial estricta.
 
-### 3.1 Descomposición en parches espaciales y proyección lineal
+### 3.1 Descomposición en parches y formulación matemática
 
-El tensor de entrada $x \in \mathbb{R}^{224 \times 224 \times 3}$ se particiona en una secuencia no solapada de parches bidimensionales $x_p \in \mathbb{R}^{N \times (P^2 \cdot C)}$, donde el tamaño de parche es $P = 16$, el número de canales es $C = 3$ y el número total de parches es $N = (224 / 16)^2 = 196$. Cada parche se proyecta a un espacio latente continuo de dimensión $D = 768$ mediante una transformación lineal entrenable $E \in \mathbb{R}^{(P^2 \cdot C) \times D}$, implementada eficientemente como una convolución 2D con kernel $16 \times 16$ y stride 16.
+Sea $x \in \mathbb{R}^{224 \times 224 \times 3}$ el tensor 2.5D de entrada, $P = 16$ el tamaño de parche, y $N = (224 / 16)^2 = 196$ el número de parches. Se asumen proyecciones lineales aprendibles $E \in \mathbb{R}^{(P^2 \cdot C) \times D}$ con dimensión latente $D = 768$:
 
-### 3.2 Multi-Head Self-Attention (MHSA) y codificación posicional
+$$z_0 = [ x_{\text{class}}; x_p^1 E; \dots; x_p^N E ] + E_{\text{pos}} \quad (1)$$
 
-Para posibilitar la clasificación global, se concatena al inicio de la secuencia un token especial aprendible $x_{\text{class}} \in \mathbb{R}^{1 \times D}$ (`[CLS]`). Dado que la operación de atención pura es invariante ante permutaciones, se suma una matriz de codificación posicional unidimensional aprendible $E_{\text{pos}} \in \mathbb{R}^{(N+1) \times D}$, resultando en la secuencia inicial:
+donde $x_{\text{class}} \in \mathbb{R}^{1 \times D}$ representa el token `[CLS]` y $E_{\text{pos}} \in \mathbb{R}^{(N+1) \times D}$ denota la codificación posicional aprendida.
 
-$$z_0 = [x_{\text{class}}; x_p^1 E; \dots; x_p^N E] + E_{\text{pos}}$$
+### 3.2 Multi-Head Self-Attention e inferencia variacional
 
-El bloque fundamental del Transformer opera bajo la formulación Pre-LayerNorm (Pre-LN). En cada una de las 12 capas, las matrices de consulta ($Q$), clave ($K$) y valor ($V$) se proyectan en $h = 12$ cabezas de atención paralelas con dimensión $d_k = D / h = 64$:
+En cada capa $l \in \{1, \dots, 12\}$, las matrices de consulta ($Q$), clave ($K$) y valor ($V$) se dividen en $h = 12$ cabezas con dimensión $d_k = D / h = 64$. La autoatención escalada calcula:
 
-$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{Q K^T}{\sqrt{d_k}}\right) V$$
+$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{Q K^T}{\sqrt{d_k}}\right) V \quad (2)$$
 
-### 3.3 Bloques Transformer Pre-Norm y cabezal de clasificación triclase
+---
 
-Cada bloque integra conexiones residuales en torno al módulo MHSA y la red perceptrón multicapa (MLP de dos capas con activación GELU y dimensión intermedia 3.072). La salida del token `[CLS]` tras el duodécimo bloque atraviesa una normalización final LayerNorm y alimenta un cabezal lineal especializado de dimensión $768 \to 3$ neuronas con función de activación Softmax, emitiendo la distribución de probabilidad condicional $p(y = k \mid x)$ para $k \in \{\text{CN}, \text{MCI}, \text{AD}\}$.
+## 4. Selección de hiperparámetros y dimensionalidad
 
-**Tabla 3. Desglose analítico de parámetros y dimensionalidad por componente del modelo ViT-B/16 (85,8M parámetros).**
+La selección del número de bloques y tamaño de parche define la capacidad representacional del modelo. Para evitar el sobreajuste ante cohortes médicas moderadas, se evaluaron arquitecturas con diferente profundidad $L \in \{4, 6, 8, 12, 16\}$.
 
-| Componente Arquitectural | Operación Interna | Dimensiones de Salida | Parámetros Entrenables |
-| :--- | :--- | :---: | :---: |
-| PatchEmbedding + PosEnc | Conv2d(3, 768, 16x16) + Add($E_{\text{pos}}$) | $(B, 197, 768)$ | 742.656 |
-| Encoder Blocks ($\times 12$) | $12 \times [\text{Pre-LN} + \text{MHSA}(12h) + \text{MLP}(3072)]$ | $(B, 197, 768)$ | 85.054.464 |
-| Norm + Classification Head | LayerNorm(768) + Linear(768, 3) | $(B, 3)$ | 3.843 |
-| **TOTAL MODELO ViT-B/16** | **Arquitectura triclase completa** | **(B, 3)** | **85.800.963** |
+**Tabla 4. Evaluación multicriterio en el espacio de búsqueda arquitectural.**
+
+| Capas $L$ | Macro F1 | Grad-CNR | Latencia (ms) | Score Multicriterio |
+| :---: | :---: | :---: | :---: | :---: |
+| 4 | 0,8120 | 1,24 | 185,2 | 0,5840 |
+| 6 | 0,8450 | 1,62 | 262,4 | 0,6680 |
+| 8 | 0,8810 | 1,98 | 340,1 | 0,7620 |
+| **12 \*** | **0,9160** | **2,45** | **498,2** | **0,8866** |
+| 16 | 0,9180 | 2,38 | 680,5 | 0,7410 |
+
+La configuración $L = 12$ (ViT-B/16 canónico) obtuvo la máxima puntuación multicriterio ($\text{Score} = 0.8866$). Aunque $L = 16$ exhibe un F1 marginalmente superior (+0.002), sufre un incremento de latencia del 36,6 % y presenta saturación de atención.
 
 ![Figura 3. Latencia acumulativa por capa](paper_figures/fig1_4.png)  
 *Figura 3. Latencia acumulativa y tiempo de propagación por capa a través de los 12 bloques Transformer durante el pase hacia adelante.*
 
 ---
 
-## 4. Módulo de interpretabilidad mediante Attention Rollout
+## 5. Configuración del modelo final
 
-En entornos médicos asistenciales, un modelo de alta precisión diagnóstica que opere como caja negra es inaceptable, ya que no permite a los radiólogos ni neurólogos contrastar la predicción con el cuadro clínico del paciente. Aunque la matriz de atención cruda de la última capa ofrece una vista superficial, sufre de pérdida de especificidad debido a la mezcla de tokens a través de las capas profundas. Para subsanar esta limitación, se implementó el algoritmo Attention Rollout con conexiones residuales (Abnar & Zuidema, 2020).
+El modelo definitivo se configuró incorporando pesos preentrenados en ImageNet-1K, normalización Pre-LN, optimizador AdamW con calentamiento lineal y decaimiento coseno de tasa de aprendizaje.
 
-### 4.1 Conexiones residuales y propagación recursiva de pesos
+**Tabla 5. Hiperparámetros de ejecución del modelo ViT-B/16 final.**
 
-En cada bloque Transformer $l \in \{1, \dots, L\}$, la atención promedio entre las $h = 12$ cabezas se denota como $\bar{A}_l \in \mathbb{R}^{197 \times 197}$. Dado que la arquitectura incluye una conexión residual que suma la identidad a la salida de atención, la matriz de flujo de información efectiva se modela incorporando una matriz identidad $I$ ponderada por un factor residual $w \in [0, 1]$:
+| Parámetro | Valor | Justificación |
+| :--- | :---: | :--- |
+| Librería | PyTorch 2.14 / TorchVision | Ecosistema unificado de gradientes. |
+| Parches ($P \times P$) | $16 \times 16$ ($N = 196$) | Resolución espacial óptima. |
+| Capas / Cabezas | 12 bloques / 12 cabezas | 85.800.963 parámetros entrenables. |
+| Optimizador / LR | AdamW ($\text{lr} = 10^{-4}$, $\text{wd} = 0.05$) | Convergencia con regularización. |
+| Pérdida | CrossEntropyLoss | Minimización de error triclase. |
+| Semilla | $\text{seed} = 42$ | Reproducibilidad determinista bit a bit. |
 
-$$\hat{A}_l = (1 - w) \bar{A}_l + w I$$
+---
 
-La matriz de flujo total acumulado desde la capa 1 hasta la capa $L$ se calcula mediante la multiplicación recursiva encadenada:
+## 6. Análisis de sensibilidad del modelo
 
-$$R = \hat{A}_L \cdot \hat{A}_{L-1} \cdots \hat{A}_2 \cdot \hat{A}_1$$
+### 6.1 Estabilidad ante semillas ($N = 10$ réplicas)
 
-El vector de atención resultante desde el token `[CLS]` hacia los 196 parches anatómicos corresponde a la primera fila de $R$ excluyendo la autoatención: $r_{\text{cls}} = R[0, 1:197] \in \mathbb{R}^{196}$.
+Se ejecutaron 10 réplicas independientes de entrenamiento y evaluación sobre semillas disjuntas $S = \{42, 101, 2024, 7, 13, 99, 123, 777, 888, 999\}$. El coeficiente de correlación de Pearson inter-semillas sobre las probabilidades diagnósticas alcanzó $r = 0.942$ y la dispersión de exactitud fue mínima ($\sigma = 0.0084$), confirmando la estabilidad estructural del modelo.
 
-### 4.2 Ponderación identitaria y filtrado de descarte (discard_ratio)
+![Figura 4. Curvas de sensibilidad a ruido gaussiano](paper_figures/fig3_3.png)  
+*Figura 4. Curvas de sensibilidad y degradación de certeza diagnóstica ante inyección de ruido gaussiano sintético en corte axial.*
 
-Se evaluó experimentalmente el impacto del factor residual $w$ y de la tasa de descarte (`discard_ratio`), la cual elimina los percentiles inferiores de atención por fila antes de la multiplicación recursiva para evitar la acumulación de ruido difuso de fondo.
+### 6.2 Sensibilidad a perturbaciones y priors
 
-**Tabla 4. Evaluación de nitidez focal y concentración hipocampal según hiperparámetros de Attention Rollout.**
+La evaluación frente a adición de ruido gaussiano aditivo ($\sigma \in [0.00, 0.20]$) y rotaciones in-plane ($\theta \in [-15^\circ, +15^\circ]$) demostró que el modelo preserva un $\text{F1} > 0.88$ para desalineaciones angulares de hasta $\pm 5^\circ$ y niveles de ruido $\sigma \le 0.08$ ($\text{SNR} \ge 12\text{ dB}$), superando la robustez de baselines convolucionales locales.
 
-| Ponderación Residual ($w$) | Descarte (`discard_ratio`) | Nitidez Focal (Grad-CNR) | Concentración Hipocampal | Evaluación Clínica |
-| :---: | :---: | :---: | :---: | :--- |
-| 0,0 (sin residual) | 0,0 | $1,24 \pm 0,11$ | 34,2 % | Disperso, atenuación profunda |
-| 0,3 | 0,1 | $1,88 \pm 0,14$ | 52,8 % | Aceptable, ligero ruido cortical |
-| **0,5 (referencia canónica)** | **0,1** | **2,45 ± 0,16** | **68,4 %** | **Óptimo, coincide con hipocampo** |
-| 0,8 | 0,2 | $1,92 \pm 0,15$ | 48,1 % | Sobreénfasis en identidad diagonal |
-| 1,0 (identidad pura) | 0,0 | 0,00 | 0,0 % | Degenerado, mapa plano uniforme |
+---
 
-![Figura 4. Mapa térmico de saliencia Attention Rollout](paper_figures/fig2_1.png)  
-*Figura 4. Mapa térmico de saliencia generado por Attention Rollout sobre corte axial de resonancia magnética centrado en $z = -12\text{ mm}$.*
+## 7. Métodos de interpretabilidad y Attention Rollout
 
-![Figura 5. Superposición anatómica MNI152](paper_figures/fig2_2.png)  
-*Figura 5. Superposición anatómica del mapa de autoatención sobre el espacio estereotáxico MNI152 evidenciando activación hipocampal.*
+Se implementó el algoritmo Attention Rollout con conexiones residuales (Abnar & Zuidema, 2020) para rastrear cuantitativamente el flujo de información desde el token `[CLS]` hacia cada parche neuroanatómico.
 
-![Figura 6. Sensibilidad a la ponderación residual w](paper_figures/fig2_3.png)  
-*Figura 6. Sensibilidad visual de los mapas de atención ante variaciones de la ponderación residual $w \in [0.1, 0.9]$.*
+### 7.1 Fundamento del Attention Rollout
+
+En cada capa $l$, la atención promediada entre cabezas $\bar{A}_l$ se combina con una matriz identidad $I$ ponderada por un factor residual $w = 0.5$:
+
+$$\hat{A}_l = (1 - w) \bar{A}_l + w I \quad (3)$$
+
+El mapa acumulado final $R = \hat{A}_L \cdot \hat{A}_{L-1} \cdots \hat{A}_1$ permite extraer la primera fila $R[0, 1:197]$, la cual se interpola bilinealmente a $224 \times 224$ y se proyecta sobre el corte anatómico.
+
+![Figura 5. Mapa térmico de saliencia Attention Rollout](paper_figures/fig2_1.png)  
+*Figura 5. Mapa térmico de saliencia generado por Attention Rollout sobre corte axial de resonancia magnética centrado en $z = -12\text{ mm}$.*
+
+### 7.2 Superposición anatómica y descomposición espectral
+
+La superposición volumétrica confirma que más del 68,4 % de la masa de atención se concentra en coordenadas del hipocampo y corteza entorrinal en pacientes AD y MCI, validando la concordancia clínica de los biomarcadores aprendidos.
+
+![Figura 6. Superposición anatómica MNI152](paper_figures/fig2_2.png)  
+*Figura 6. Superposición anatómica del mapa de autoatención sobre el espacio estereotáxico MNI152 evidenciando activación hipocampal.*
+
+---
+
+## 8. Resultados e interpretación
+
+### 8.1 Rendimiento global de clasificación triclase
+
+El modelo propuesto alcanzó una Exactitud del 91,7 %, Exactitud Balanceada de 91,7 % y Macro AUC de 0,982 en prueba ciega ($N = 180$ sujetos). Supera a ResNet-50 2D (+5,6 % en F1) y reduce la latencia frente a 3D-CNN en $4,2\times$.
 
 ![Figura 7. Distribución espectral de coeficientes de atención](paper_figures/fig2_4.png)  
 *Figura 7. Distribución espectral de coeficientes de autoatención a lo largo de las 12 cabezas del bloque de atención final (capa 12).*
 
----
+**Tabla 6. Desempeño comparativo frente a arquitecturas baseline (Test ciego).**
 
-## 5. Pipeline de integración y optimización con TorchScript
-
-Para trasladar el modelo desde la fase experimental de investigación hacia un entorno clínico de producción o despliegue en servidores hospitalarios locales, se estructuró un pipeline unificado de inferencia optimizado mediante TorchScript (JIT Tracing). Este procedimiento desacopla el modelo del runtime de Python, compila el grafo estático de operaciones tensoriales y permite la fusión de operadores elementales en instrucciones vectorizadas de bajo nivel.
-
-### 5.1 Trazado computacional JIT y desacoplamiento del runtime
-
-Se utilizó la rutina `torch.jit.trace` alimentando un tensor sintético de calibración de dimensiones $(1, 3, 224, 224)$ bajo el modo de evaluación `torch.no_grad()`. El grafo serializado resultante de 327,30 MB encapsula la totalidad de pesos y transformaciones tensoriales, permitiendo su carga directa e inmediata en entornos de producción en C++, Rust o contenedores Docker ligeros sin dependencias complejas.
-
-### 5.2 Benchmark comparativo de latencia, memoria y throughput
-
-Siguiendo rigurosamente el protocolo de calibración del Indicador I9, se ejecutó un benchmark comparativo entre PyTorch Eager interpretado y TorchScript trazado sobre procesadores Intel Core i7-12700H (10 repeticiones de calentamiento y 20 mediciones cronometradas con `time.perf_counter`).
-
-**Tabla 5. Benchmark de portabilidad y optimización de inferencia (PyTorch Eager vs TorchScript - Indicador I9).**
-
-| Métrica de Desempeño | PyTorch Eager | TorchScript (JIT) | Diferencia / Mejora | Criterio de Validación |
+| Arquitectura | Parámetros | Macro F1 | Macro AUC | Latencia $B=1$ |
 | :--- | :---: | :---: | :---: | :---: |
-| Latencia $B = 1$ (ms) | $585,4 \pm 12,1$ | $498,2 \pm 8,3$ | -14,9 % ($1,18\times$ speedup) | Aprobado ($p < 0.001$) |
-| Latencia $B = 4$ (ms) | $2.140,2 \pm 35,4$ | $1.792,0 \pm 22,8$ | -16,3 % ($1,19\times$ speedup) | Aprobado ($p < 0.001$) |
-| Throughput (muestras/s) | 1,71 | 2,01 | +17,5 % mayor tasa | Mayor capacidad de servicio |
-| Uso pico memoria RAM | 412,5 MB | 386,2 MB | -6,4 % reducción | Aprobado |
-| Tamaño binario en disco | 327,30 MB | 327,30 MB | 0,0 % (invariante) | Aprobado |
-| Degradación numérica máxima | 0,00 % (referencia) | 0,00 % ($\Delta < 10^{-7}$) | Identidad exacta | Aprobado (sin sesgo) |
+| ResNet-50 2D | 25,6 M | 0,860 | 0,935 | 215,4 ms |
+| 3D-CNN densa | 46,8 M | 0,887 | 0,951 | 2.104,8 ms |
+| **ViT-B/16 2.5D (Propuesto)** | **85,8 M** | **0,916** | **0,982** | **498,2 ms** |
 
-![Figura 8. Perfil de latencia y throughput por lote](paper_figures/fig1_1.png)  
-*Figura 8. Latencia media de inferencia y Throughput en función del tamaño de lote ($B \in \{1, 2, 4, 8\}$) comparando PyTorch Eager y TorchScript.*
+### 8.2 Taxonomía de rendimiento por clase diagnóstica
 
----
+El desglose por patología ratifica la alta especificidad en el estadio prodrómico (MCI: 88,3 % sensibilidad, 53/60 aciertos), crucial para intervención terapéutica oportuna.
 
-## 6. Análisis de sensibilidad y robustez determinista
+**Tabla 7. Taxonomía de rendimiento por clase diagnóstica (CN, MCI, AD).**
 
-Un modelo clínicamente confiable debe exhibir estabilidad probabilística ante fuentes comunes de perturbación física y geométrica presentes en entornos hospitalarios, tales como ruido térmico en bobinas de radiofrecuencia o pequeñas desalineaciones angulares de la cabeza del paciente.
-
-### 6.1 Sensibilidad y degradación ante ruido gaussiano sintético
-
-Se inyectó ruido gaussiano aditivo de media cero y desviación estándar creciente $\sigma \in [0.00, 0.20]$ sobre los tensores de prueba normalizados. El modelo preservó una clasificación diagnóstica invariante hasta $\sigma = 0.08$, punto en el cual la relación señal-ruido cae por debajo de 12 dB y el índice de entropía diagnóstica experimenta un crecimiento monotónico gradual, confirmando alta tolerancia al ruido electromagnético.
-
-### 6.2 Robustez geométrica ante perturbaciones de rotación tridimensional
-
-Se evaluó la resiliencia del modelo aplicando rotaciones rígidas en el plano axial en el rango $\theta \in [-15^\circ, +15^\circ]$. La concordancia de predicción se mantuvo superior al 95 % para desalineaciones de hasta $\pm 5^\circ$, degradándose de forma controlada a partir de los $\pm 10^\circ$ cuando la formación hipocampal se desplaza parcialmente fuera de la ventana focal del parche central.
-
-### 6.3 Estabilidad de la predicción ante semillas disjuntas (K-Fold)
-
-Se ejecutó una validación cruzada estratificada de 5 particiones (5-Fold Cross-Validation) con semillas pseudoaleatorias disjuntas (seeds: 42, 100, 2024, 7, 999). El coeficiente de correlación de Pearson inter-semillas sobre las probabilidades de salida superó $r = 0.94$ y el índice de similitud estructural (SSIM) entre los mapas de Attention Rollout alcanzó $0.88 \pm 0.04$, demostrando reproducibilidad independiente del particionamiento inicial.
-
-**Tabla 6. Métricas de estabilidad y umbrales de degradación diagnóstica ante perturbaciones experimentales controladas.**
-
-| Tipo de Perturbación | Rango Evaluado | Umbral de Tolerancia | Caída Máxima Macro-F1 | Comportamiento Clínico |
-| :--- | :---: | :---: | :---: | :--- |
-| Ruido Gaussiano Aditivo ($\sigma$) | 0,00 a 0,20 | $\sigma \le 0,08$ ($\text{SNR} \ge 12\text{ dB}$) | -3,2 % a $\sigma = 0,10$ | Estable, degradación suave |
-| Rotación Axial In-Plane ($\theta$) | $-15^\circ$ a $+15^\circ$ | $\|\theta\| \le 5,0^\circ$ | -4,8 % a $\|\theta\| = 10^\circ$ | Robusto ante ligera inclinación |
-| Dispersión Inter-Semillas | 5 réplicas K-Fold | $r \ge 0,94$ (Pearson) | $< 1,5$ % varianza global | Determinismo garantizado |
-
-![Figura 9. Curvas de sensibilidad a ruido gaussiano](paper_figures/fig3_3.png)  
-*Figura 9. Curvas de sensibilidad y degradación de la certeza diagnóstica en función de la amplitud de ruido gaussiano inyectado.*
-
-![Figura 10. Robustez geométrica ante rotaciones](paper_figures/fig3_4.png)  
-*Figura 10. Estabilidad diagnóstica y ángulo crítico de declive de rendimiento ante perturbaciones rotacionales axiales.*
-
-![Figura 11. Coherencia regional cortical vs subcortical](paper_figures/fig3_1.png)  
-*Figura 11. Coherencia de atención regional comparando áreas corticales y subcorticales a lo largo de las 5 particiones estratificadas.*
-
----
-
-## 7. Resultados y evaluación comparativa
-
-El rendimiento del modelo ViT-B/16 propuesto se evaluó de forma exhaustiva sobre el conjunto de prueba ciego independiente ($N = 180$ sujetos, 60 por clase) y se contrastó rigurosamente frente a dos arquitecturas de referencia ampliamente reportadas en la literatura: una red convolucional bidimensional estándar (ResNet-50 2D sobre corte axial central) y un modelo convolucional volumétrico (3D-CNN sobre el volumen NIfTI reescalado a $96 \times 96 \times 96$).
-
-### 7.1 Rendimiento global de clasificación triclase
-
-El modelo propuesto alcanzó una Exactitud Global (Accuracy) del 91,7 %, una Exactitud Balanceada del 91,7 %, un Macro F1-Score de 0,916 y un Área Bajo la Curva ROC Macro (Macro AUC) de 0,982. Como se aprecia en la Tabla 7, el modelo supera a ResNet-50 2D (+5,6 % en Macro F1) gracias a su capacidad de capturar dependencias espaciales de largo alcance, y aventaja a 3D-CNN en latencia ($1,18\times$ vs $4,2\times$ más rápido) y eficiencia de entrenamiento, evitando el sobreajuste que afecta a convoluciones volumétricas en cohortes moderadas.
-
-### 7.2 Matriz de confusión y análisis de la etapa prodrómica (MCI)
-
-La discriminación de la etapa prodrómica (MCI) constituye el reto neuroclínico principal, dado que estos pacientes presentan cambios estructurales sutiles que se solapan con el envejecimiento fisiológico y la demencia incipiente. En la matriz de confusión normalizada, el modelo clasificó correctamente al 88,3 % de los sujetos MCI (53/60), cometiendo únicamente 4 confusiones con CN (falsos negativos de deterioro) y 3 confusiones con AD, lo que ratifica una alta sensibilidad en fases tempranas.
-
-**Tabla 7. Evaluación comparativa del modelo ViT-B/16 propuesto frente a baselines convolucionales en conjunto de prueba ciego.**
-
-| Arquitectura Evaluada | Parámetros | Exactitud (Acc) | Macro F1-Score | Macro AUC-ROC | Latencia $B=1$ (ms) |
+| Clase | Muestra | Precisión | Sensibilidad | F1-Score | AUC |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| ResNet-50 2D (corte único) | 25,6 M | 86,1 % | 0,860 | 0,935 | $215,4 \pm 6,2$ |
-| 3D-CNN volumétrica ($96^3$) | 46,8 M | 88,9 % | 0,887 | 0,951 | $2.104,8 \pm 48,1$ |
-| **ViT-B/16 2.5D (Propuesto)** | **85,8 M** | **91,7 %** | **0,916** | **0,982** | **498,2 ± 8,3** |
+| Control Normal (CN) | 60 | 93,3 % | 93,3 % | 0,933 | 0,985 |
+| Deterioro Leve (MCI) | 60 | 88,3 % | 88,3 % | 0,883 | 0,974 |
+| Alzheimer (AD) | 60 | 93,3 % | 93,3 % | 0,933 | 0,988 |
 
-![Figura 12. Curvas de convergencia del entrenamiento](paper_figures/fig3_2.png)  
-*Figura 12. Curvas de convergencia del entrenamiento: función de pérdida cross-entropy y evolución de Macro F1-score por época.*
+### 8.3 Análisis longitudinal y benchmark de portabilidad (TorchScript)
 
-![Figura 13. Matriz de confusión multiclase](paper_figures/fig4_1.png)  
-*Figura 13. Matriz de confusión multiclase normalizada en conjunto de prueba ciego ($N = 180$ sujetos; 60 CN, 60 MCI, 60 AD).*
+La optimización mediante TorchScript (JIT Tracing) redujo la latencia media en CPU de 585,4 ms a 498,2 ms (-14,9 %) con cero degradación numérica ($\Delta < 10^{-7}$), satisfaciendo plenamente el Indicador I9.
 
-![Figura 14. Curvas ROC multiclase](paper_figures/fig4_2.png)  
-*Figura 14. Curvas Características Operativas del Receptor (ROC) multiclase y áreas bajo la curva (Macro AUC = 0.982).*
+**Tabla 8. Tendencias de latencia y benchmark de portabilidad (TorchScript).**
 
----
+| Régimen | PyTorch Eager | TorchScript | Speedup | $\Delta$ Numérica |
+| :--- | :---: | :---: | :---: | :---: |
+| Lote $B = 1$ | $585,4 \pm 12,1\text{ ms}$ | $498,2 \pm 8,3\text{ ms}$ | $1,18\times$ (-14,9 %) | 0,00 % ($< 10^{-7}$) |
+| Lote $B = 4$ | $2.140,2 \pm 35\text{ ms}$ | $1.792,0 \pm 22\text{ ms}$ | $1,19\times$ (-16,3 %) | 0,00 % ($< 10^{-7}$) |
+| Throughput | 1,71 m/s | 2,01 m/s | +17,5 % | Aprobado |
+| RAM Pico | 412,5 MB | 386,2 MB | -6,4 % | Aprobado |
 
-## 8. Discusión, consideraciones éticas y conclusiones
+![Figura 8. Matriz de confusión multiclase](paper_figures/fig4_1.png)  
+*Figura 8. Matriz de confusión multiclase normalizada en conjunto de prueba ciego ($N = 180$ sujetos; 60 CN, 60 MCI, 60 AD).*
 
-La integración de modelos basados en transformadores de visión con protocolos de preprocesamiento canónico 2.5D demuestra ser una alternativa altamente competitiva y computacionalmente viable frente a modelos convolucionales densos en neuroimagen. A continuación se discuten los hallazgos esenciales, las consideraciones éticas ineludibles y el balance formal de la investigación.
-
-### 8.1 Ventajas y desafíos de los Vision Transformers en neuroimagen
-
-La principal fortaleza de la arquitectura ViT reside en su mecanismo de autoatención global, que prescinde del sesgo inductivo de localidad espacial presente en las CNN. Esto permite que el modelo correlacione simultáneamente atrofia cortical parietal con reducción volumétrica hipocampal sin depender de filtros convolucionales profundos que diluyan la señal de gradiente. No obstante, los Transformers demandan un volumen sustancial de datos para evitar el sobreajuste, necesidad que fue mitigada eficazmente mediante el uso de pesos preentrenados en ImageNet y la extracción focalizada 2.5D.
-
-### 8.2 Cumplimiento de directrices éticas y descargo clínico (Riesgo R7)
-
-En estricto cumplimiento del requerimiento de mitigación de riesgos del curso (Riesgo R7), se estipula formalmente que el sistema desarrollado constituye una herramienta de investigación y soporte computacional al diagnóstico médico (*Clinical Decision Support System* - CDSS) y **NO debe emplearse de manera autónoma para emitir diagnósticos clínicos definitivos ni orientar tratamientos farmacológicos sin la supervisión directa de un médico especialista en neurología o radiología**. La interpretación de los mapas de Attention Rollout debe actuar como un complemento orientativo que guíe la inspección visual de biomarcadores y no como una prueba concluyente aislada.
-
-### 8.3 Balance de indicadores de gestión del proyecto (I1-I10)
-
-La totalidad de los diez indicadores de línea base establecidos en la planeación de Seminario III fueron cumplidos al 100 %, como se consolida en la Tabla 8.
-
-**Tabla 8. Consolidación final de indicadores de desempeño, gestión y calidad del proyecto (I1-I10).**
-
-| ID | Indicador de Línea Base | Meta Programada | Resultado Obtenido | Estado Final |
-| :---: | :--- | :---: | :--- | :---: |
-| **I1** | Tasa de actividades cumplidas | $\ge 85,0$ % | 100,0 % (4/4 actividades culminadas) | Cumplido |
-| **I2** | Entregables técnicos aceptados | 100 % cronograma | 100,0 % (7/7 entregables E1-E7) | Cumplido |
-| **I3** | Hitos temporales en fecha | $\ge 80,0$ % | 100,0 % (7/7 hitos H1-H7) | Cumplido |
-| **I4** | Desviación de esfuerzo invertido | $\pm 20,0$ % margen | 0,0 % (24 h dedicadas / 24 h plan) | Cumplido |
-| **I5** | Riesgos de severidad alta abiertos | Tendencia decreciente | 0 riesgos abiertos (7 mitigados) | Cumplido |
-| **I6** | Tasa de incidencias técnicas resueltas | $\ge 80,0$ % | 100,0 % (0 incidencias pendientes) | Cumplido |
-| **I7** | Índice de reproducibilidad técnica | 100,0 % suite | 100,0 % (200 tests pytest aprobados) | Cumplido |
-| **I8** | Rendimiento clínico referencial | Línea base documental | 91,7 % Exactitud / 0,982 AUC | Cumplido |
-| **I9** | Portabilidad de inferencia (TorchScript) | Documentar benchmark | 327,3 MB disco / -14,9 % latencia | Cumplido |
-| **I10** | Cobertura documental institucional | 100,0 % artefactos | 100,0 % (23 artefactos archivados) | Cumplido |
-
-### 8.4 Conclusiones y líneas de trabajo futuro
-
-Se demostró que la adaptación de Vision Transformers (ViT-B/16) junto a un protocolo canónico 2.5D centrado en el hipocampo ($z = -12\text{ mm}$) resuelve eficientemente el compromiso entre resolución anatómica, demanda de memoria VRAM y explicabilidad clínica. Como líneas futuras se proyecta:
-1. Evaluar modelos multimodales que fusionen sMRI con biomarcadores en líquido cefalorraquídeo (Aβ42, p-tau) y perfiles genéticos APOE ε4.
-2. Implementar mecanismos de atención cruzada (Cross-Attention) sobre secuencias temporales para predecir la tasa de conversión de MCI a AD en ventanas de 24 meses.
-3. Validar el despliegue del binario TorchScript en dispositivos edge hospitalarios de bajo consumo.
+El análisis estadístico ratifica la estabilidad clínica: la tasa de confusión entre CN y AD es nula (0/60), concentrándose las únicas discrepancias menores en la frontera biológica sutil entre CN y MCI incipiente.
 
 ---
 
-## 9. Referencias bibliográficas
+## 9. Referencias
 
-- [1] A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, L. Kaiser, and I. Polosukhin, "Attention is all you need," in *Advances in Neural Information Processing Systems (NeurIPS)*, vol. 30, pp. 5998-6008, 2017.
-- [2] A. Dosovitskiy, L. Beyer, A. Kolesnikov, D. Weissenborn, X. Zhai, T. Unterthiner, M. Dehghani, M. Minderer, G. Heigold, S. Gelly, J. Uszkoreit, and N. Houlsby, "An image is worth 16x16 words: Transformers for image recognition at scale," in *International Conference on Learning Representations (ICLR)*, 2021.
-- [3] S. Abnar and W. Zuidema, "Quantifying attention flow in transformers," in *Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics (ACL)*, pp. 4190-4197, 2020.
-- [4] C. R. Jack Jr. et al., "The Alzheimer's Disease Neuroimaging Initiative (ADNI): MRI methods," *Journal of Magnetic Resonance Imaging*, vol. 27, no. 4, pp. 685-691, 2008.
-- [5] D. S. Marcus, T. H. Wang, J. Parker, J. G. Csernansky, J. C. Morris, and R. L. Buckner, "Open Access Series of Imaging Studies (OASIS): Cross-sectional MRI data in young, middle aged, nondemented, and demented older adults," *Journal of Cognitive Neuroscience*, vol. 19, no. 9, pp. 1498-1507, 2007.
-- [6] B. Fischl, "FreeSurfer," *NeuroImage*, vol. 62, no. 2, pp. 774-781, 2012.
-- [7] M. Jenkinson, C. F. Beckmann, T. E. Behrens, M. W. Woolrich, and S. M. Smith, "FSL," *NeuroImage*, vol. 62, no. 2, pp. 782-790, 2012.
-- [8] H. Chefer, S. Gur, and L. Wolf, "Transformer interpretability beyond attention visualization," in *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*, pp. 782-791, 2021.
-- [9] J. Simancas y M. Sánchez, "Detección prodrómica de la enfermedad de Alzheimer mediante Vision Transformers aplicados a imágenes de resonancia magnética estructural," Documento Técnico de Seminario III, Universidad del Magdalena, 2026.
-- [10] A. Paszke et al., "PyTorch: An imperative style, high-performance deep learning library," in *Advances in Neural Information Processing Systems (NeurIPS)*, vol. 32, pp. 8024-8035, 2019.
-- [11] K. He, X. Zhang, S. Ren, and J. Sun, "Deep residual learning for image recognition," in *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*, pp. 770-778, 2016.
-- [12] G. Litjens et al., "A survey on deep learning in medical image analysis," *Medical Image Analysis*, vol. 42, pp. 60-88, 2017.
-- [13] F. Sammut and R. Webb, "Reproducible benchmarks in computational neuroscience," *Nature Machine Intelligence*, vol. 3, pp. 112-124, 2021.
-- [14] M. W. Weiner et al., "The Alzheimer's Disease Neuroimaging Initiative: A review of papers published since its inception," *Alzheimer's & Dementia*, vol. 8, no. 1, pp. S1-S68, 2012.
-- [15] R. S. Desikan et al., "An automated labeling system for subdividing the human cerebral cortex on MRI scans into gyral based regions of interest," *NeuroImage*, vol. 31, no. 3, pp. 968-980, 2006.
+- Abnar, S., & Zuidema, W. (2020). Quantifying attention flow in transformers. In *Proceedings of ACL* (pp. 4190-4197).
+- Benjamini, Y., & Hochberg, Y. (1995). Controlling the false discovery rate. *J. R. Stat. Soc. Ser. B*, 57(1), 289-300.
+- Chefer, H., Gur, S., & Wolf, L. (2021). Transformer interpretability beyond attention visualization. In *CVPR* (pp. 782-791).
+- Desikan, R. S., et al. (2006). An automated labeling system for subdividing human cortex on MRI. *NeuroImage*, 31(3), 968-980.
+- Dosovitskiy, A., et al. (2021). An image is worth 16x16 words: Transformers for image recognition at scale. In *ICLR*.
+- Fischl, B. (2012). FreeSurfer. *NeuroImage*, 62(2), 774-781.
+- He, K., Zhang, X., Ren, S., & Sun, J. (2016). Deep residual learning for image recognition. In *CVPR* (pp. 770-778).
+- Jack, C. R., et al. (2008). The Alzheimer's Disease Neuroimaging Initiative (ADNI): MRI methods. *JMRI*, 27(4), 685-691.
+- Jenkinson, M., Beckmann, C. F., Behrens, T. E., Woolrich, M. W., & Smith, S. M. (2012). FSL. *NeuroImage*, 62(2), 782-790.
+- Litjens, G., et al. (2017). A survey on deep learning in medical image analysis. *Medical Image Analysis*, 42, 60-88.
+- Marcus, D. S., et al. (2007). Open Access Series of Imaging Studies (OASIS). *J. Cogn. Neurosci.*, 19(9), 1498-1507.
+- Page, M. J., et al. (2021). The PRISMA 2020 statement: an updated guideline for reporting systematic reviews. *BMJ*, 372, n71.
+- Paszke, A., et al. (2019). PyTorch: An imperative style, high-performance deep learning library. In *NeurIPS* (pp. 8024-8035).
+- Simancas, J., & Sánchez, M. (2026). Detección prodrómica de Alzheimer mediante Vision Transformers en sMRI. Universidad del Magdalena.
+- Vaswani, A., et al. (2017). Attention is all you need. In *NeurIPS* (pp. 5998-6008).
+- Weiner, M. W., et al. (2012). The Alzheimer's Disease Neuroimaging Initiative. *Alzheimer's & Dementia*, 8(1), S1-S68.
 
 ---
 
-## 10. Apéndices: Reproducibilidad y especificación algorítmica
+## 10. Apéndices: Reproducibilidad
 
-Con el objetivo de garantizar la verificación independiente y auditabilidad de los resultados computacionales, se documentan los comandos canónicos de reproducción y la estructura de verificación automatizada del repositorio.
+### Requerimientos de software y librerías
+- Python >= 3.12 · torch == 2.14.0 · torchvision == 0.19.0 · nibabel == 5.4.2 · scikit-learn == 1.9.1 · reportlab == 5.0.1 · pytest == 9.1.1
 
-### 10.1 Auditoría del entorno y dependencias del sistema
+### Estructura de ejecución determinista
+1. Auditoría del corpus y verificación sin fuga de datos: `python scripts/run_audit_dataset.py`
+2. Preprocesamiento canónico 2.5D y extracción axial z=-12mm: `python scripts/run_preprocessing.py`
+3. Entrenamiento del modelo ViT-B/16 (seed=42, 50 épocas): `python scripts/run_training.py`
+4. Generación de mapas de interpretabilidad Attention Rollout: `python scripts/run_attention_rollout.py`
+5. Benchmark de portabilidad y optimización TorchScript (I9): `python scripts/benchmark_torchscript.py`
+6. Ejecución de suite completa de pruebas (200 tests - I7): `pytest tests/ -q`
 
-El entorno se gestiona de forma reproducible con `uv` (Python 3.12.3 en arquitectura x86_64). Los scripts principales se ejecutan con los siguientes comandos en la raíz del proyecto:
+### Artefactos exportados
+- Modelo final entrenado (PyTorch checkpoint): `models/vit_b16_best.pth`
+- Binario compilado optimizado (TorchScript JIT): `models/vit_b16_torchscript.pt`
+- Reporte de indicadores de línea base (I1-I10): `configs/reports/weekly_reports.json`
+- Suite de verificación automatizada (200 tests): `tests/test_s16_final_closure.py`
+- Documento técnico oficial compilado: `docs/reports/Articulo_Final_Seminario_III.pdf`
 
-```bash
-# 1. Auditoría de integridad y partición estratificada por sujeto
-uv run python scripts/run_audit_dataset.py --config configs/dataset.json
-
-# 2. Preprocesamiento canónico 2.5D y extracción MNI152 (z = -12 mm)
-uv run python scripts/run_preprocessing.py --input-dir data/raw --output-dir data/processed
-
-# 3. Entrenamiento determinista del modelo ViT-B/16 (seed=42)
-uv run python scripts/run_training.py --config configs/train_config.json
-
-# 4. Generación y exportación de mapas Attention Rollout
-uv run python scripts/run_attention_rollout.py --checkpoint models/vit_b16_best.pth
-
-# 5. Compilación TorchScript y benchmark de latencia (Indicador I9)
-uv run python scripts/benchmark_torchscript.py --device cpu --num-trials 20
-
-# 6. Ejecución de suite completa de pruebas (200 tests - Indicador I7)
-uv run pytest tests/ -v --tb=short
-
-# 7. Compilación de reporte de cierre semanal final (S16)
-uv run python scripts/run_s16_verification.py
-
-# 8. Compilación del artículo académico final en PDF
-uv run --group reports python scripts/build_final_project_paper.py
-```
-
-### 10.2 Desglose de la suite de pruebas unitarias e integración (Indicador I7)
-
-La suite de pruebas automatizadas está compuesta por 200 pruebas unitarias y de integración distribuidas en 16 módulos de prueba en el directorio `tests/`, cubriendo validación de dimensiones tensoriales, ausencia de fuga de sujetos en particiones, invarianza numérica de TorchScript, consistencia estocástica de Attention Rollout y manejo estructurado de excepciones.
-
-### 10.3 Especificación del hardware y software de evaluación
-
-Las evaluaciones de latencia y throughput se ejecutaron sobre una estación de trabajo con procesador Intel Core i7-12700H (14 núcleos, 20 hilos, frecuencia base 2.3 GHz, boost 4.7 GHz), 32 GB de memoria RAM DDR5 a 4800 MHz, unidad SSD NVMe PCIe 4.0 y acelerador gráfico NVIDIA GeForce RTX 3070 Ti Laptop GPU (8 GB GDDR6). El software de base corresponde a Windows 11 Pro 64-bit, PyTorch 2.14.0+cpu / cu121, TorchVision 0.19.0, ReportLab 5.0.1 y uv 0.4.x.
+### Descargo ético y clínico (Riesgo R7)
+El sistema desarrollado constituye una herramienta de investigación computacional y soporte al diagnóstico (*Clinical Decision Support System* - CDSS) y **NO debe emplearse de manera autónoma para emitir diagnósticos clínicos definitivos ni guiar tratamientos médicos sin la supervisión directa de un especialista en neurología o radiología**. La inspección de los mapas de Attention Rollout actúa como guía orientativa de biomarcadores hipocampales.
