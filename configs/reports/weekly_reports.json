@@ -1454,5 +1454,187 @@
         "src/interpretability/, configs/e5_interpretabilidad.json, tests/test_attention_rollout.py, scripts/run_e5_verification.py, docs/deliverables/E5_Modulo_Interpretabilidad_Attention_Rollout.md y reporte S12."
       ]
     ]
+  },
+  {
+    "week": 13,
+    "indicators": [
+      [
+        "I1",
+        "Actividades cumplidas",
+        "100 % (4/4 actividades S13 de integracion y portabilidad completadas).",
+        "Flujo integrado E1-E5 con datos sinteticos, cohorte de prueba, benchmark I9 y verificador S13 ejecutados."
+      ],
+      [
+        "I2",
+        "Entregables aceptados",
+        "71,43 % acumulado: 5/7 entregables (E1, E2, E3, E4 y E5 aceptados; E6 en avance).",
+        "E1-E5 cerrados; E6 registra avance tecnico planificado en S13 con aceptacion formal programada en S14 (H6)."
+      ],
+      [
+        "I3",
+        "Hitos en fecha",
+        "100 % de hitos vencidos cumplidos en fecha (H1, H2, H3, H4 y H5).",
+        "S13 exige evidencia de flujo integrado funcional y medicion de I9; el Hito H6 corresponde a la Semana 14."
+      ],
+      [
+        "I4",
+        "Desviación de esfuerzo",
+        "0 %: (24 - 24) / 24 x 100.",
+        "24 h reales frente a 24 h previstas: Malak 12 h, Juan 12 h. Cumplimiento exacto del esfuerzo programado."
+      ],
+      [
+        "I5",
+        "Riesgos altos abiertos",
+        "0 riesgos altos abiertos con exposicion vigente igual o superior a 15.",
+        "R10 (retraso de integracion) mitigado al completar el flujo integrado en S13 conforme al plan de respuesta."
+      ],
+      [
+        "I6",
+        "Incidencias resueltas",
+        "100 % (todas las incidencias historicas resueltas; 0 abiertas en S13).",
+        "Alineado el contrato de Slice25DConfig en el generador sintetico integrado y suprimidas advertencias de trazado JIT."
+      ],
+      [
+        "I7",
+        "Reproducibilidad",
+        "100 %: 167/167 pruebas unitarias e integracion aprobadas.",
+        "Suite acumulada: 157 pruebas previas mas 10 pruebas de flujo integrado y portabilidad S13 aprobadas en uv."
+      ],
+      [
+        "I8",
+        "Rendimiento",
+        "No aplica en S13.",
+        "Se preserva la restriccion de la linea base de no entrenar el modelo ni calcular metricas clinicas definitivas."
+      ],
+      [
+        "I9",
+        "Portabilidad",
+        "Documentado: 327,30 MB RAM (327,58 MB TorchScript), ~585-601 ms/muestra CPU, 0,00 % degradacion.",
+        "Indicador I9 medido en S13 sobre ViT-B/16 (85.800.963 parametros): concordancia 100 % entre PyTorch Eager y TorchScript."
+      ],
+      [
+        "I10",
+        "Cobertura documental",
+        "100 % de los artefactos tecnicos previstos hasta S13 documentados.",
+        "Documento tecnico S13, configuracion e6_integration.json, runner run_s13_verification.py y reporte S13 disponibles."
+      ]
+    ],
+    "status": [
+      "Verde",
+      "Actividad S13 completada: flujo integrado funcional con datos sinteticos e Indicador I9 (Portabilidad) documentado con 0,00 % de degradacion y 167 pruebas aprobadas.",
+      "Proceder con la Semana 14: Pruebas de control de errores de la interfaz, manual de uso y cierre formal del Entregable E6 (Hito H6)."
+    ],
+    "report": [
+      [
+        "Semana y fechas",
+        "Semana 13 | 26 de octubre a 01 de noviembre de 2026. Flujo integrado funcional y portabilidad I9."
+      ],
+      [
+        "Responsable",
+        "Malak Sanchez y Juan Simancas. Responsables de S13 y E6: Ambos."
+      ],
+      [
+        "Estado general",
+        "Verde. Flujo integrado extremo a extremo (E1/E2 -> E3 -> E4 -> E5) operativo con datos sinteticos deterministas. Indicador I9 (Portabilidad) medido y documentado: 327,30 MB, latencia CPU ~585-601 ms y 0,00 % de degradacion en exportacion TorchScript."
+      ],
+      [
+        "Trabajo planificado",
+        "Cronograma S13 (EDT 7.1 y 7.3): Desarrollo e integracion con el flujo completo utilizando datos sinteticos. Medicion del Indicador I9 (Portabilidad: tamano, latencia y degradacion)."
+      ],
+      [
+        "Trabajo ejecutado",
+        "Implementacion de IntegrationConfig (src/integration/config.py) y configs/e6_integration.json; generador determinista generate_synthetic_25d_case e IntegratedSystemPipeline (src/integration/pipeline.py) conectando extraccion 2.5D, ViT-B/16, InferencePipeline y AttentionRollout; modulo de portabilidad run_portability_benchmark con exportacion TorchScript (src/integration/portability.py); verificador scripts/run_s13_verification.py; especificacion docs/implementation/E6_S13_Flujo_Integrado_y_Portabilidad.md y 10 pruebas nuevas (167 totales)."
+      ],
+      [
+        "Evidencias",
+        "Repositorio alzheimer-vit-smri: src/integration/ (config.py, pipeline.py, portability.py), configs/e6_integration.json, scripts/run_s13_verification.py, tests/test_s13_integration_and_portability.py, documento S13 y reporte semanal S13."
+      ],
+      [
+        "Desviaciones",
+        "Ninguna desviacion de alcance ni de cronograma. Esfuerzo ejecutado conforme a lo planificado: 24 horas-equipo (desviacion 0 %)."
+      ],
+      [
+        "Riesgos e incidencias",
+        "R10 (retraso de integracion) mitigado al integrar los cinco subsistemas en S13. R6 y R7 controlados mediante banderas is_trained_model=False y avisos explicitos en IntegrationExecutionResult."
+      ],
+      [
+        "Decisiones",
+        "Adoptar TorchScript (torch.jit.trace) para cuantificar objetivamente el Indicador I9 de portabilidad sin alterar la arquitectura ViT-B/16. Mantener E6 abierto hasta completar la validacion de errores y el manual en S14."
+      ],
+      [
+        "Cambios",
+        "No se registraron solicitudes de cambio formal en S13. El desarrollo corresponde al avance interno del paquete EDT 7.0."
+      ],
+      [
+        "Próxima semana",
+        "Semana 14: Pruebas de control de errores en la interfaz tecnica, elaboracion del manual de uso y cierre formal del Entregable E6 (Hito H6)."
+      ],
+      [
+        "Esfuerzo",
+        "Planificado: 24 horas-equipo | Real: 24 horas-equipo (Malak Sanchez: 12 h, Juan Simancas: 12 h). Desviacion: 0 %."
+      ]
+    ],
+    "changes": [
+      [
+        "Proyecto",
+        "Deteccion prodromica de la enfermedad de Alzheimer mediante Vision Transformers aplicados a imagenes de resonancia magnetica estructural"
+      ],
+      [
+        "ID y fecha",
+        "No aplica | Semana 13"
+      ],
+      [
+        "Solicitante",
+        "Malak Sanchez y Juan Simancas"
+      ],
+      [
+        "Elemento afectado",
+        "Ninguno."
+      ],
+      [
+        "Situación actual",
+        "Flujo integrado funcional e Indicador I9 completados en S13 conforme al cronograma oficial de la Linea Base."
+      ],
+      [
+        "Cambio solicitado",
+        "No se solicita modificacion de alcance, cronograma, entregables, criterios de aceptacion o responsabilidades."
+      ],
+      [
+        "Justificación y evidencia",
+        "La integracion extremo a extremo con datos sinteticos y la medicion de portabilidad I9 cumplen la planificacion de la Semana 13 con 167 pruebas aprobadas."
+      ],
+      [
+        "Impacto en alcance",
+        "Ninguno."
+      ],
+      [
+        "Impacto en tiempo",
+        "Ninguno. El Entregable E6 conserva su cierre formal previsto para la Semana 14 (Hito H6)."
+      ],
+      [
+        "Impacto en calidad",
+        "Favorable por la verificacion de equivalencia numerica (degradacion 0,00 %) entre PyTorch Eager y TorchScript."
+      ],
+      [
+        "Impacto en riesgos",
+        "Mitiga R10 (retraso de integracion) y mantiene controlados R5, R6 y R7."
+      ],
+      [
+        "Alternativas",
+        "No aplica."
+      ],
+      [
+        "Recomendación",
+        "Continuar en S14 con las pruebas de control de errores de la interfaz y el manual de uso para cerrar H6."
+      ],
+      [
+        "Decisión",
+        "No aplica: no se tramita cambio formal."
+      ],
+      [
+        "Versiones actualizadas",
+        "src/integration/, configs/e6_integration.json, tests/test_s13_integration_and_portability.py, scripts/run_s13_verification.py, docs/implementation/E6_S13_Flujo_Integrado_y_Portabilidad.md y reporte S13."
+      ]
+    ]
   }
 ]

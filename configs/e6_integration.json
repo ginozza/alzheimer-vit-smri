@@ -1,0 +1,16 @@
+{
+  "image_size": 224,
+  "patch_size": 16,
+  "in_channels": 3,
+  "num_classes": 3,
+  "class_names": ["CN", "MCI", "AD"],
+  "default_device": "cpu",
+  "default_alpha": 0.5,
+  "default_seed": 42,
+  "is_trained_model": false,
+  "enable_clinical_diagnosis": false,
+  "portability_benchmark_runs": 5,
+  "portability_warmup_runs": 1,
+  "max_latency_ms_cpu": 2500.0,
+  "max_export_degradation_tol": 1e-4
+}
